@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Estoque.Model
+namespace EstoqueWEB.Model
 {
     public class AplicationUser : IdentityUser
     {

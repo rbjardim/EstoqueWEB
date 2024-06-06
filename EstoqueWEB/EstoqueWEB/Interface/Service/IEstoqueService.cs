@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 
 namespace EstoqueWEB.Interface.Service
 {
-    public interface ILocalizacaoService
+    public interface IEstoqueService
     {
         Task<bool> CreateEstoque(Estoque estoque);
-        Task<bool> DeleteLocalAsync(int Idlocal);
-        Task<Estoque> GetLocalizacaoById(int id);
-        Task<List<Estoque>> ListLocal();
+        Task<bool> DeleteEstoqueAsync(int Idlocal);
+        Task<Estoque> GetEstoqueById(int id);
+        Task<List<Estoque>> ListEstoque();
         Task<int> UpdateEstoque(Estoque estoque);
 
     }

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Sustem.Collections.Generic;
-using EstoqueWEB.Model
+using System.Collections.Generic;
+using EstoqueWEB.Model;
 
 
 namespace EstoqueWEB.Interface.Repository
@@ -8,9 +8,9 @@ namespace EstoqueWEB.Interface.Repository
     public interface IEstoqueRepository
     {
         Task<int> UpdateEstoque(Estoque local);
-        Task<bool> DeleteLocalAsync(int Id);
-        Task<Estoque> CreateNotebook(Estoque notebook);
-        Task<List<Estoque>> ListLocal();
-        Task<Estoque> GetLocalizacaoById(int id);
+        Task<bool> DeleteEstoqueAsync(int Id);
+        Task<Estoque> CreateEstoque(Estoque notebook);
+        Task<List<Estoque>> ListEstoque();
+        Task<Estoque> GetEstoqueById(int id);
     }
 }
