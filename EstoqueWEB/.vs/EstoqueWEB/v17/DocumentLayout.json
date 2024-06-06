@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "C:\\Projeto\\EstoqueWEB\\EstoqueWEB\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{6C169898-E054-4EE0-A1A0-891CBF623879}|EstoqueWEB\\EstoqueWEB.csproj|c:\\projeto\\estoqueweb\\estoqueweb\\estoqueweb\\model\\estoque.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C169898-E054-4EE0-A1A0-891CBF623879}|EstoqueWEB\\EstoqueWEB.csproj|solutionrelative:estoqueweb\\model\\estoque.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C169898-E054-4EE0-A1A0-891CBF623879}|EstoqueWEB\\EstoqueWEB.csproj|c:\\projeto\\estoqueweb\\estoqueweb\\estoqueweb\\viewmodel\\register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C169898-E054-4EE0-A1A0-891CBF623879}|EstoqueWEB\\EstoqueWEB.csproj|solutionrelative:estoqueweb\\viewmodel\\register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C169898-E054-4EE0-A1A0-891CBF623879}|EstoqueWEB\\EstoqueWEB.csproj|c:\\projeto\\estoqueweb\\estoqueweb\\estoqueweb\\viewmodel\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C169898-E054-4EE0-A1A0-891CBF623879}|EstoqueWEB\\EstoqueWEB.csproj|solutionrelative:estoqueweb\\viewmodel\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C169898-E054-4EE0-A1A0-891CBF623879}|EstoqueWEB\\EstoqueWEB.csproj|c:\\projeto\\estoqueweb\\estoqueweb\\estoqueweb\\model\\aplicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6C169898-E054-4EE0-A1A0-891CBF623879}|EstoqueWEB\\EstoqueWEB.csproj|solutionrelative:estoqueweb\\model\\aplicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6C169898-E054-4EE0-A1A0-891CBF623879}|EstoqueWEB\\EstoqueWEB.csproj|c:\\projeto\\estoqueweb\\estoqueweb\\estoqueweb\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{6C169898-E054-4EE0-A1A0-891CBF623879}|EstoqueWEB\\EstoqueWEB.csproj|solutionrelative:estoqueweb\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -34,24 +50,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Register.cs",
+              "DocumentMoniker": "C:\\Projeto\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\ViewModel\\Register.cs",
+              "RelativeDocumentMoniker": "EstoqueWEB\\ViewModel\\Register.cs",
+              "ToolTip": "C:\\Projeto\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\ViewModel\\Register.cs",
+              "RelativeToolTip": "EstoqueWEB\\ViewModel\\Register.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T19:26:53.404Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Login.cs",
+              "DocumentMoniker": "C:\\Projeto\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\ViewModel\\Login.cs",
+              "RelativeDocumentMoniker": "EstoqueWEB\\ViewModel\\Login.cs",
+              "ToolTip": "C:\\Projeto\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\ViewModel\\Login.cs",
+              "RelativeToolTip": "EstoqueWEB\\ViewModel\\Login.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T19:26:39.233Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Estoque.cs",
+              "DocumentMoniker": "C:\\Projeto\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\Model\\Estoque.cs",
+              "RelativeDocumentMoniker": "EstoqueWEB\\Model\\Estoque.cs",
+              "ToolTip": "C:\\Projeto\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\Model\\Estoque.cs",
+              "RelativeToolTip": "EstoqueWEB\\Model\\Estoque.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T19:23:51.646Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AplicationUser.cs",
+              "DocumentMoniker": "C:\\Projeto\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\Model\\AplicationUser.cs",
+              "RelativeDocumentMoniker": "EstoqueWEB\\Model\\AplicationUser.cs",
+              "ToolTip": "C:\\Projeto\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\Model\\AplicationUser.cs",
+              "RelativeToolTip": "EstoqueWEB\\Model\\AplicationUser.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T19:23:40.868Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Projeto\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\appsettings.json",
               "RelativeDocumentMoniker": "EstoqueWEB\\appsettings.json",
               "ToolTip": "C:\\Projeto\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\appsettings.json",
               "RelativeToolTip": "EstoqueWEB\\appsettings.json",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAACIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-06-06T19:19:32.498Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "IEstoqueService.cs",
               "DocumentMoniker": "C:\\Projeto\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\Interface\\Service\\IEstoqueService.cs",
               "RelativeDocumentMoniker": "EstoqueWEB\\Interface\\Service\\IEstoqueService.cs",
@@ -59,12 +127,11 @@
               "RelativeToolTip": "EstoqueWEB\\Interface\\Service\\IEstoqueService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-06T19:17:10.205Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-06T19:17:10.205Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "IEstoqueRepository.cs",
               "DocumentMoniker": "C:\\Projeto\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\Interface\\Repository\\IEstoqueRepository.cs",
               "RelativeDocumentMoniker": "EstoqueWEB\\Interface\\Repository\\IEstoqueRepository.cs",
@@ -72,12 +139,11 @@
               "RelativeToolTip": "EstoqueWEB\\Interface\\Repository\\IEstoqueRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-06T19:16:14.793Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-06T19:16:14.793Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Projeto\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\Pages\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "EstoqueWEB\\Pages\\Shared\\_Layout.cshtml",
@@ -85,12 +151,11 @@
               "RelativeToolTip": "EstoqueWEB\\Pages\\Shared\\_Layout.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAB8AAABkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-06T19:06:43.957Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-06T19:06:43.957Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Projeto\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\Pages\\Index.cshtml",
               "RelativeDocumentMoniker": "EstoqueWEB\\Pages\\Index.cshtml",
@@ -98,12 +163,11 @@
               "RelativeToolTip": "EstoqueWEB\\Pages\\Index.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-06T19:06:03.556Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-06T19:06:03.556Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "Privacy.cshtml",
               "DocumentMoniker": "C:\\Projeto\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\Pages\\Privacy.cshtml",
               "RelativeDocumentMoniker": "EstoqueWEB\\Pages\\Privacy.cshtml",
@@ -111,8 +175,7 @@
               "RelativeToolTip": "EstoqueWEB\\Pages\\Privacy.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-06T19:05:17.337Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-06T19:05:17.337Z"
             }
           ]
         }
