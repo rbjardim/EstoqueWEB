@@ -11,6 +11,5 @@ namespace EstoqueWEB.Interface.Service
         Task<Estoque> GetEstoqueById(int id);
         Task<List<Estoque>> ListEstoque();
         Task<int> UpdateEstoque(Estoque estoque);
-
     }
 }
