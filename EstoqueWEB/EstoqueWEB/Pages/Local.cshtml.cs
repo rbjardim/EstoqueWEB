@@ -3,7 +3,10 @@ using EstoqueWEB.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Text;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EstoqueWEB.Pages
 {
@@ -60,66 +63,40 @@ namespace EstoqueWEB.Pages
             return RedirectToPage("/Local");
         }
 
-        public async Task<IActionResult> OnPostUpdateAsync(int id)
+        public async Task<IActionResult> OnPostUpdateStatusAsync(int id)
         {
-            if (id != Estoque.Id)
+            var estoqueToUpdate = await _estoqueService.GetEstoqueById(id);
+            if (estoqueToUpdate == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            try
+            string status = Request.Form["status"];
+
+
+            if (!string.IsNullOrEmpty(status))
             {
-                var result = await _estoqueService.UpdateEstoque(Estoque);
-                if (result == 0)
+                estoqueToUpdate.Status = status;
+
+                try
                 {
-                    return NotFound();
+                    await _estoqueService.UpdateEstoque(estoqueToUpdate);
+                    TempData["Message"] = "Status atualizado com sucesso!";
                 }
-                TempData["Message"] = "Registro atualizado!";
+                catch (Exception ex)
+                {
+                    TempData["Error"] = "Erro ao atualizar status: " + ex.Message;
+                    return Page();
+                }
             }
-            catch (Exception ex)
+            else
             {
-                TempData["Error"] = "Erro ao atualizar informações: " + ex.Message;
+                TempData["Error"] = "Status inválido.";
                 return Page();
             }
 
             return RedirectToPage("/Local");
         }
 
-        public async Task<IActionResult> OnPostDeleteAsync(int id)
-        {
-            try
-            {
-                var result = await _estoqueService.DeleteEstoqueAsync(id);
-                if (!result)
-                {
-                    return NotFound();
-                }
-                TempData["Message"] = "Registro deletado!";
-            }
-            catch (Exception ex)
-            {
-                TempData["Error"] = "Erro ao deletar informações: " + ex.Message;
-                return Page();
-            }
-
-            return RedirectToPage("/Local");
-        }
-
-        public async Task<IActionResult> OnPostExportAsync(int id)
-        {
-            var estoque = await _estoqueService.GetEstoqueById(id);
-            if (estoque == null)
-            {
-                TempData["Error"] = "Item de estoque não encontrado.";
-                return RedirectToPage("/Local");
-            }
-
-            var csvContent = new StringBuilder();
-            csvContent.AppendLine("ID,Chamado,Nome,Cargo,Patrimonio,Modelo,RQ");
-            csvContent.AppendLine($"{estoque.Id},{estoque.Chamado},{estoque.Nome},{estoque.Cargo},{estoque.Patrimonio},{estoque.Modelo},{estoque.RQ}");
-
-            byte[] buffer = Encoding.UTF8.GetBytes(csvContent.ToString());
-            return File(buffer, "text/csv", "estoque.csv");
-        }
     }
 }

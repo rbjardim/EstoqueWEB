@@ -9,5 +9,6 @@
         public string Patrimonio { get; set; }
         public string Modelo { get; set; }
         public string RQ { get; set; }
+        public string Status { get; set; }
     }
 }

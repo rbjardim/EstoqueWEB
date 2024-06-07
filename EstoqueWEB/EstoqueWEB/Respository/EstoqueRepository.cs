@@ -52,10 +52,6 @@ namespace EstoqueWEB.Repository
             return await _context.Estoque.FirstOrDefaultAsync(l => l.Id == id);
         }
 
-        public Task<Estoque> CreateNotebook(Estoque notebook)
-        {
-            throw new NotImplementedException();
-        }
 
     }
 }

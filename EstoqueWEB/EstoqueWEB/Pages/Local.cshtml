@@ -64,6 +64,7 @@
                 <th>Patrimônio</th>
                 <th>Modelo</th>
                 <th>RQ</th>
+                <th>Status</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -78,6 +79,22 @@
                     <td>@estoque.Patrimonio</td>
                     <td>@estoque.Modelo</td>
                     <td>@estoque.RQ</td>
+                    <td>
+                        <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@estoque.Id">
+                            <select name="status" class="form-control">
+                                @{
+                                    var configurandoSelected = estoque.Status == "configurando" ? "selected" : "";
+                                    var aguardandoSelected = estoque.Status == "aguardando" ? "selected" : "";
+                                    var entregueSelected = estoque.Status == "entregue" ? "selected" : "";
+                                }
+                                <option value="configurando" selected="@configurandoSelected">Configurando</option>
+                                <option value="aguardando" selected="@aguardandoSelected">Aguardando retirada</option>
+                                <option value="entregue" selected="@entregueSelected">Entregue</option>
+                            </select>
+
+                            <button type="submit" class="btn btn-primary">Atualizar</button>
+                        </form>
+                    </td>
                     <td>
                         <form method="post" asp-page-handler="Delete" asp-route-id="@estoque.Id" style="display:inline;">
                             <button type="submit" class="btn btn-danger">Excluir</button>
