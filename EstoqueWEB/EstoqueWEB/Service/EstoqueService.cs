@@ -20,9 +20,9 @@ namespace EstoqueWEB.Service
 
         public async Task<bool> CreateEstoque(Estoque estoque)
         {
-            var result = await _estoqueRepository.CreateEstoque(estoque);
-            return true;
+            return await _estoqueRepository.CreateEstoque(estoque) != null;
         }
+
 
         public async Task<bool> DeleteEstoqueAsync(int Idlocal)
         {
@@ -37,13 +37,21 @@ namespace EstoqueWEB.Service
 
         public async Task<List<Estoque>> ListEstoque()
         {
-            var local = await _estoqueRepository.ListEstoque();
-            return local;
+            return await _estoqueRepository.ListEstoque();
         }
 
         public async Task<int> UpdateEstoque(Estoque estoque)
         {
             return await _estoqueRepository.UpdateEstoque(estoque);
+        }
+
+        // Método para obter itens de estoque por ID do usuário
+        public async Task<List<Estoque>> GetEstoqueByUserId(string userId)
+        {
+            // Implemente a lógica para obter itens de estoque por ID do usuário
+            // Você pode chamar métodos do UserManager ou quaisquer outras fontes de dados necessárias
+            // Por enquanto, vamos apenas retornar uma lista vazia para evitar erros de compilação
+            return new List<Estoque>();
         }
     }
 }

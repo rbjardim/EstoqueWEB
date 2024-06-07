@@ -118,6 +118,9 @@ namespace EstoqueWEB.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
                     b.Property<string>("RQ")
                         .IsRequired()
                         .HasColumnType("longtext");

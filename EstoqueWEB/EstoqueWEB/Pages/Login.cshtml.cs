@@ -30,7 +30,7 @@ namespace EstoqueWEB.Pages
             {
                 if (Model.Email == "admin@aec.com.br" && Model.Password == "Ab!123")
                 {
-                    return RedirectToPage("Local");
+                    return RedirectToPage("/Admin");
                 }
 
                 var user = await userManager.FindByEmailAsync(Model.Email);

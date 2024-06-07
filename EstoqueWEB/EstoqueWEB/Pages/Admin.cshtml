@@ -1,7 +1,6 @@
 ﻿@page
 @model EstoqueWEB.Pages.AdminModel
 @{
-}
     ViewData["Title"] = "Painel de Administração";
 }
 
@@ -11,9 +10,30 @@
         <div class="col-md-3">
             <div class="list-group">
                 <a asp-page="Local" class="list-group-item list-group-item-action">Pagamentos Adicionais</a>
+                <a asp-page="/Admin/Users" class="list-group-item list-group-item-action">Usuários</a>
+                <a asp-page="/Admin/Estoque" class="list-group-item list-group-item-action">Estoque</a>
             </div>
         </div>
         <div class="col-md-9">
+            <!-- Conteúdo da lista de usuários e seus itens de estoque -->
+            @if (Model.UsersWithEstoque != null)
+            {
+                <h2>Usuários e seus Itens de Estoque</h2>
+                <ul>
+                    @foreach (var userWithEstoque in Model.UsersWithEstoque)
+                    {
+                        <li>
+                            @userWithEstoque.UserName
+                            <ul>
+                                @foreach (var item in userWithEstoque.Estoque)
+                                {
+                                    <li>@item.Nome - @item.Quantidade</li>
+                                }
+                            </ul>
+                        </li>
+                    }
+                </ul>
+            }
         </div>
     </div>
 </div>

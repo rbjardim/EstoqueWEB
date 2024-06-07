@@ -1,0 +1,39 @@
+﻿@page
+@model List<EstoqueWEB.Model.Estoque>
+@{
+    ViewData["Title"] = "Estoque";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Chamado</th>
+            <th>Nome</th>
+            <th>Cargo</th>
+            <th>Patrimônio</th>
+            <th>Modelo</th>
+            <th>RQ</th>
+            <th>Status</th>
+            <th>Quantidade</th> <!-- Adicione a coluna Quantidade -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Chamado</td>
+                <td>@item.Nome</td>
+                <td>@item.Cargo</td>
+                <td>@item.Patrimonio</td>
+                <td>@item.Modelo</td>
+                <td>@item.RQ</td>
+                <td>@item.Status</td>
+                <td>@item.Quantidade</td> <!-- Acesso à propriedade Quantidade de cada objeto Estoque -->
+            </tr>
+        }
+    </tbody>
+</table>

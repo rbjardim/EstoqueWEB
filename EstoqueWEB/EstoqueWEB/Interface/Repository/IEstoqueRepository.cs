@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using EstoqueWEB.Model;
 using System.Collections.Generic;
-using EstoqueWEB.Model;
-
+using System.Threading.Tasks;
 
 namespace EstoqueWEB.Interface.Repository
 {
@@ -12,5 +11,6 @@ namespace EstoqueWEB.Interface.Repository
         Task<Estoque> CreateEstoque(Estoque estoque);
         Task<List<Estoque>> ListEstoque();
         Task<Estoque> GetEstoqueById(int id);
+        Task<List<Estoque>> GetEstoqueByUserId(string userId);
     }
 }

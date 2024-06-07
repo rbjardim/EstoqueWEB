@@ -1,8 +1,9 @@
 ﻿using EstoqueWEB.Interface.Repository;
 using EstoqueWEB.Model;
 using EstoqueWEB.MySqlContext;
-using EstoqueWEB.MySqlContext;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace EstoqueWEB.Repository
@@ -52,6 +53,10 @@ namespace EstoqueWEB.Repository
             return await _context.Estoque.FirstOrDefaultAsync(l => l.Id == id);
         }
 
-
+        public async Task<List<Estoque>> GetEstoqueByUserId(string userId)
+        {
+ 
+            return null; 
+        }
     }
 }
