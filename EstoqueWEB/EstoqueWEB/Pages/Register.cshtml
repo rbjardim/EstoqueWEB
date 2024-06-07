@@ -2,6 +2,7 @@
 @model EstoqueWEB.Pages.RegisterModel
 @{
 }
+
 <div class="container mt-5">
     <div class="row justify-content-center align-items-center">
         <div class="col-sm-12 col-md-12 col-lg-4">
@@ -35,25 +36,9 @@
                     <span asp-validation-for="Model.ConfirmPassword" class="text-danger"></span>
                 </div>
 
-
-                <div class="mb-3">
-                    <label class="form-label" asp-for="Model.Cpf">CPF</label>
-                    <input type="text" asp-for="Model.Cpf" class="form-control" />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" asp-for="Model.Genero">Gênero</label>
-                    <input type="text" asp-for="Model.Genero" class="form-control" />
-                </div>
-
                 <div class="mb-3">
                     <label class="form-label" asp-for="Model.Telefone">Telefone</label>
                     <input type="text" asp-for="Model.Telefone" class="form-control" />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" asp-for="Model.Endereco">Endereço</label>
-                    <input type="text" asp-for="Model.Endereco" class="form-control" />
                 </div>
 
                 <div class="mb-3">

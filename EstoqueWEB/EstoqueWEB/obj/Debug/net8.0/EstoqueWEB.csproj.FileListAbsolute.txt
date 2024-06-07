@@ -175,10 +175,8 @@ C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\Microsoft.Extensio
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\Mono.TextTemplating.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\MySqlConnector.dll
-C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.Design.dll
-C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\Pomelo.JsonObject.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\System.CodeDom.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\System.Composition.AttributedModel.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\System.Composition.Convention.dll
