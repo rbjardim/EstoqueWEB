@@ -11,7 +11,7 @@
         .social-button {
             display: inline-block;
             padding: 10px 20px;
-            margin: 10px;
+            margin-right: 5px;
             text-decoration: none;
             color: white;
             border-radius: 5px;
@@ -22,16 +22,21 @@
             background-color: #0077b5;
         }
 
-        .linkedin-button:hover {
-            background-color: #005582;
-        }
+            .linkedin-button:hover {
+                background-color: #005582;
+            }
 
         .github-button {
             background-color: #333;
         }
 
-        .github-button:hover {
-            background-color: #24292e;
+            .github-button:hover {
+                background-color: #24292e;
+            }
+
+        .btn-group-custom {
+            display: flex;
+            gap: 5px; 
         }
     </style>
 </head>
@@ -56,12 +61,17 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacidade</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark social-button linkedin-button" href=https://www.linkedin.com/in/ruan-bueno-jardim/" target="_blank">LinkedIn</a>
+                            <a class="nav-link text-dark social-button linkedin-button" href="https://www.linkedin.com/in/ruan-bueno-jardim/" target="_blank">LinkedIn</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark social-button github-button" href="https://github.com/rbjardim" target="_blank">GitHub</a>
+                            <a class="nav-link text-white social-button github-button" href="https://github.com/rbjardim" target="_blank">GitHub</a>
                         </li>
                     </ul>
+
+                    <div class="btn-group-custom">
+                        <a asp-page="/Login" class="btn btn-primary">Login</a>
+                        <a asp-page="/Register" class="btn btn-secondary">Registrar</a>
+                    </div>
                 </div>
             </div>
         </nav>

@@ -57,9 +57,5 @@ namespace EstoqueWEB.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Estoque> GetEstoqueById(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -48,11 +48,6 @@ namespace EstoqueWEB.Service
             return local;
         }
 
-        public Task<int> UpdateEstoque(Estoque estoque)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<int> UpdateEstoque(Estoque estoque)
         {
             var local = new Estoque();
