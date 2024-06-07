@@ -6,8 +6,11 @@
     <title>@ViewData["Title"] - EstoqueWEB</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/EstoqueWEB.styles.css" asp-append-version="true" />
     <style>
+        .navbar-custom {
+            background-color: #f0f0f0;
+        }
+
         .social-button {
             display: inline-block;
             padding: 10px 20px;
@@ -22,29 +25,64 @@
             background-color: #0077b5;
         }
 
-            .linkedin-button:hover {
-                background-color: #005582;
-            }
+        .linkedin-button:hover {
+            background-color: #005582;
+        }
 
         .github-button {
             background-color: #333;
         }
 
-            .github-button:hover {
-                background-color: #24292e;
-            }
+        .github-button:hover {
+            background-color: #24292e;
+        }
 
-        .btn-group-custom {
-            display: flex;
-            gap: 5px;
+        .logout-button {
+            background-color: #cc0000;
+            border-color: #cc0000;
+            color: white;
+        }
+
+        .logout-button:hover {
+            background-color: #aa0000;
+            border-color: #aa0000;
+        }
+
+        .sim-button {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+
+        .sim-button:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        .nao-button {
+            background-color: #cc0000;
+            border-color: #cc0000;
+            color: white;
+        }
+
+        .nao-button:hover {
+            background-color: #aa0000;
+            border-color: #aa0000; 
         }
     </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-custom border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">EstoqueWEB</a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="navbar-brand" asp-area="" asp-page="/Local">EstoqueWEB</a>
+                }
+                else
+                {
+                    <a class="navbar-brand" asp-area="" asp-page="/Index">EstoqueWEB</a>
+                }
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -52,12 +90,8 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Pagina Inicial</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/About">Sobre</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link text-dark social-button linkedin-button" href="https://www.linkedin.com/in/ruan-bueno-jardim/" target="_blank">LinkedIn</a>
                         </li>
@@ -65,10 +99,16 @@
                             <a class="nav-link text-white social-button github-button" href="https://github.com/rbjardim" target="_blank">GitHub</a>
                         </li>
                     </ul>
-
                     <div class="btn-group-custom">
-                        <a asp-page="/Login" class="btn btn-primary">Login</a>
-                        <a asp-page="/Register" class="btn btn-secondary">Registrar</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-page="/Logout" class="btn logout-button">Logout</a>
+                        }
+                        else
+                        {
+                            <a asp-page="/Login" class="btn btn-primary">Login</a>
+                            <a asp-page="/Register" class="btn btn-secondary">Registrar</a>
+                        }
                     </div>
                 </div>
             </div>
@@ -79,17 +119,14 @@
             @RenderBody()
         </main>
     </div>
-
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - EstoqueWEB - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

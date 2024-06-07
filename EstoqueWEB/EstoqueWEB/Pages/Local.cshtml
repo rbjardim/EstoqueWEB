@@ -1,10 +1,32 @@
 ﻿@page
 @model EstoqueWEB.Pages.LocalModel
 @{
-    ViewData["Title"] = "Gerenciar Estoque";
+    ViewData["Title"] = "Gerenciador de Estoque";
 }
 
-<h2>Gerenciar Estoque</h2>
+<style>
+    .titulo {
+        text-align: center;
+    }
+
+    .btn-salvar {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: white;
+        border: none;
+    }
+
+        .btn-salvar:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+    .form-control {
+        background-color: #f0f0f0;
+    }
+</style>
+
+<h2 class="titulo">Gerenciar Estoque</h2>
 
 @if (TempData["Message"] != null)
 {
@@ -19,35 +41,38 @@
     </div>
 }
 
-<div>
-    <h4>Adicionar novo Equipamento</h4>
-    <form method="post" asp-page-handler="Post">
-        <div class="form-group">
-            <label asp-for="Estoque.Chamado"></label>
-            <input asp-for="Estoque.Chamado" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Estoque.Nome"></label>
-            <input asp-for="Estoque.Nome" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Estoque.Cargo"></label>
-            <input asp-for="Estoque.Cargo" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Estoque.Patrimonio"></label>
-            <input asp-for="Estoque.Patrimonio" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Estoque.Modelo"></label>
-            <input asp-for="Estoque.Modelo" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label asp-for="Estoque.RQ"></label>
-            <input asp-for="Estoque.RQ" class="form-control" />
-        </div>
-        <button type="submit" class="btn btn-primary">Salvar</button>
-    </form>
+<div class="row">
+    <div class="col-md-6">
+        <h4>Adicionar novo Equipamento</h4>
+        <form method="post" asp-page-handler="Post" class="form">
+            <div class="form-group">
+                <label asp-for="Estoque.Chamado"></label>
+                <input asp-for="Estoque.Chamado" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Estoque.Nome"></label>
+                <input asp-for="Estoque.Nome" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Estoque.Cargo"></label>
+                <input asp-for="Estoque.Cargo" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Estoque.Patrimonio"></label>
+                <input asp-for="Estoque.Patrimonio" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Estoque.Modelo"></label>
+                <input asp-for="Estoque.Modelo" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Estoque.RQ"></label>
+                <input asp-for="Estoque.RQ" class="form-control" />
+                <p></p></>
+            </div>
+            <button type="submit" class="btn btn-salvar">Salvar</button>
+        </form>
+    </div>
 </div>
 
 <hr />

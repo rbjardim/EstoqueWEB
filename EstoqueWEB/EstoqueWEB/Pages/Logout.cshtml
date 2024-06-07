@@ -1,6 +1,7 @@
 ﻿@page
 @model EstoqueWEB.Pages.LogoutModel
 @{
+    ViewData["Title"] = "Logout";
 }
 <form method="post">
     <div class="container mt-5">
@@ -9,8 +10,8 @@
                 <p>Tem certeza que deseja sair?</p>
 
                 <p>
-                    <button class="btn btn-primary" asp-page-handler="Logout">SIM</button>
-                    <button class="btn btn-danger ml-5 border-dark" asp-page-handler="DontLogout">NÃO</button>
+                    <button class="btn sim-button" asp-page-handler="Logout">SIM</button>
+                    <button class="btn nao-button ml-5" asp-page-handler="DontLogout">NÃO</button>
                 </p>
             </div>
         </div>

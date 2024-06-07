@@ -73,30 +73,20 @@ namespace EstoqueWEB.Pages
 
             string status = Request.Form["status"];
 
+            estoqueToUpdate.Status = status;
 
-            if (!string.IsNullOrEmpty(status))
+            try
             {
-                estoqueToUpdate.Status = status;
-
-                try
-                {
-                    await _estoqueService.UpdateEstoque(estoqueToUpdate);
-                    TempData["Message"] = "Status atualizado com sucesso!";
-                }
-                catch (Exception ex)
-                {
-                    TempData["Error"] = "Erro ao atualizar status: " + ex.Message;
-                    return Page();
-                }
+                await _estoqueService.UpdateEstoque(estoqueToUpdate);
+                TempData["Message"] = "Status atualizado com sucesso!";
             }
-            else
+            catch (Exception ex)
             {
-                TempData["Error"] = "Status inválido.";
+                TempData["Error"] = "Erro ao atualizar status: " + ex.Message;
                 return Page();
             }
 
             return RedirectToPage("/Local");
         }
-
     }
 }
