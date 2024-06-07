@@ -45,12 +45,10 @@ namespace EstoqueWEB.Service
             return await _estoqueRepository.UpdateEstoque(estoque);
         }
 
-        // Método para obter itens de estoque por ID do usuário
+
         public async Task<List<Estoque>> GetEstoqueByUserId(string userId)
         {
-            // Implemente a lógica para obter itens de estoque por ID do usuário
-            // Você pode chamar métodos do UserManager ou quaisquer outras fontes de dados necessárias
-            // Por enquanto, vamos apenas retornar uma lista vazia para evitar erros de compilação
+           
             return new List<Estoque>();
         }
     }

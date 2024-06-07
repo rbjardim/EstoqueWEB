@@ -20,7 +20,7 @@ namespace EstoqueWEB.Pages.Admin
 
         public async Task OnGet()
         {
-            // Carregar itens de estoque do banco de dados
+            
             Estoque = await _estoqueService.ListEstoque();
         }
 
@@ -30,7 +30,7 @@ namespace EstoqueWEB.Pages.Admin
             return RedirectToPage();
         }
 
-        // Métodos para manipulação de estoque, como Create, Edit
+        
 
         public async Task<IActionResult> OnPostCreateAsync(Estoque estoque)
         {

@@ -1,11 +1,11 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EstoqueWEB.Model;
-using EstoqueWEB.Service;
-using Microsoft.AspNetCore.Identity;
 using EstoqueWEB.Interface.Service;
+using EstoqueWEB.Model;
+using Microsoft.AspNetCore.Identity;
 
 namespace EstoqueWEB.Pages
 {
@@ -21,8 +21,33 @@ namespace EstoqueWEB.Pages
         }
 
         public List<UserWithEstoque> UsersWithEstoque { get; set; }
+        public bool IsDeleteConfirmed { get; set; }
 
         public async Task OnGet()
+        {
+            await LoadUsersWithEstoqueAsync();
+        }
+
+        public async Task<IActionResult> OnPostDeleteUserAsync(string userName)
+        {
+            if (IsDeleteConfirmed)
+            {
+                var user = await _userManager.FindByNameAsync(userName);
+                if (user != null)
+                {
+                    await _userManager.DeleteAsync(user);
+                    await LoadUsersWithEstoqueAsync();
+                    return RedirectToPage();
+                }
+                return NotFound();
+            }
+            else
+            {
+                return Page();
+            }
+        }
+
+        private async Task LoadUsersWithEstoqueAsync()
         {
             var users = _userManager.Users.ToList();
             UsersWithEstoque = new List<UserWithEstoque>();
@@ -37,11 +62,5 @@ namespace EstoqueWEB.Pages
                 UsersWithEstoque.Add(userWithEstoque);
             }
         }
-    }
-
-    public class UserWithEstoque
-    {
-        public string UserName { get; set; }
-        public List<Estoque> Estoque { get; set; }
     }
 }
