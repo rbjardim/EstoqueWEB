@@ -15,15 +15,21 @@ builder.Services.AddDbContextPool<Context>(options =>
 
 builder.Services.AddIdentity<AplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<Context>()
-    .AddUserManager<UserManager<AplicationUser>>();
+    .AddUserManager<UserManager<AplicationUser>>()
+    .AddDefaultTokenProviders();
+
 builder.Services.AddRazorPages();
 
 builder.Services.ConfigureApplicationCookie(config =>
 {
     config.LoginPath = "/Login";
 });
+
 builder.Services.AddScoped<IEstoqueRepository, EstoqueRepository>();
 builder.Services.AddScoped<IEstoqueService, EstoqueService>();
+builder.Services.AddLogging();
+
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -35,11 +41,12 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapRazorPages();
 

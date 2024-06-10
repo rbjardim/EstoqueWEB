@@ -30,16 +30,29 @@
 
 @if (TempData["Message"] != null)
 {
-    <div class="alert alert-success">
+    <div id="message" class="alert alert-success">
         @TempData["Message"]
     </div>
 }
 @if (TempData["Error"] != null)
 {
-    <div class="alert alert-danger">
+    <div id="error" class="alert alert-danger">
         @TempData["Error"]
     </div>
 }
+
+<script>
+    setTimeout(function () {
+        var message = document.getElementById("message");
+        if (message) {
+            message.style.display = "none";
+        }
+        var error = document.getElementById("error");
+        if (error) {
+            error.style.display = "none";
+        }
+    }, 5000);
+</script>
 
 <div class="row">
     <div class="col-md-6">
@@ -68,7 +81,7 @@
             <div class="form-group">
                 <label asp-for="Estoque.RQ"></label>
                 <input asp-for="Estoque.RQ" class="form-control" />
-                <p></p></>
+                <p></p>
             </div>
             <button type="submit" class="btn btn-salvar">Salvar</button>
         </form>
@@ -79,57 +92,64 @@
 
 <div>
     <h4>Itens de Estoque Existentes</h4>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Chamado</th>
-                <th>Nome</th>
-                <th>Cargo</th>
-                <th>Patrimônio</th>
-                <th>Modelo</th>
-                <th>RQ</th>
-                <th>Status</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var estoque in Model.ItensDeEstoque)
-            {
+    @if (Model.ItensDeEstoque == null || !Model.ItensDeEstoque.Any())
+    {
+        <p>Não há itens de estoque disponíveis.</p>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@estoque.Id</td>
-                    <td>@estoque.Chamado</td>
-                    <td>@estoque.Nome</td>
-                    <td>@estoque.Cargo</td>
-                    <td>@estoque.Patrimonio</td>
-                    <td>@estoque.Modelo</td>
-                    <td>@estoque.RQ</td>
-                    <td>
-                        <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@estoque.Id">
-                            <select name="status" class="form-control">
-                                @{
-                                    var configurandoSelected = estoque.Status == "configurando" ? "selected" : "";
-                                    var aguardandoSelected = estoque.Status == "aguardando" ? "selected" : "";
-                                    var entregueSelected = estoque.Status == "entregue" ? "selected" : "";
-                                }
-                                <option value="configurando" selected="@configurandoSelected">Configurando</option>
-                                <option value="aguardando" selected="@aguardandoSelected">Aguardando retirada</option>
-                                <option value="entregue" selected="@entregueSelected">Entregue</option>
-                            </select>
-
-                            <button type="submit" class="btn btn-primary">Atualizar</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form method="post" asp-page-handler="Delete" asp-route-id="@estoque.Id" style="display:inline;">
-                            <button type="submit" class="btn btn-danger">Excluir</button>
-                        </form>
-                        <form method="post" asp-page-handler="Export" asp-route-id="@estoque.Id" style="display:inline;">
-                            <button type="submit" class="btn btn-success">Exportar</button>
-                        </form>
-                    </td>
+                    <th>ID</th>
+                    <th>Chamado</th>
+                    <th>Nome</th>
+                    <th>Cargo</th>
+                    <th>Patrimonio</th>
+                    <th>Modelo</th>
+                    <th>RQ</th>
+                    <th>Status</th>
+                    <th>Ações</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var estoque in Model.ItensDeEstoque)
+                {
+                    <tr>
+                        <td>@estoque.Id</td>
+                        <td>@estoque.Chamado</td>
+                        <td>@estoque.Nome</td>
+                        <td>@estoque.Cargo</td>
+                        <td>@estoque.Patrimonio</td>
+                        <td>@estoque.Modelo</td>
+                        <td>@estoque.RQ</td>
+                        <td>
+                            <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@estoque.Id">
+                                <select name="status" class="form-control">
+                                    @{
+                                        var configurandoSelected = estoque.Status == "configurando" ? "selected" : "";
+                                        var aguardandoSelected = estoque.Status == "aguardando" ? "selected" : "";
+                                        var entregueSelected = estoque.Status == "entregue" ? "selected" : "";
+                                    }
+                                    <option value="configurando" selected="@configurandoSelected">Configurando</option>
+                                    <option value="aguardando" selected="@aguardandoSelected">Aguardando retirada</option>
+                                    <option value="entregue" selected="@entregueSelected">Entregue</option>
+                                </select>
+
+                            </form>
+                        </td>
+                        <td>
+                            <form method="post" asp-page-handler="Delete" asp-route-id="@estoque.Id" style="display:inline;">
+                                <button type="submit" class="btn btn-danger">Excluir</button>
+                            </form>
+                            <a href="/Local/Edit?id=@estoque.Id" class="btn btn-primary">Editar</a>
+                            <form method="post" asp-page-handler="Export" asp-route-id="@estoque.Id" style="display:inline;">
+                            </form>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 </div>

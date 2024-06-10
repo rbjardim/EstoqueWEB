@@ -1,0 +1,40 @@
+﻿@page
+@model EstoqueWEB.Pages.Local.EditModel
+@{
+    ViewData["Title"] = "Editar Estoque";
+}
+
+<h2>Editar Estoque</h2>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Estoque.Id" />
+
+    <div class="form-group">
+        <label asp-for="Estoque.Chamado"></label>
+        <input asp-for="Estoque.Chamado" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Estoque.Nome"></label>
+        <input asp-for="Estoque.Nome" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Estoque.Cargo"></label>
+        <input asp-for="Estoque.Cargo" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Estoque.Patrimonio"></label>
+        <input asp-for="Estoque.Patrimonio" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Estoque.Modelo"></label>
+        <input asp-for="Estoque.Modelo" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Estoque.RQ"></label>
+        <input asp-for="Estoque.RQ" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a asp-page="/Local/Index" class="btn btn-secondary">Cancelar</a>
+</form>
