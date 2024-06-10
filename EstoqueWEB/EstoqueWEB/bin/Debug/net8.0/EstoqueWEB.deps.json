@@ -15,7 +15,8 @@
           "Microsoft.EntityFrameworkCore.Tools": "8.0.6",
           "Microsoft.Extensions.Identity.Core": "8.0.6",
           "Pomelo.EntityFrameworkCore.MySql": "8.0.2",
-          "Pomelo.EntityFrameworkCore.MySql.Design": "1.1.2"
+          "Pomelo.EntityFrameworkCore.MySql.Design": "1.1.2",
+          "System.Linq": "4.3.0"
         },
         "runtime": {
           "EstoqueWEB.dll": {}

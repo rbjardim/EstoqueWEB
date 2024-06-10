@@ -7,10 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Admin\**" />
+    <Content Remove="Pages\Admin\**" />
+    <EmbeddedResource Remove="Pages\Admin\**" />
+    <None Remove="Pages\Admin\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Pages\Admin.cshtml.cs" />
+    <Compile Remove="Pages\Admin2.cshtml.cs" />
+    <Compile Remove="Pages\Index1.cshtml.cs" />
     <Compile Remove="Pages\Privacy.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Admin.cshtml" />
+    <Content Remove="Pages\Admin2.cshtml" />
+    <Content Remove="Pages\Index1.cshtml" />
     <Content Remove="Pages\Privacy.cshtml" />
   </ItemGroup>
 
@@ -29,6 +42,7 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.6" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2" />
+    <PackageReference Include="System.Linq" Version="4.3.0" />
   </ItemGroup>
 
 </Project>

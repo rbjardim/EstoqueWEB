@@ -1,63 +1,53 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using EstoqueWEB.Interface.Service;
 using EstoqueWEB.Model;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc;
 
-namespace EstoqueWEB.Pages
+public class AdminModel : PageModel
 {
-    public class AdminModel : PageModel
+    private readonly UserManager<AplicationUser> _userManager;
+    private readonly IEstoqueService _estoqueService;
+
+    public AdminModel(UserManager<AplicationUser> userManager, IEstoqueService estoqueService)
     {
-        private readonly UserManager<AplicationUser> _userManager;
-        private readonly IEstoqueService _estoqueService;
+        _userManager = userManager;
+        _estoqueService = estoqueService;
+    }
 
-        public AdminModel(UserManager<AplicationUser> userManager, IEstoqueService estoqueService)
+    // Manipulador de página para deletar usuário
+    public async Task<IActionResult> OnPostDeleteUser(string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user != null)
         {
-            _userManager = userManager;
-            _estoqueService = estoqueService;
-        }
-
-        public List<UserWithEstoque> UsersWithEstoque { get; set; }
-        public bool IsDeleteConfirmed { get; set; }
-
-        public async Task OnGet()
-        {
-            await LoadUsersWithEstoqueAsync();
-        }
-
-        public async Task<IActionResult> OnPostDeleteUserAsync(string userName)
-        {
-            if (IsDeleteConfirmed)
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
             {
-                var user = await _userManager.FindByNameAsync(userName);
-                if (user != null)
-                {
-                    await _userManager.DeleteAsync(user);
-                    await LoadUsersWithEstoqueAsync();
-                    return RedirectToPage();
-                }
-                return NotFound();
+                // Usuário deletado com sucesso
+                // Redirecione ou atualize a página conforme necessário
             }
             else
             {
-                return Page();
+                // Lidar com erros ao excluir usuário, se necessário
             }
         }
+        return RedirectToPage();
+    }
 
-        private async Task LoadUsersWithEstoqueAsync()
+    // Manipulador de página para deletar item de estoque
+    public async Task<IActionResult> OnPostDeleteItem(int itemId)
+    {
+        var success = await _estoqueService.DeleteEstoqueAsync(itemId);
+        if (success)
         {
-            var users = _userManager.Users.ToList();
-            UsersWithEstoque = new List<UserWithEstoque>();
-
-            foreach (var user in users)
-            {
-                var userWithEstoque = new UserWithEstoque
-                {
-                    UserName = user.UserName,
-                    Estoque = await _estoqueService.GetEstoqueByUserId(user.Id)
-                };
-                UsersWithEstoque.Add(userWithEstoque);
-            }
+            // Item de estoque deletado com sucesso
+            // Redirecione ou atualize a página conforme necessário
         }
+        else
+        {
+            // Lidar com erros ao excluir item de estoque, se necessário
+        }
+        return RedirectToPage();
     }
 }

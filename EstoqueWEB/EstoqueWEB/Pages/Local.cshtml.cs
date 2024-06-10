@@ -1,8 +1,14 @@
 using EstoqueWEB.Interface.Service;
 using EstoqueWEB.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EstoqueWEB.Pages
 {
@@ -68,7 +74,6 @@ namespace EstoqueWEB.Pages
                 return Page();
             }
         }
-
         public async Task<IActionResult> OnPostAsync()
         {
             try
@@ -79,15 +84,16 @@ namespace EstoqueWEB.Pages
                     return RedirectToPage("/Local");
                 }
 
-                if (string.IsNullOrEmpty(Estoque.Patrimonio))
+                if (string.IsNullOrEmpty(Estoque.Chamado) || string.IsNullOrEmpty(Estoque.Nome) || string.IsNullOrEmpty(Estoque.Cargo) || string.IsNullOrEmpty(Estoque.Nome) || string.IsNullOrEmpty(Estoque.Modelo) || string.IsNullOrEmpty(Estoque.RQ))
                 {
-                    TempData["Error"] = "O campo 'Patrimônio' é obrigatório.";
+                    TempData["Error"] = "Todos os campos são obrigatórios.";
+
+                    ItensDeEstoque = await _estoqueService.ListEstoque();
+
                     return Page();
                 }
 
-
                 Estoque.Status = Request.Form["status"];
-
 
                 if (string.IsNullOrEmpty(Estoque.Status))
                 {
@@ -96,6 +102,8 @@ namespace EstoqueWEB.Pages
 
                 await _estoqueService.CreateEstoque(Estoque);
                 TempData["Message"] = "Registro salvo!";
+
+                ItensDeEstoque = await _estoqueService.ListEstoque();
             }
             catch (Exception ex)
             {
@@ -104,7 +112,6 @@ namespace EstoqueWEB.Pages
                 var innerExceptionMessage = ex.InnerException != null ? ex.InnerException.Message : "Detalhes adicionais não disponíveis.";
 
                 TempData["Error"] = $"Erro ao salvar informações: {innerExceptionMessage}";
-                return Page();
             }
 
             return RedirectToPage("/Local");

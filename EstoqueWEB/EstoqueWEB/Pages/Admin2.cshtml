@@ -1,0 +1,123 @@
+﻿@page
+@model EstoqueWEB.Pages.Admin2Model
+@{
+    ViewData["Title"] = "Painel de Administração";
+}
+
+<style>
+    .titulo {
+        text-align: center;
+    }
+
+    .btn-salvar {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: white;
+        border: none;
+    }
+
+        .btn-salvar:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+    .form-control {
+        background-color: #f0f0f0;
+    }
+
+    .btn-excluir {
+        background-color: #aa0000;
+        border-color: #aa0000;
+        color: white;
+    }
+
+        .btn-excluir:hover {
+            background-color: #aa0000;
+            border-color: #aa0000;
+        }
+
+    .btn-logout {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: white;
+    }
+
+        .btn-logout:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+
+    .list-group-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f8f9fa;
+        border: none;
+        border-bottom: 1px solid #dee2e6;
+        padding: 10px;
+    }
+
+    .list-group {
+        border: 1px solid #dee2e6;
+        border-radius: .25rem;
+    }
+
+    .list-group-item:last-child {
+        border-bottom: none;
+    }
+</style>
+
+<div class="container mt-5">
+    <h2 class="titulo">@ViewData["Title"]</h2>
+    <div class="row">
+        <div class="col-md-12">
+            @if (Model.UsersWithEstoque != null && Model.UsersWithEstoque.Any())
+            {
+                <h3>Usuários</h3>
+                <ul class="list-group">
+                    @foreach (var userWithEstoque in Model.UsersWithEstoque)
+                    {
+                        <li class="list-group-item">
+                            <span>@userWithEstoque.UserName</span>
+                            <form method="post" asp-page-handler="DeleteUser" style="display: inline;">
+                                <input type="hidden" name="userName" value="@userWithEstoque.UserName" />
+                                <button type="submit" class="btn btn-excluir" onclick="return confirm('Tem certeza que deseja excluir este usuário?')">Excluir</button>
+                            </form>
+                        </li>
+                    }
+                </ul>
+                <div style="margin-top: 20px;">
+                    <h3>Itens de Estoque</h3>
+                    @foreach (var userWithEstoque in Model.UsersWithEstoque)
+                    {
+                        <h4>@userWithEstoque.UserName</h4>
+                        @if (userWithEstoque.EstoqueItems.Any())
+                        {
+                            <ul class="list-group">
+                                @foreach (var item in userWithEstoque.EstoqueItems)
+                                {
+                                    <li class="list-group-item">
+                                        <div>
+                                            <span>@item.Nome</span>
+                                            <span>@item.Quantidade</span>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p>Nenhum item de estoque encontrado para este usuário.</p>
+                        }
+                    }
+                </div>
+            }
+            else
+            {
+                <p>Nenhum usuário encontrado.</p>
+            }
+        </div>
+    </div>
+</div>
+<div class="text-center">
+</div>

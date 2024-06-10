@@ -55,17 +55,17 @@ namespace EstoqueWEB.Repository
             return await _context.Estoque.FirstOrDefaultAsync(l => l.Id == id);
         }
 
-        public async Task<List<Estoque>> GetEstoqueByUserId(string userId)
-        {
-            return null;
-        }
-
         public Task<int> UpdateEstoque(Estoque estoque)
         {
             throw new NotImplementedException();
         }
 
         public Task<Estoque> GetEstoqueByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Estoque>> GetEstoqueByUserId(string userId)
         {
             throw new NotImplementedException();
         }

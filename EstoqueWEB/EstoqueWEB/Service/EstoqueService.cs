@@ -43,11 +43,16 @@ namespace EstoqueWEB.Service
             return await _estoqueRepository.UpdateEstoque(estoque);
         }
 
-
         public async Task<List<Estoque>> GetEstoqueByUserId(string userId)
         {
-           
-            return new List<Estoque>();
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+ 
+                return new List<Estoque>();
+            }
+
+            return await _estoqueRepository.GetEstoqueByUserId(user.Id);
         }
     }
 }
