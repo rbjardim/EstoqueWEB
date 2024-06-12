@@ -14,6 +14,8 @@
         border-color: #28a745;
         color: white;
         border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
     }
 
         .btn-salvar:hover {
@@ -24,6 +26,44 @@
     .form-control {
         background-color: #f0f0f0;
     }
+
+    .filter-btn {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+        .filter-btn:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+            transform: scale(1.05);
+        }
+
+    .filter-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .filter-section {
+        display: none;
+        margin-left: 10px;
+        transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+    }
+
+        .filter-section.show {
+            display: block;
+            max-height: 100px; /* Ajuste conforme necessário */
+            opacity: 1;
+        }
 </style>
 
 <h2 class="titulo">Gerenciar Estoque</h2>
@@ -52,6 +92,15 @@
             error.style.display = "none";
         }
     }, 5000);
+
+    function toggleFilter() {
+        var filterSection = document.getElementById("filterSection");
+        if (filterSection.classList.contains('show')) {
+            filterSection.classList.remove('show');
+        } else {
+            filterSection.classList.add('show');
+        }
+    }
 </script>
 
 <div class="row">
@@ -91,7 +140,25 @@
 <hr />
 
 <div>
-    <h4>Itens de Estoque Existentes</h4>
+    <div class="filter-container">
+        <h4>Itens de Estoque Existentes</h4>
+        <div>
+            <button type="button" class="filter-btn" onclick="toggleFilter()">Filtro</button>
+            <div id="filterSection" class="filter-section">
+                <form method="get" asp-page-handler="Filter" class="form-inline">
+                    <div class="form-group">
+                        <select id="filterStatus" name="status" class="form-control">
+                            <option value="">Todos</option>
+                            <option value="configurando">Configurando</option>
+                            <option value="aguardando">Aguardando retirada</option>
+                            <option value="entregue">Entregue</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Aplicar Filtro</button>
+                </form>
+            </div>
+        </div>
+    </div>
     @if (Model.ItensDeEstoque == null || !Model.ItensDeEstoque.Any())
     {
         <p>Não há itens de estoque disponíveis.</p>
@@ -145,7 +212,6 @@
                             <form method="post" asp-page-handler="Export" asp-route-id="@estoque.Id" style="display:inline;">
                             </form>
                         </td>
-
                     </tr>
                 }
             </tbody>

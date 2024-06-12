@@ -2,7 +2,6 @@
 using EstoqueWEB.Model;
 using EstoqueWEB.MySqlContext;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -46,8 +45,7 @@ namespace EstoqueWEB.Repository
 
         public async Task<List<Estoque>> ListEstoque()
         {
-            List<Estoque> list = await _context.Estoque.OrderBy(p => p.Id).ToListAsync();
-            return list;
+            return await _context.Estoque.OrderBy(p => p.Id).ToListAsync();
         }
 
         public async Task<Estoque> GetEstoqueById(int id)
@@ -55,19 +53,28 @@ namespace EstoqueWEB.Repository
             return await _context.Estoque.FirstOrDefaultAsync(l => l.Id == id);
         }
 
-        public Task<int> UpdateEstoque(Estoque estoque)
+        public async Task<List<Estoque>> FilterByStatus(string status)
         {
-            throw new NotImplementedException();
+            return await _context.Estoque.Where(e => e.Status == status).ToListAsync();
         }
+
+        public async Task<int> UpdateEstoque(Estoque estoque)
+        {
+            _context.Entry(estoque).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return estoque.Id;
+        }
+
 
         public Task<Estoque> GetEstoqueByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            throw new System.NotImplementedException();
         }
 
-        public Task<List<Estoque>> GetEstoqueByUserId(string userId)
+        public async Task<List<Estoque>> GetEstoqueByUserId(string userId)
         {
-            throw new NotImplementedException();
+            throw new System.NotImplementedException();
         }
+
     }
 }

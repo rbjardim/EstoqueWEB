@@ -31,11 +31,23 @@ namespace EstoqueWEB.Pages
         public Estoque Estoque { get; set; }
         public IList<Estoque> ItensDeEstoque { get; private set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string StatusFiltro { get; set; } // Nova propriedade para o filtro
+
         public async Task OnGetAsync()
         {
             try
             {
-                ItensDeEstoque = await _estoqueService.ListEstoque();
+                // Verifica se há filtro de status
+                if (!string.IsNullOrEmpty(StatusFiltro))
+                {
+                    ItensDeEstoque = await _estoqueService.FilterByStatus(StatusFiltro);
+                }
+                else
+                {
+                    ItensDeEstoque = await _estoqueService.ListEstoque();
+                }
+
                 if (ItensDeEstoque == null)
                 {
                     ItensDeEstoque = new List<Estoque>();
@@ -49,31 +61,6 @@ namespace EstoqueWEB.Pages
             }
         }
 
-        public async Task<IActionResult> OnGetDetailsAsync(int id)
-        {
-            try
-            {
-                ItensDeEstoque = await _estoqueService.ListEstoque();
-                if (ItensDeEstoque == null)
-                {
-                    ItensDeEstoque = new List<Estoque>();
-                    TempData["Error"] = "Não foi possível carregar os itens de estoque.";
-                    return Page();
-                }
-                Estoque = ItensDeEstoque.FirstOrDefault(e => e.Id == id);
-                if (Estoque == null)
-                {
-                    return NotFound();
-                }
-                return Page();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Erro ao carregar detalhes do item de estoque");
-                TempData["Error"] = "Erro ao carregar detalhes do item de estoque: " + ex.Message;
-                return Page();
-            }
-        }
         public async Task<IActionResult> OnPostAsync()
         {
             try
@@ -100,7 +87,8 @@ namespace EstoqueWEB.Pages
                     Estoque.Status = "Pendente";
                 }
 
-                await _estoqueService.CreateEstoque(Estoque);
+                await _estoqueService.UpdateEstoque(Estoque);
+
                 TempData["Message"] = "Registro salvo!";
 
                 ItensDeEstoque = await _estoqueService.ListEstoque();

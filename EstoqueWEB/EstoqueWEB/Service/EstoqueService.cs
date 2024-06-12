@@ -2,6 +2,8 @@
 using EstoqueWEB.Interface.Service;
 using EstoqueWEB.Model;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EstoqueWEB.Service
 {
@@ -20,7 +22,6 @@ namespace EstoqueWEB.Service
         {
             return await _estoqueRepository.CreateEstoque(estoque) != null;
         }
-
 
         public async Task<bool> DeleteEstoqueAsync(int Idlocal)
         {
@@ -48,11 +49,15 @@ namespace EstoqueWEB.Service
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
- 
                 return new List<Estoque>();
             }
 
             return await _estoqueRepository.GetEstoqueByUserId(user.Id);
+        }
+
+        public async Task<List<Estoque>> FilterByStatus(string status)
+        {
+            return await _estoqueRepository.FilterByStatus(status);
         }
     }
 }
