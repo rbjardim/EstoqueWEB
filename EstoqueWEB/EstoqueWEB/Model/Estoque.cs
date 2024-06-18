@@ -1,4 +1,6 @@
-﻿namespace EstoqueWEB.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EstoqueWEB.Model
 {
     public class Estoque
     {
@@ -9,7 +11,7 @@
         public string Patrimonio { get; set; }
         public string Modelo { get; set; }
         public string RQ { get; set; }
-        public string Status { get; set; }
+        public string Status { get; set; } = "Configurando";
         public int Quantidade { get; set; }
     }
 }

@@ -16,12 +16,44 @@
         border: none;
         border-radius: 5px;
         padding: 10px 20px;
+        margin-left: 10px;
     }
 
-        .btn-salvar:hover {
-            background-color: #218838;
-            border-color: #1e7e34;
-        }
+    .btn-salvar:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    .btn-salvar2 {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        margin-left: 10px;
+    }
+
+    .btn-salvar2:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: white;
+        border: none;   
+        border-radius: 5px;
+        padding: 10px 20px;
+        margin-left: 10px;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
 
     .form-control {
         background-color: #f0f0f0;
@@ -38,11 +70,11 @@
         transition: background-color 0.3s, transform 0.3s;
     }
 
-        .filter-btn:hover {
-            background-color: #0056b3;
-            border-color: #004085;
-            transform: scale(1.05);
-        }
+    .filter-btn:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+        transform: scale(1.05);
+    }
 
     .filter-container {
         display: flex;
@@ -59,11 +91,17 @@
         opacity: 0;
     }
 
-        .filter-section.show {
-            display: block;
-            max-height: 100px; /* Ajuste conforme necessário */
-            opacity: 1;
-        }
+    .filter-section.show {
+        display: block;
+        max-height: 100px;
+        opacity: 1;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
 </style>
 
 <h2 class="titulo">Gerenciar Estoque</h2>
@@ -101,6 +139,16 @@
             filterSection.classList.add('show');
         }
     }
+
+ 
+    document.addEventListener("DOMContentLoaded", function() {
+        var statusSelects = document.querySelectorAll("select[name='status']");
+        statusSelects.forEach(function(select) {
+            select.addEventListener("change", function() {
+                this.parentNode.submit();
+            });
+        });
+    });
 </script>
 
 <div class="row">
@@ -193,23 +241,15 @@
                         <td>
                             <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@estoque.Id">
                                 <select name="status" class="form-control">
-                                    @{
-                                        var configurandoSelected = estoque.Status == "configurando" ? "selected" : "";
-                                        var aguardandoSelected = estoque.Status == "aguardando" ? "selected" : "";
-                                        var entregueSelected = estoque.Status == "entregue" ? "selected" : "";
-                                    }
-                                    <option value="configurando" selected="@configurandoSelected">Configurando</option>
-                                    <option value="aguardando" selected="@aguardandoSelected">Aguardando retirada</option>
-                                    <option value="entregue" selected="@entregueSelected">Entregue</option>
+                                    <option value="configurando" selected="@((estoque.Status == "configurando") ? "selected" : null)">Configurando</option>
+                                    <option value="aguardando" selected="@((estoque.Status == "aguardando") ? "selected" : null)">Aguardando retirada</option>
+                                    <option value="entregue" selected="@((estoque.Status == "entregue") ? "selected" : null)">Entregue</option>
                                 </select>
                             </form>
                         </td>
                         <td>
                             <form method="post" asp-page-handler="Delete" asp-route-id="@estoque.Id" style="display:inline;">
                                 <button type="submit" class="btn btn-danger">Excluir</button>
-                            </form>
-                            <a href="/Local/Edit?id=@estoque.Id" class="btn btn-primary">Editar</a>
-                            <form method="post" asp-page-handler="Export" asp-route-id="@estoque.Id" style="display:inline;">
                             </form>
                         </td>
                     </tr>

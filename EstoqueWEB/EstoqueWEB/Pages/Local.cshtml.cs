@@ -32,13 +32,13 @@ namespace EstoqueWEB.Pages
         public IList<Estoque> ItensDeEstoque { get; private set; }
 
         [BindProperty(SupportsGet = true)]
-        public string StatusFiltro { get; set; } // Nova propriedade para o filtro
+        public string StatusFiltro { get; set; }
 
         public async Task OnGetAsync()
         {
             try
             {
-                // Verifica se há filtro de status
+
                 if (!string.IsNullOrEmpty(StatusFiltro))
                 {
                     ItensDeEstoque = await _estoqueService.FilterByStatus(StatusFiltro);
@@ -82,12 +82,8 @@ namespace EstoqueWEB.Pages
 
                 Estoque.Status = Request.Form["status"];
 
-                if (string.IsNullOrEmpty(Estoque.Status))
-                {
-                    Estoque.Status = "Pendente";
-                }
 
-                await _estoqueService.UpdateEstoque(Estoque);
+                await _estoqueService.CreateEstoque(Estoque);
 
                 TempData["Message"] = "Registro salvo!";
 
@@ -132,5 +128,36 @@ namespace EstoqueWEB.Pages
 
             return RedirectToPage("/Local");
         }
+
+        public async Task<IActionResult> OnPostUpdateStatusAsync(int id, string status)
+        {
+            try
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    return RedirectToPage("/Local");
+                }
+
+                var estoque = await _estoqueService.GetEstoqueById(id);
+                if (estoque == null)
+                {
+                    TempData["Error"] = "Item de estoque não encontrado.";
+                    return RedirectToPage("/Local");
+                }
+                estoque.Status = status;
+
+                await _estoqueService.UpdateEstoque(estoque);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao atualizar status do estoque");
+                var innerExceptionMessage = ex.InnerException != null ? ex.InnerException.Message : "Detalhes adicionais não disponíveis.";
+                TempData["Error"] = $"Erro ao atualizar status: {innerExceptionMessage}";
+            }
+
+            return RedirectToPage("/Local");
+        }
+
     }
 }
