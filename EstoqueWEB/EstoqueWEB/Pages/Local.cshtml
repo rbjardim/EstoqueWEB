@@ -173,7 +173,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="Estoque.Modelo"></label>
-                <input asp-for="Estoque.Modelo" class="form-control" />
+                <select asp-for="Estoque.Modelo" class="form-control">
+                    <option value="">Selecione um modelo</option>
+                    <option value="Dell Latitude 3400">Dell Latitude 3400</option>
+                    <option value="Dell Latitude 3410">Dell Latitude 3410</option>
+                    <option value="Dell Latitude 3420">Dell Latitude 3420</option>
+                    <option value="Dell Latitude 3440">Dell Latitude 3440</option>
+                    <option value="Dell Latitude 3490">Dell Latitude 3490</option>
+                    <option value="HP 240 G7">HP 240 G7</option>
+                    <option value="HP 250 G8">HP 250 G8</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Estoque.RQ"></label>
