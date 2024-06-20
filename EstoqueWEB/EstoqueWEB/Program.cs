@@ -7,6 +7,10 @@ using Microsoft.Extensions.Hosting;
 using EstoqueWEB.Model;
 using EstoqueWEB.MySqlContext;
 using Microsoft.EntityFrameworkCore;
+using EstoqueWEB.Interface.Service;
+using EstoqueWEB.Service;
+using EstoqueWEB.Interface.Repository;
+using EstoqueWEB.Repository;
 
 public class Program
 {
@@ -49,6 +53,9 @@ public class Startup
         .AddEntityFrameworkStores<Context>()
         .AddDefaultTokenProviders();
 
+        services.AddScoped<IEstoqueService, EstoqueService>();
+        services.AddScoped<IEstoqueRepository, EstoqueRepository>();
+
         services.AddRazorPages();
     }
 
@@ -78,3 +85,5 @@ public class Startup
         });
     }
 }
+
+
