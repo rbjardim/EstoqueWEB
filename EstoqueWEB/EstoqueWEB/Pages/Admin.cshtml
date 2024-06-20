@@ -17,6 +17,7 @@
         border: none;
         border-radius: 5px;
         padding: 8px 16px;
+        width: 100%; 
     }
 
         .btn-danger:hover {
@@ -36,6 +37,18 @@
 
     .alert {
         margin-bottom: 20px;
+    }
+
+  
+    .table th.text-center,
+    .table td.text-center {
+        text-align: center;
+    }
+
+ 
+    .table .action-cell {
+        width: 150px;
+        white-space: nowrap;
     }
 </style>
 
@@ -62,7 +75,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>Email</th>
-                            <th>Ações</th>
+                            <th class="text-center action-cell">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,7 +84,7 @@
                             <tr>
                                 <td>@user.Nome</td>
                                 <td>@user.Email</td>
-                                <td>
+                                <td class="text-center action-cell">
                                     <form method="post" asp-page-handler="DeleteUser" asp-route-id="@user.Id" style="display:inline;">
                                         <button type="submit" class="btn btn-danger">Excluir</button>
                                     </form>
@@ -95,7 +108,7 @@
                             <th>Nome</th>
                             <th>Patrimônio</th>
                             <th>Status</th>
-                            <th>Ações</th>
+                            <th class="text-center action-cell">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -106,7 +119,7 @@
                                 <td>@item.Nome</td>
                                 <td>@item.Patrimonio</td>
                                 <td>@item.Status</td>
-                                <td>
+                                <td class="text-center action-cell">
                                     <form method="post" asp-page-handler="DeleteItem" asp-route-id="@item.Id" style="display:inline;">
                                         <button type="submit" class="btn btn-danger">Excluir</button>
                                     </form>
