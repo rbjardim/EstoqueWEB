@@ -2,16 +2,17 @@ using EstoqueWEB.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Threading.Tasks;
 
 namespace EstoqueWEB.Pages
 {
     public class LogoutModel : PageModel
     {
-        public readonly SignInManager<AplicationUser> signInManager;
+        private readonly SignInManager<AplicationUser> _signInManager;
 
         public LogoutModel(SignInManager<AplicationUser> signInManager)
         {
-            this.signInManager = signInManager;
+            _signInManager = signInManager;
         }
 
         public void OnGet()
@@ -20,13 +21,13 @@ namespace EstoqueWEB.Pages
 
         public async Task<IActionResult> OnPostLogoutAsync()
         {
-            await signInManager.SignOutAsync();
-            return RedirectToPage("Login");
+            await _signInManager.SignOutAsync();
+            return RedirectToPage("/Index");
         }
 
         public IActionResult OnPostDontLogoutAsync()
         {
-            return RedirectToPage("Login");
+            return RedirectToPage("/Index");
         }
     }
 }

@@ -77,7 +77,14 @@
             <div class="container">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <a class="navbar-brand" asp-area="" asp-page="/Local">EstoqueWEB</a>
+                    if (User.IsInRole("Admin"))
+                    {
+                        <a class="navbar-brand" asp-area="" asp-page="/Admin">EstoqueWEB</a>
+                    }
+                    else
+                    {
+                        <a class="navbar-brand" asp-area="" asp-page="/Local">EstoqueWEB</a>
+                    }
                 }
                 else
                 {
@@ -102,7 +109,9 @@
                     <div class="btn-group-custom">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <a asp-page="/Logout" class="btn logout-button">Logout</a>
+                            <form method="post" asp-area="" asp-page="/Logout">
+                                <button type="submit" class="btn logout-button">Logout</button>
+                            </form>
                         }
                         else
                         {

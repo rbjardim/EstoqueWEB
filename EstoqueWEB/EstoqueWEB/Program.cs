@@ -56,6 +56,9 @@ public class Startup
         services.AddScoped<IEstoqueService, EstoqueService>();
         services.AddScoped<IEstoqueRepository, EstoqueRepository>();
 
+
+        services.AddScoped<IUserService, UserService>();
+
         services.AddRazorPages();
     }
 

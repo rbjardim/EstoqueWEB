@@ -1,53 +1,35 @@
-﻿using System.Threading.Tasks;
+﻿using EstoqueWEB.Interface.Service;
 using EstoqueWEB.Model;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace EstoqueWEB.Service
+public class UserService : IUserService
 {
-    public class UserService
+    private readonly UserManager<AplicationUser> _userManager;
+
+    public UserService(UserManager<AplicationUser> userManager)
     {
-        private readonly UserManager<AplicationUser> _userManager;
+        _userManager = userManager;
+    }
 
-        public UserService(UserManager<AplicationUser> userManager)
+    public async Task<List<AplicationUser>> GetAllUsersAsync()
+    {
+        return _userManager.Users.ToList();
+    }
+
+    public async Task<AplicationUser> GetUserByIdAsync(string id)
+    {
+        return await _userManager.FindByIdAsync(id);
+    }
+
+    public async Task DeleteUserAsync(string id)
+    {
+        var user = await GetUserByIdAsync(id);
+        if (user != null)
         {
-            _userManager = userManager;
+            await _userManager.DeleteAsync(user);
         }
-
-        public async Task<List<AplicationUser>> GetAllUsers()
-        {
-            return _userManager.Users.ToList();
-        }
-
-        public async Task<AplicationUser> GetUserById(string userId)
-        {
-            
-            return null;
-        }
-
-        public async Task<AplicationUser> GetUserByEmail(string email)
-        {
-           
-            return null; 
-        }
-
-        public async Task<bool> CreateUser(AplicationUser user, string password)
-        {
-          
-            return false; 
-        }
-
-        public async Task<bool> UpdateUser(AplicationUser user)
-        {
-            
-            return false;
-        }
-
-        public async Task<bool> DeleteUser(string userId)
-        {
-           
-            return false; 
-        }
-
-  
     }
 }

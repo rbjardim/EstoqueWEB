@@ -3,21 +3,22 @@ using EstoqueWEB.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Threading.Tasks;
 
 namespace EstoqueWEB.Pages
 {
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<AplicationUser> signInManager;
-        private readonly UserManager<AplicationUser> userManager;
+        private readonly SignInManager<AplicationUser> _signInManager;
+        private readonly UserManager<AplicationUser> _userManager;
 
         [BindProperty]
         public Login Model { get; set; }
 
         public LoginModel(SignInManager<AplicationUser> signInManager, UserManager<AplicationUser> userManager)
         {
-            this.signInManager = signInManager;
-            this.userManager = userManager;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         public void OnGet()
@@ -28,30 +29,41 @@ namespace EstoqueWEB.Pages
         {
             if (ModelState.IsValid)
             {
-                if (Model.Email == "admin@aec.com.br" && Model.Password == "Ab!123")
+ 
+                if (Model.Email == "admin@aec.com.br" && Model.Password == "2o22@T&cnico*AeC")
                 {
                     return RedirectToPage("/Admin");
                 }
 
-                var user = await userManager.FindByEmailAsync(Model.Email);
+                var user = await _userManager.FindByEmailAsync(Model.Email);
 
                 if (user != null)
                 {
-                    var result = await signInManager.PasswordSignInAsync(user, Model.Password, Model.RelembreMe, lockoutOnFailure: false);
+                    var result = await _signInManager.PasswordSignInAsync(user, Model.Password, Model.RelembreMe, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
-                        if (returnUrl == null || returnUrl == "/")
+
+                        var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
+
+                        if (isAdmin)
                         {
-                            return RedirectToPage("Local");
+                            return RedirectToPage("/Admin");
                         }
                         else
                         {
-                            return RedirectToPage(returnUrl);
+                            if (string.IsNullOrEmpty(returnUrl) || returnUrl == "/")
+                            {
+                                return RedirectToPage("/Local");
+                            }
+                            else
+                            {
+                                return RedirectToPage(returnUrl);
+                            }
                         }
                     }
                 }
 
-                ModelState.AddModelError("", "Nome de usuário ou senha incorretos!");
+                ModelState.AddModelError(string.Empty, "Nome de usuário ou senha incorretos!");
             }
 
             return Page();
