@@ -7,13 +7,10 @@ namespace EstoqueWEB.Interface.Service
     public interface IEstoqueService
     {
         Task<bool> CreateEstoque(Estoque estoque);
-        Task<bool> DeleteEstoqueAsync(int Idlocal);
+        Task<bool> DeleteEstoqueAsync(int id);
         Task<Estoque> GetEstoqueById(int id);
         Task<List<Estoque>> ListEstoque();
         Task<int> UpdateEstoque(Estoque estoque);
-
-        Task<List<Estoque>> GetEstoqueByUserId(string userId);
-
-                Task<List<Estoque>> FilterByStatus(string status);
+        Task<List<Estoque>> FilterByStatus(string status);
     }
 }

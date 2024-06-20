@@ -1,6 +1,5 @@
 using EstoqueWEB.Interface.Service;
 using EstoqueWEB.Model;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -17,18 +16,17 @@ namespace EstoqueWEB.Pages
         private readonly IEstoqueService _estoqueService;
         private readonly UserManager<AplicationUser> _userManager;
         private readonly ILogger<LocalModel> _logger;
-        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public LocalModel(IEstoqueService estoqueService, UserManager<AplicationUser> userManager, ILogger<LocalModel> logger, IHttpContextAccessor httpContextAccessor)
+        public LocalModel(IEstoqueService estoqueService, UserManager<AplicationUser> userManager, ILogger<LocalModel> logger)
         {
             _estoqueService = estoqueService ?? throw new ArgumentNullException(nameof(estoqueService));
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
         }
 
         [BindProperty]
         public Estoque Estoque { get; set; }
+
         public IList<Estoque> ItensDeEstoque { get; private set; }
 
         [BindProperty(SupportsGet = true)]
@@ -38,7 +36,6 @@ namespace EstoqueWEB.Pages
         {
             try
             {
-
                 if (!string.IsNullOrEmpty(StatusFiltro))
                 {
                     ItensDeEstoque = await _estoqueService.FilterByStatus(StatusFiltro);
@@ -71,33 +68,25 @@ namespace EstoqueWEB.Pages
                     return RedirectToPage("/Local");
                 }
 
-                if (string.IsNullOrEmpty(Estoque.Chamado) || string.IsNullOrEmpty(Estoque.Nome) || string.IsNullOrEmpty(Estoque.Cargo) || string.IsNullOrEmpty(Estoque.Nome) || string.IsNullOrEmpty(Estoque.Modelo) || string.IsNullOrEmpty(Estoque.RQ))
+                if (string.IsNullOrEmpty(Estoque.Chamado) || string.IsNullOrEmpty(Estoque.Nome) || string.IsNullOrEmpty(Estoque.Cargo) || string.IsNullOrEmpty(Estoque.Modelo) || string.IsNullOrEmpty(Estoque.RQ))
                 {
                     TempData["Error"] = "Todos os campos são obrigatórios.";
-
                     ItensDeEstoque = await _estoqueService.ListEstoque();
-
                     return Page();
                 }
 
                 await _estoqueService.CreateEstoque(Estoque);
-
                 TempData["Message"] = "Registro salvo!";
-
                 ItensDeEstoque = await _estoqueService.ListEstoque();
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao salvar informações de estoque");
-
-                var innerExceptionMessage = ex.InnerException != null ? ex.InnerException.Message : "Detalhes adicionais não disponíveis.";
-
-                TempData["Error"] = $"Erro ao salvar informações: {innerExceptionMessage}";
+                TempData["Error"] = $"Erro ao salvar informações: {ex.Message}";
             }
 
             return RedirectToPage("/Local");
         }
-
 
         public async Task<IActionResult> OnPostDeleteAsync(int id)
         {
@@ -111,16 +100,12 @@ namespace EstoqueWEB.Pages
                 }
 
                 await _estoqueService.DeleteEstoqueAsync(id);
-
                 TempData["Message"] = "Item de estoque excluído com sucesso!";
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao excluir item de estoque");
-
-                var innerExceptionMessage = ex.InnerException != null ? ex.InnerException.Message : "Detalhes adicionais não disponíveis.";
-
-                TempData["Error"] = $"Erro ao excluir item de estoque: {innerExceptionMessage}";
+                TempData["Error"] = $"Erro ao excluir item de estoque: {ex.Message}";
             }
 
             return RedirectToPage("/Local");
@@ -142,19 +127,17 @@ namespace EstoqueWEB.Pages
                     TempData["Error"] = "Item de estoque não encontrado.";
                     return RedirectToPage("/Local");
                 }
-                estoque.Status = status;
 
+                estoque.Status = status;
                 await _estoqueService.UpdateEstoque(estoque);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao atualizar status do estoque");
-                var innerExceptionMessage = ex.InnerException != null ? ex.InnerException.Message : "Detalhes adicionais não disponíveis.";
-                TempData["Error"] = $"Erro ao atualizar status: {innerExceptionMessage}";
+                TempData["Error"] = $"Erro ao atualizar status: {ex.Message}";
             }
 
             return RedirectToPage("/Local");
         }
-
     }
 }

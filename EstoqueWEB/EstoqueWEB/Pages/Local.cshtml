@@ -9,21 +9,7 @@
         text-align: center;
     }
 
-    .btn-salvar {
-        background-color: #28a745;
-        border-color: #28a745;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-left: 10px;
-    }
-
-    .btn-salvar:hover {
-        background-color: #218838;
-        border-color: #1e7e34;
-    }
-
+    .btn-salvar,
     .btn-salvar2 {
         background-color: #28a745;
         border-color: #28a745;
@@ -34,26 +20,26 @@
         margin-left: 10px;
     }
 
-    .btn-salvar2:hover {
-        background-color: #218838;
-        border-color: #1e7e34;
-    }
-
+        .btn-salvar:hover,
+        .btn-salvar2:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
 
     .btn-danger {
         background-color: #dc3545;
         border-color: #dc3545;
         color: white;
-        border: none;   
+        border: none;
         border-radius: 5px;
         padding: 10px 20px;
         margin-left: 10px;
     }
 
-    .btn-danger:hover {
-        background-color: #c82333;
-        border-color: #bd2130;
-    }
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
 
     .form-control {
         background-color: #f0f0f0;
@@ -61,20 +47,18 @@
 
     .filter-btn {
         background-color: #007bff;
-        border-color: #007bff;
-        color: white;
         border: none;
-        border-radius: 5px;
+        color: white;
         padding: 10px 20px;
+        border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s, transform 0.3s;
+        margin-left: 10px;
     }
 
-    .filter-btn:hover {
-        background-color: #0056b3;
-        border-color: #004085;
-        transform: scale(1.05);
-    }
+        .filter-btn:hover {
+            background-color: #0056b3;
+        }
 
     .filter-container {
         display: flex;
@@ -91,11 +75,11 @@
         opacity: 0;
     }
 
-    .filter-section.show {
-        display: block;
-        max-height: 100px;
-        opacity: 1;
-    }
+        .filter-section.show {
+            display: block;
+            max-height: 100px;
+            opacity: 1;
+        }
 
     .action-buttons {
         display: flex;
@@ -140,11 +124,10 @@
         }
     }
 
- 
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         var statusSelects = document.querySelectorAll("select[name='status']");
-        statusSelects.forEach(function(select) {
-            select.addEventListener("change", function() {
+        statusSelects.forEach(function (select) {
+            select.addEventListener("change", function () {
                 this.parentNode.submit();
             });
         });
@@ -200,18 +183,17 @@
     <div class="filter-container">
         <h4>Itens de Estoque Existentes</h4>
         <div>
-            <button type="button" class="filter-btn" onclick="toggleFilter()">Filtro</button>
+            <button type="button" class="filter-btn" onclick="toggleFilter()">Filtrar</button>
             <div id="filterSection" class="filter-section">
                 <form method="get" asp-page-handler="Filter" class="form-inline">
                     <div class="form-group">
-                        <select id="filterStatus" name="status" class="form-control">
+                        <select id="filterStatus" name="StatusFiltro" class="form-control" onchange="this.form.submit()">
                             <option value="">Todos</option>
-                            <option value="configurando">Configurando</option>
-                            <option value="aguardando">Aguardando retirada</option>
-                            <option value="entregue">Entregue</option>
+                            <option value="configurando" selected="@((Model.StatusFiltro == "configurando") ? "selected" : null)">Configurando</option>
+                            <option value="aguardando" selected="@((Model.StatusFiltro == "aguardando") ? "selected" : null)">Aguardando retirada</option>
+                            <option value="entregue" selected="@((Model.StatusFiltro == "entregue") ? "selected" : null)">Entregue</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Aplicar Filtro</button>
                 </form>
             </div>
         </div>
@@ -249,7 +231,7 @@
                         <td>@estoque.RQ</td>
                         <td>
                             <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@estoque.Id">
-                                <select name="status" class="form-control">
+                                <select name="status" class="form-control" onchange="this.form.submit()">
                                     <option value="configurando" selected="@((estoque.Status == "configurando") ? "selected" : null)">Configurando</option>
                                     <option value="aguardando" selected="@((estoque.Status == "aguardando") ? "selected" : null)">Aguardando retirada</option>
                                     <option value="entregue" selected="@((estoque.Status == "entregue") ? "selected" : null)">Entregue</option>
@@ -257,7 +239,7 @@
                             </form>
                         </td>
                         <td>
-                            <form method="post" asp-page-handler="Delete" asp-route-id="@estoque.Id" style="display:inline;">
+                            <form method="post" asp-page-handler="Delete" asp-route-id="@estoque.Id" style="display: inline;">
                                 <button type="submit" class="btn btn-danger">Excluir</button>
                             </form>
                         </td>
