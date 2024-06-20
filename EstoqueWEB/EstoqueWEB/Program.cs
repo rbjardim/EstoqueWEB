@@ -1,53 +1,80 @@
-using EstoqueWEB.Interface.Repository;
-using EstoqueWEB.Interface.Service;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using EstoqueWEB.Model;
 using EstoqueWEB.MySqlContext;
-using EstoqueWEB.Repository;
-using EstoqueWEB.Service;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args);
-string mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
-
-builder.Services.AddDbContextPool<Context>(options =>
-    options.UseMySql(mySqlConnection, ServerVersion.AutoDetect(mySqlConnection)));
-
-builder.Services.AddIdentity<AplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<Context>()
-    .AddUserManager<UserManager<AplicationUser>>()
-    .AddDefaultTokenProviders();
-
-builder.Services.AddRazorPages();
-
-builder.Services.ConfigureApplicationCookie(config =>
+public class Program
 {
-    config.LoginPath = "/Login";
-});
+    public static void Main(string[] args)
+    {
+        CreateHostBuilder(args).Build().Run();
+    }
 
-builder.Services.AddScoped<IEstoqueRepository, EstoqueRepository>();
-builder.Services.AddScoped<IEstoqueService, EstoqueService>();
-builder.Services.AddLogging();
-
-builder.Services.AddSession();
-
-var app = builder.Build();
-
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    app.UseHsts();
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseRouting();
+public class Startup
+{
+    public Startup(IConfiguration configuration)
+    {
+        Configuration = configuration;
+    }
 
-app.UseAuthentication();
-app.UseAuthorization();
+    public IConfiguration Configuration { get; }
 
-app.UseSession();
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddDbContext<Context>(options =>
+            options.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
+                new MySqlServerVersion(new Version(8, 0, 21))));
 
-app.MapRazorPages();
+        services.AddIdentity<AplicationUser, IdentityRole>(options =>
+        {
+            options.Password.RequireDigit = true;
+            options.Password.RequiredLength = 12;
+            options.Password.RequireNonAlphanumeric = true;
+            options.Password.RequireUppercase = true;
+            options.Password.RequireLowercase = true;
+        })
+        .AddEntityFrameworkStores<Context>()
+        .AddDefaultTokenProviders();
 
-app.Run();
+        services.AddRazorPages();
+    }
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
+            app.UseExceptionHandler("/Error");
+            app.UseHsts();
+        }
+
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+
+        app.UseRouting();
+
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapRazorPages();
+        });
+    }
+}

@@ -22,14 +22,14 @@ namespace EstoqueWEB.Pages
             [EmailAddress]
             public string Email { get; set; }
 
-            [Display(Name = "Nome do Usu?rio")]
+            [Display(Name = "Nome do Usuário")]
             public string Nome { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Compare("Password", ErrorMessage = "As senhas n?o conferem.")]
+            [Compare("Password", ErrorMessage = "As senhas não conferem.")]
             [DataType(DataType.Password)]
             [Display(Name = "Confirme sua Senha")]
             public string ConfirmPassword { get; set; }
@@ -45,12 +45,11 @@ namespace EstoqueWEB.Pages
             _dbContext = dbContext;
         }
 
-
         public void OnGet()
         {
         }
 
-        public async Task<ActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
             {
@@ -59,17 +58,15 @@ namespace EstoqueWEB.Pages
                     UserName = Model.Email,
                     Email = Model.Email,
                     Nome = Model.Nome,
-
                 };
 
                 var result = await userManager.CreateAsync(user, Model.Password);
                 if (result.Succeeded)
                 {
-
+                    TempData["SuccessMessage"] = "Registro realizado com sucesso! Redirecionando para a página de login...";
                     await _dbContext.SaveChangesAsync();
 
-                    await signInManager.SignInAsync(user, false);
-                    return RedirectToPage("Login");
+                    return Page();
                 }
 
                 foreach (var error in result.Errors)

@@ -80,9 +80,6 @@ namespace EstoqueWEB.Pages
                     return Page();
                 }
 
-                Estoque.Status = Request.Form["status"];
-
-
                 await _estoqueService.CreateEstoque(Estoque);
 
                 TempData["Message"] = "Registro salvo!";
