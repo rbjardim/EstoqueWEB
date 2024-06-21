@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using EstoqueWEB.Model
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<AplicationUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -77,7 +81,8 @@
             <div class="container">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    if (User.IsInRole("Admin"))
+                    var user = await UserManager.GetUserAsync(User);
+                    if (await UserManager.IsInRoleAsync(user, "Admin"))
                     {
                         <a class="navbar-brand" asp-area="" asp-page="/Admin">EstoqueWEB</a>
                     }

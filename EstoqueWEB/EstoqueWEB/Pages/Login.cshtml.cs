@@ -29,9 +29,10 @@ namespace EstoqueWEB.Pages
         {
             if (ModelState.IsValid)
             {
- 
-                if (Model.Email == "admin@aec.com.br" && Model.Password == "2o22@T&cnico*AeC")
+
+                if (Model.Email == "admin@aec.com.br" && Model.Password == "Ab!123")
                 {
+  
                     return RedirectToPage("/Admin");
                 }
 
@@ -42,7 +43,6 @@ namespace EstoqueWEB.Pages
                     var result = await _signInManager.PasswordSignInAsync(user, Model.Password, Model.RelembreMe, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
-
                         var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
 
                         if (isAdmin)

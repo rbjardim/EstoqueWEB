@@ -41,6 +41,21 @@
             border-color: #bd2130;
         }
 
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        margin-left: 10px;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
     .form-control {
         background-color: #f0f0f0;
     }
@@ -86,6 +101,16 @@
         justify-content: flex-end;
         align-items: center;
     }
+
+    .button-group {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+        .button-group .btn {
+            margin-left: 5px;
+        }
 </style>
 
 <h2 class="titulo">Gerenciar Estoque</h2>
@@ -132,6 +157,21 @@
             });
         });
     });
+
+    function openEditModal(id, chamado, nome, cargo, patrimonio, modelo, rq) {
+        document.getElementById("editId").value = id;
+        document.getElementById("editChamado").value = chamado;
+        document.getElementById("editNome").value = nome;
+        document.getElementById("editCargo").value = cargo;
+        document.getElementById("editPatrimonio").value = patrimonio;
+        document.getElementById("editModelo").value = modelo;
+        document.getElementById("editRq").value = rq;
+        document.getElementById("editModal").style.display = "block";
+    }
+
+    function closeEditModal() {
+        document.getElementById("editModal").style.display = "none";
+    }
 </script>
 
 <div class="row">
@@ -238,7 +278,8 @@
                                 </select>
                             </form>
                         </td>
-                        <td>
+                        <td class="button-group">
+                            <button type="button" class="btn btn-primary" onclick="openEditModal('@estoque.Id', '@estoque.Chamado', '@estoque.Nome', '@estoque.Cargo', '@estoque.Patrimonio', '@estoque.Modelo', '@estoque.RQ')">Editar</button>
                             <form method="post" asp-page-handler="Delete" asp-route-id="@estoque.Id" style="display: inline;">
                                 <button type="submit" class="btn btn-danger">Excluir</button>
                             </form>
@@ -249,3 +290,87 @@
         </table>
     }
 </div>
+
+<!-- Edit Modal -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeEditModal()">&times;</span>
+        <h2>Editar Equipamento</h2>
+        <form method="post" asp-page-handler="Edit">
+            <input type="hidden" id="editId" name="Estoque.Id" />
+            <div class="form-group">
+                <label for="editChamado">Chamado</label>
+                <input type="text" id="editChamado" name="Estoque.Chamado" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="editNome">Nome</label>
+                <input type="text" id="editNome" name="Estoque.Nome" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="editCargo">Cargo</label>
+                <input type="text" id="editCargo" name="Estoque.Cargo" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="editPatrimonio">Patrimonio</label>
+                <input type="text" id="editPatrimonio" name="Estoque.Patrimonio" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="editModelo">Modelo</label>
+                <select id="editModelo" name="Estoque.Modelo" class="form-control">
+                    <option value="">Selecione um modelo</option>
+                    <option value="Dell Latitude 3400">Dell Latitude 3400</option>
+                    <option value="Dell Latitude 3410">Dell Latitude 3410</option>
+                    <option value="Dell Latitude 3420">Dell Latitude 3420</option>
+                    <option value="Dell Latitude 3440">Dell Latitude 3440</option>
+                    <option value="Dell Latitude 3490">Dell Latitude 3490</option>
+                    <option value="HP 240 G7">HP 240 G7</option>
+                    <option value="HP 250 G8">HP 250 G8</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="editRq">RQ</label>
+                <input type="text" id="editRq" name="Estoque.RQ" class="form-control" />
+                <p></p>
+            </div>
+            <button type="submit" class="btn btn-salvar2">Salvar Alterações</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
+        padding-top: 60px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>

@@ -17,6 +17,11 @@
         margin-top: 10px;
         color: #6c757d;
     }
+
+    .caps-lock-warning {
+        color: red;
+        display: none;
+    }
 </style>
 <div class="container mt-5">
     <div class="row justify-content-center align-items-center">
@@ -54,18 +59,21 @@
 
                     <div class="mb-3">
                         <label class="form-label" asp-for="Model.Password">Senha</label>
-                        <input type="password" asp-for="Model.Password" class="form-control" />
+                        <input type="password" asp-for="Model.Password" class="form-control" id="password-input" />
+                        <input type="checkbox" id="show-password" onclick="togglePasswordVisibility()"> Mostrar Senha
                         <span asp-validation-for="Model.Password" class="text-danger"></span>
                         <div class="password-requirements">
                             • Mínimo de 12 caracteres<br />
                             • Alfanumérica<br />
                             • Caractere Especial
                         </div>
+                        <p id="caps-lock-warning" class="caps-lock-warning">Caps Lock está ativado!</p>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" asp-for="Model.ConfirmPassword">Confirme sua Senha</label>
-                        <input type="password" asp-for="Model.ConfirmPassword" class="form-control" />
+                        <input type="password" asp-for="Model.ConfirmPassword" class="form-control" id="confirm-password-input" />
+                        <input type="checkbox" id="show-confirm-password" onclick="toggleConfirmPasswordVisibility()"> Mostrar Senha
                         <span asp-validation-for="Model.ConfirmPassword" class="text-danger"></span>
                     </div>
 
@@ -82,3 +90,34 @@
         </div>
     </div>
 </div>
+
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("password-input");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
+    }
+
+    function toggleConfirmPasswordVisibility() {
+        var passwordInput = document.getElementById("confirm-password-input");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
+    }
+
+    var passwordInput = document.getElementById("password-input");
+    var capsLockWarning = document.getElementById("caps-lock-warning");
+
+    passwordInput.addEventListener("keyup", function (event) {
+        if (event.getModifierState("CapsLock")) {
+            capsLockWarning.style.display = "block";
+        } else {
+            capsLockWarning.style.display = "none";
+        }
+    });
+</script>

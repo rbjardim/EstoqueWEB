@@ -139,5 +139,41 @@ namespace EstoqueWEB.Pages
 
             return RedirectToPage("/Local");
         }
+
+        public async Task<IActionResult> OnPostEditAsync()
+        {
+            try
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    return RedirectToPage("/Local");
+                }
+
+                var estoqueToUpdate = await _estoqueService.GetEstoqueById(Estoque.Id);
+                if (estoqueToUpdate == null)
+                {
+                    TempData["Error"] = "Item de estoque não encontrado.";
+                    return RedirectToPage("/Local");
+                }
+
+                estoqueToUpdate.Chamado = Estoque.Chamado;
+                estoqueToUpdate.Nome = Estoque.Nome;
+                estoqueToUpdate.Cargo = Estoque.Cargo;
+                estoqueToUpdate.Patrimonio = Estoque.Patrimonio;
+                estoqueToUpdate.Modelo = Estoque.Modelo;
+                estoqueToUpdate.RQ = Estoque.RQ;
+
+                await _estoqueService.UpdateEstoque(estoqueToUpdate);
+                TempData["Message"] = "Item de estoque atualizado com sucesso!";
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao atualizar item de estoque");
+                TempData["Error"] = $"Erro ao atualizar item de estoque: {ex.Message}";
+            }
+
+            return RedirectToPage("/Local");
+        }
     }
 }
