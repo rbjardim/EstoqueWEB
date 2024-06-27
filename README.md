@@ -1,6 +1,6 @@
 Sobre
 
-Aplicação Web desenvolvida em C#, construida para o gerenciamento de um CRUD de Estoque, com opções criação, exportação gerenciamento e memorização!
+Aplicação Web desenvolvida em C#, construida para o gerenciamento de Estoque, com opções criação, exportação gerenciamento e memorização!
 
 Tela Inicial
 ![Tela Inicial](https://github.com/rbjardim/EstoqueWEB/assets/118462663/d362b3f9-4570-4db8-aefd-f3b8cd8524da)
