@@ -19,13 +19,18 @@ Banco de Dados
 
 Back-End
 • C#
+
 • .Net Core
+
 • Entity Framework Core
+
 • Razor
 
 Front-End
 • HTML
+
 • CSS
+
 • JavaScript
 
 Banco de Dados
@@ -33,9 +38,15 @@ Banco de Dados
 
 Pacotes NuGet
 • EntityFramework • Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
 • Microsoft.EntityFrameworkCore
+
 • Microsoft.EntityFrameworkCore.Desing
+
 • Microsoft.EntityFrameworkCore.Tools
+
 • Microsoft.Extensions.Identity.Core
+
 • Pomelo.EntityFrameworkCore.MySql
+
 • System.Linq
