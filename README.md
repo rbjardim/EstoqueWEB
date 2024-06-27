@@ -18,6 +18,7 @@ Banco de Dados
 ![TelaBanco](https://github.com/rbjardim/EstoqueWEB/assets/118462663/6c434298-a9fa-4414-b4a4-cbfa718e3776)
 
 Back-End
+
 • C#
 
 • .Net Core
@@ -26,18 +27,28 @@ Back-End
 
 • Razor
 
+
+
 Front-End
+
 • HTML
 
 • CSS
 
 • JavaScript
 
+
+
 Banco de Dados
+
 • MySQL
 
+
 Pacotes NuGet
-• EntityFramework • Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+• EntityFramework 
+
+• Microsoft.AspNetCore.Identity.EntityFrameworkCore
 
 • Microsoft.EntityFrameworkCore
 
