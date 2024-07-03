@@ -11,6 +11,7 @@ using EstoqueWEB.Interface.Service;
 using EstoqueWEB.Service;
 using EstoqueWEB.Interface.Repository;
 using EstoqueWEB.Repository;
+using EstoqueWEB.Service.EstoqueWEB.Service;
 
 public class Program
 {
@@ -88,5 +89,4 @@ public class Startup
         });
     }
 }
-
 

@@ -175,5 +175,35 @@ namespace EstoqueWEB.Pages
 
             return RedirectToPage("/Local");
         }
+
+        public string Patrimonio { get; set; }
+        public string Chamado { get; set; }
+
+        public async Task<IActionResult> OnGetSearchAsync(string Chamado, string Patrimonio)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(Chamado) && string.IsNullOrWhiteSpace(Patrimonio))
+                {
+                    TempData["Message"] = "Por favor, informe pelo menos um critério de busca.";
+                    return RedirectToPage("/Local");
+                }
+
+                ItensDeEstoque = await _estoqueService.SearchByChamadoOrPatrimonio(Chamado, Patrimonio);
+
+                if (ItensDeEstoque == null || !ItensDeEstoque.Any())
+                {
+                    TempData["Message"] = "Nenhum resultado encontrado.";
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao buscar itens de estoque por chamado ou patrimônio");
+                TempData["Error"] = $"Erro ao buscar itens de estoque: {ex.Message}";
+            }
+
+            return Page();
+        }
+
     }
 }

@@ -82,7 +82,7 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     var user = await UserManager.GetUserAsync(User);
-                    if (await UserManager.IsInRoleAsync(user, "Admin"))
+                    if (user != null && await UserManager.IsInRoleAsync(user, "Admin"))
                     {
                         <a class="navbar-brand" asp-area="" asp-page="/Admin">EstoqueWEB</a>
                     }

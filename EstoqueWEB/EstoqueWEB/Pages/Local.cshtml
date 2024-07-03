@@ -111,6 +111,29 @@
         .button-group .btn {
             margin-left: 5px;
         }
+
+    .linha-branca {
+        background-color: white;
+    }
+
+    .linha-cinza {
+        background-color: #f2f2f2;
+    }
+
+    .toggle-btn {
+        background-color: #6c757d;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+        .toggle-btn:hover {
+            background-color: #5a6268;
+        }
 </style>
 
 <h2 class="titulo">Gerenciar Estoque</h2>
@@ -149,6 +172,20 @@
         }
     }
 
+    function toggleTable() {
+        var table = document.getElementById("inventoryTable");
+        var toggleButton = document.getElementById("toggleButton");
+        if (table.style.display === "none") {
+            table.style.display = "table";
+            toggleButton.innerText = "Ocultar Lista";
+            localStorage.setItem("tableVisibility", "visible");
+        } else {
+            table.style.display = "none";
+            toggleButton.innerText = "Exibir Lista";
+            localStorage.setItem("tableVisibility", "hidden");
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
         var statusSelects = document.querySelectorAll("select[name='status']");
         statusSelects.forEach(function (select) {
@@ -156,9 +193,21 @@
                 this.parentNode.submit();
             });
         });
+
+        var tableVisibility = localStorage.getItem("tableVisibility");
+        var table = document.getElementById("inventoryTable");
+        var toggleButton = document.getElementById("toggleButton");
+        if (tableVisibility === "hidden") {
+            table.style.display = "none";
+            toggleButton.innerText = "Exibir Lista";
+        } else {
+            table.style.display = "table";
+            toggleButton.innerText = "Ocultar Lista";
+        }
     });
 
     function openEditModal(id, chamado, nome, cargo, patrimonio, modelo, rq) {
+        document.getElementById("editId").value = id;
         document.getElementById("editChamado").value = chamado;
         document.getElementById("editNome").value = nome;
         document.getElementById("editCargo").value = cargo;
@@ -179,7 +228,7 @@
         <form method="post" asp-page-handler="Post" class="form">
             <div class="form-group">
                 <label asp-for="Estoque.Chamado"></label>
-                <input asp-for="Estoque.Chamado" class="form-control" />
+                <input asp-for="Estoque.Chamado" class="form-control" id="Chamado" />
             </div>
             <div class="form-group">
                 <label asp-for="Estoque.Nome"></label>
@@ -191,7 +240,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Estoque.Patrimonio"></label>
-                <input asp-for="Estoque.Patrimonio" class="form-control" />
+                <input asp-for="Estoque.Patrimonio" class="form-control" id="Patrimonio" />
             </div>
             <div class="form-group">
                 <label asp-for="Estoque.Modelo"></label>
@@ -212,6 +261,7 @@
                 <p></p>
             </div>
             <button type="submit" class="btn btn-salvar">Salvar</button>
+            <button type="button" class="btn btn-primary" onclick="buscarItens()" asp-page-handler="Search">Buscar</button>
         </form>
     </div>
 </div>
@@ -223,6 +273,7 @@
         <h4>Itens de Estoque Existentes</h4>
         <div>
             <button type="button" class="filter-btn" onclick="toggleFilter()">Filtrar</button>
+            <button type="button" class="toggle-btn" id="toggleButton" onclick="toggleTable()">Exibir</button>
             <div id="filterSection" class="filter-section">
                 <form method="get" asp-page-handler="Filter" class="form-inline">
                     <div class="form-group">
@@ -233,33 +284,31 @@
                             <option value="entregue" selected="@((Model.StatusFiltro == "entregue") ? "selected" : null)">Entregue</option>
                         </select>
                     </div>
+                    <button type="submit" class="btn btn-primary">Aplicar Filtro</button>
                 </form>
             </div>
         </div>
     </div>
-    @if (Model.ItensDeEstoque == null || !Model.ItensDeEstoque.Any())
-    {
-        <p>Não há itens de estoque disponíveis.</p>
-    }
-    else
-    {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Chamado</th>
-                    <th>Nome</th>
-                    <th>Cargo</th>
-                    <th>Patrimonio</th>
-                    <th>Modelo</th>
-                    <th>RQ</th>
-                    <th>Status</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var estoque in Model.ItensDeEstoque)
-                {
-                    <tr>
+</div>
+    <table id="inventoryTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Chamado</th>
+                <th>Nome</th>
+                <th>Cargo</th>
+                <th>Patrimônio</th>
+                <th>Modelo</th>
+                <th>RQ</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        @for (var i = 0; i < Model.ItensDeEstoque.Count; i++)
+        {
+            var estoque = Model.ItensDeEstoque[i];
+            var classeLinha = i % 1 == 0 ? "linha-branca" : "linha-cinza";
+            <tr class="@classeLinha">
                         <td>@estoque.Chamado</td>
                         <td>@estoque.Nome</td>
                         <td>@estoque.Cargo</td>
@@ -267,53 +316,55 @@
                         <td>@estoque.Modelo</td>
                         <td>@estoque.RQ</td>
                         <td>
-                            <form method="post" asp-page-handler="UpdateStatus" asp-route-id="@estoque.Id">
-                                <select name="status" class="form-control" onchange="this.form.submit()">
-                                    <option value="configurando" selected="@((estoque.Status == "configurando") ? "selected" : null)">Configurando</option>
-                                    <option value="aguardando" selected="@((estoque.Status == "aguardando") ? "selected" : null)">Aguardando retirada</option>
-                                    <option value="entregue" selected="@((estoque.Status == "entregue") ? "selected" : null)">Entregue</option>
-                                </select>
+                            <form method="post" asp-page-handler="UpdateStatus">
+                                <input type="hidden" name="id" value="@estoque.Id" />
+                                <select name="status" class="form-control">
+                                    <option value="configurando" selected="@(estoque.Status == "configurando" ? "selected" : null)">Configurando</option>
+                                    <option value="aguardando" selected="@(estoque.Status == "aguardando" ? "selected" : null)">Aguardando retirada</option>
+                                    <option value="entregue" selected="@(estoque.Status == "entregue" ? "selected" : null)">Entregue</option>
+                            </select>
+                        </form>
+                    </td>
+                    <td>
+                        <div class="button-group">
+                            <button type="button" class="btn btn-salvar2" onclick="openEditModal('@estoque.Id', '@estoque.Chamado', '@estoque.Nome', '@estoque.Cargo', '@estoque.Patrimonio', '@estoque.Modelo', '@estoque.RQ')">Editar</button>
+                            <form method="post" asp-page-handler="Delete" style="display:inline;">
+                                <input type="hidden" name="id" value="@estoque.Id" />
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este item?')">Excluir</button>
                             </form>
-                        </td>
-                        <td class="button-group">
-                            <button type="button" class="btn btn-primary" onclick="openEditModal('@estoque.Id', '@estoque.Chamado', '@estoque.Nome', '@estoque.Cargo', '@estoque.Patrimonio', '@estoque.Modelo', '@estoque.RQ')">Editar</button>
-                            <form method="post" asp-page-handler="Delete" asp-route-id="@estoque.Id" style="display: inline;">
-                                <button type="submit" class="btn btn-danger">Excluir</button>
-                            </form>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
 <div id="editModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeEditModal()">&times;</span>
-        <h2>Editar Equipamento</h2>
+        <h2>Editar Item de Estoque</h2>
         <form method="post" asp-page-handler="Edit">
-            <input type="hidden" id="editId" name="Estoque.Id" />
+            <input type="hidden" id="editId" name="id" />
             <div class="form-group">
                 <label for="editChamado">Chamado</label>
-                <input type="text" id="editChamado" name="Estoque.Chamado" class="form-control" />
+                <input type="text" id="editChamado" name="Chamado" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="editNome">Nome</label>
-                <input type="text" id="editNome" name="Estoque.Nome" class="form-control" />
+                <input type="text" id="editNome" name="Nome" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="editCargo">Cargo</label>
-                <input type="text" id="editCargo" name="Estoque.Cargo" class="form-control" />
+                <input type="text" id="editCargo" name="Cargo" class="form-control" />
             </div>
             <div class="form-group">
-                <label for="editPatrimonio">Patrimonio</label>
-                <input type="text" id="editPatrimonio" name="Estoque.Patrimonio" class="form-control" />
+                <label for="editPatrimonio">Patrimônio</label>
+                <input type="text" id="editPatrimonio" name="Patrimonio" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="editModelo">Modelo</label>
-                <select id="editModelo" name="Estoque.Modelo" class="form-control">
-                    <option value="">Selecione um modelo</option>
+                <select id="editModelo" name="modelo" class="form-control">
                     <option value="Dell Latitude 3400">Dell Latitude 3400</option>
                     <option value="Dell Latitude 3410">Dell Latitude 3410</option>
                     <option value="Dell Latitude 3420">Dell Latitude 3420</option>
@@ -325,9 +376,9 @@
             </div>
             <div class="form-group">
                 <label for="editRq">RQ</label>
-                <input type="text" id="editRq" name="Estoque.RQ" class="form-control" />
-                <p></p>
+                <input type="text" id="editRq" name="RQ" class="form-control" />
             </div>
+            <p></p>
             <button type="submit" class="btn btn-salvar2">Salvar Alterações</button>
         </form>
     </div>
