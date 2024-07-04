@@ -68,11 +68,19 @@ namespace EstoqueWEB.Service
                 return await _estoqueRepository.FilterByStatus(status);
             }
 
-            public async Task<List<Estoque>> SearchByChamadoOrPatrimonio(string chamado, string patrimonio)
+            public async Task<List<Estoque>> SearchByChamado(string chamado)
             {
                 return await _dbContext.Estoque
-                    .Where(e => (string.IsNullOrEmpty(chamado) || e.Chamado.Contains(chamado)) ||
-                                (string.IsNullOrEmpty(patrimonio) || e.Patrimonio.Contains(patrimonio)))
+                    .Where(e => (string.IsNullOrEmpty(chamado) || e.Chamado.Contains(chamado)))
+
+                    .ToListAsync();
+            }
+
+            public async Task<List<Estoque>> SearchByPatrimonio(string patrimonio)
+            {
+                return await _dbContext.Estoque
+                    .Where(e => (string.IsNullOrEmpty(patrimonio) || e.Patrimonio.Contains(patrimonio)))
+
                     .ToListAsync();
             }
         }

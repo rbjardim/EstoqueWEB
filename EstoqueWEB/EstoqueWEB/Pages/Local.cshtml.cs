@@ -1,5 +1,6 @@
 using EstoqueWEB.Interface.Service;
 using EstoqueWEB.Model;
+using EstoqueWEB.Service.EstoqueWEB.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -32,11 +33,21 @@ namespace EstoqueWEB.Pages
         [BindProperty(SupportsGet = true)]
         public string StatusFiltro { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string Chamado { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string Patrimonio { get; set; }
+
         public async Task OnGetAsync()
         {
             try
             {
-                if (!string.IsNullOrEmpty(StatusFiltro))
+                if (!string.IsNullOrEmpty(Chamado) || !string.IsNullOrEmpty(Patrimonio))
+                {
+                    ItensDeEstoque = await _estoqueService.SearchByChamado(Chamado);
+                }
+                else if (!string.IsNullOrEmpty(StatusFiltro))
                 {
                     ItensDeEstoque = await _estoqueService.FilterByStatus(StatusFiltro);
                 }
@@ -176,29 +187,55 @@ namespace EstoqueWEB.Pages
             return RedirectToPage("/Local");
         }
 
-        public string Patrimonio { get; set; }
-        public string Chamado { get; set; }
+public async Task<IActionResult> OnGetSearchAsync(string Chamado)
+{
+    try
+    {
+        if (string.IsNullOrWhiteSpace(Chamado))
+        {
+            TempData["Messages"] = "Por favor, informe o número de chamado para busca.";
+            TempData["MessageClass"] = "alert alert-danger";
+                    return RedirectToPage("/Local");
+        }
 
-        public async Task<IActionResult> OnGetSearchAsync(string Chamado, string Patrimonio)
+                ItensDeEstoque = await _estoqueService.SearchByChamado(Chamado);
+
+        if (ItensDeEstoque == null || !ItensDeEstoque.Any())
+        {
+            TempData["Messages"] = "Nenhum resultado encontrado.";
+            TempData["MessageClass"] = "alert alert-danger";
+        }
+    }
+    catch (Exception ex)
+    {
+        _logger.LogError(ex, "Erro ao buscar itens de estoque por chamado");
+        TempData["Error"] = $"Erro ao buscar itens de estoque: {ex.Message}";
+    }
+
+    return Page();
+}
+        public async Task<IActionResult> OnGetSearchByPatrimonioAsync(string Patrimonio)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(Chamado) && string.IsNullOrWhiteSpace(Patrimonio))
+                if (string.IsNullOrWhiteSpace(Patrimonio))
                 {
-                    TempData["Message"] = "Por favor, informe pelo menos um critério de busca.";
+                    TempData["Messages"] = "Por favor, informe o número de patrimônio para busca.";
+                    TempData["MessageClass"] = "alert alert-danger";
                     return RedirectToPage("/Local");
                 }
 
-                ItensDeEstoque = await _estoqueService.SearchByChamadoOrPatrimonio(Chamado, Patrimonio);
+                ItensDeEstoque = await _estoqueService.SearchByPatrimonio(Patrimonio);
 
                 if (ItensDeEstoque == null || !ItensDeEstoque.Any())
                 {
-                    TempData["Message"] = "Nenhum resultado encontrado.";
+                    TempData["Messages"] = "Nenhum resultado encontrado.";
+                    TempData["MessageClass"] = "alert alert-danger";
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao buscar itens de estoque por chamado ou patrimônio");
+                _logger.LogError(ex, "Erro ao buscar itens de estoque por patrimônio");
                 TempData["Error"] = $"Erro ao buscar itens de estoque: {ex.Message}";
             }
 
@@ -206,4 +243,5 @@ namespace EstoqueWEB.Pages
         }
 
     }
+
 }

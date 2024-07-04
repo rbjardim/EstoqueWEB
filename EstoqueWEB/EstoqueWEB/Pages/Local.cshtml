@@ -134,6 +134,13 @@
         .toggle-btn:hover {
             background-color: #5a6268;
         }
+
+
+    .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+    }
 </style>
 
 <h2 class="titulo">Gerenciar Estoque</h2>
@@ -148,6 +155,12 @@
 {
     <div id="error" class="alert alert-danger">
         @TempData["Error"]
+    </div>
+}
+@if (TempData["Messages"] != null)
+{
+    <div id="message" class="@TempData["MessageClass"]">
+        @TempData["Messages"]
     </div>
 }
 
@@ -220,6 +233,20 @@
     function closeEditModal() {
         document.getElementById("editModal").style.display = "none";
     }
+
+    function buscarItens() {
+        var chamado = document.getElementById("Chamado").value;
+        var patrimonio = document.getElementById("Patrimonio").value;
+
+        if (chamado) {
+            window.location.href = `./Local?handler=Search&Chamado=${chamado}`;
+        } else if (patrimonio) {
+            window.location.href = `./Local?handler=SearchByPatrimonio&Patrimonio=${patrimonio}`;
+        } else {
+            alert("Por favor, informe um número de Chamado ou Patrimônio.");
+        }
+    }
+
 </script>
 
 <div class="row">
@@ -261,7 +288,7 @@
                 <p></p>
             </div>
             <button type="submit" class="btn btn-salvar">Salvar</button>
-            <button type="button" class="btn btn-primary" onclick="buscarItens()" asp-page-handler="Search">Buscar</button>
+            <button type="button" class="btn btn-primary" onclick="buscarItens()">Buscar</button>
         </form>
     </div>
 </div>
@@ -284,7 +311,7 @@
                             <option value="entregue" selected="@((Model.StatusFiltro == "entregue") ? "selected" : null)">Entregue</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Aplicar Filtro</button>
+
                 </form>
             </div>
         </div>
