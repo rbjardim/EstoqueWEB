@@ -7,22 +7,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\**" />
     <Compile Remove="Pages\Admin\**" />
+    <Content Remove="Migrations\**" />
     <Content Remove="Pages\Admin\**" />
+    <EmbeddedResource Remove="Migrations\**" />
     <EmbeddedResource Remove="Pages\Admin\**" />
+    <None Remove="Migrations\**" />
     <None Remove="Pages\Admin\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Model\ModelDev.cs" />
     <Compile Remove="Model\User.cs" />
     <Compile Remove="Model\UserWithEstoque.cs" />
     <Compile Remove="Pages\Admin2.cshtml.cs" />
+    <Compile Remove="Pages\EditDev.cshtml.cs" />
     <Compile Remove="Pages\Index1.cshtml.cs" />
     <Compile Remove="Pages\Privacy.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Pages\Admin2.cshtml" />
+    <Content Remove="Pages\EditDev.cshtml" />
     <Content Remove="Pages\Index1.cshtml" />
     <Content Remove="Pages\Privacy.cshtml" />
   </ItemGroup>

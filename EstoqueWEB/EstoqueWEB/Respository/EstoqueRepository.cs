@@ -65,16 +65,14 @@ namespace EstoqueWEB.Repository
             return estoque.Id;
         }
 
-
         public Task<Estoque> GetEstoqueByIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public async Task<List<Estoque>> GetEstoqueByUserId(string userId)
+        public Task<List<Estoque>> GetEstoqueByUserId(string userId)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
-
     }
 }

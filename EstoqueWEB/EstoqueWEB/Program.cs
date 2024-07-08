@@ -56,6 +56,8 @@ public class Startup
 
         services.AddScoped<IEstoqueService, EstoqueService>();
         services.AddScoped<IEstoqueRepository, EstoqueRepository>();
+        services.AddScoped<IDevolucaoService, DevolucaoService>();
+        services.AddScoped<IDevolucaoRepository, DevolucaoRepository>();
 
 
         services.AddScoped<IUserService, UserService>();

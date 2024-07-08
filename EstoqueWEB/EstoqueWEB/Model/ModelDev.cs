@@ -2,7 +2,7 @@
 
 namespace EstoqueWEB.Model
 {
-    public class Estoque
+    public class Devolucao
     {
         public int Id { get; set; }
 
@@ -12,28 +12,28 @@ namespace EstoqueWEB.Model
         [Required(ErrorMessage = "O campo Nome é obrigatório.")]
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = "O campo Cargo é obrigatório.")]
-        public string Cargo { get; set; }
-
         [Required(ErrorMessage = "O campo Patrimônio é obrigatório.")]
         public string Patrimonio { get; set; }
 
         [Required(ErrorMessage = "O campo Modelo é obrigatório.")]
         public string Modelo { get; set; }
 
-        [Required(ErrorMessage = "O campo RQ é obrigatório.")]
-        public string RQ { get; set; }
+        [Required(ErrorMessage = "O campo Data é obrigatório.")]
+        public string Data { get; set; }
+
+        [Required(ErrorMessage = "O campo Chamado Armazenagem é obrigatório.")]
+        public string ChamadoArmazenagem { get; set; }
 
         public string Status { get; set; }
 
-        public int Quantidade { get; set; }
 
 
-        public Estoque()
+        public Devolucao()
         {
 
             Modelo = "";
-            Status = "Configurando";
+            Status = "Retirar no RH";
         }
     }
 }
+

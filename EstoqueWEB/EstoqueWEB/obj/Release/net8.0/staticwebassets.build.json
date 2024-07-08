@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HbumZzoVh+JnXnQabuXq7xyGe0vdiTUxfc+7Wp/T/FE=",
+  "Hash": "ZY8ffR5lC7if9vz9TAQfFMTJc0LKX3hET/n4dSkbbDw=",
   "Source": "EstoqueWEB",
   "BasePath": "_content/EstoqueWEB",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Projetos\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\wwwroot\\images\\logo.png",
+      "SourceId": "EstoqueWEB",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Projetos\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\wwwroot\\",
+      "BasePath": "_content/EstoqueWEB",
+      "RelativePath": "images/logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\logo.png"
     },
     {
       "Identity": "C:\\Projetos\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\wwwroot\\js\\site.js",

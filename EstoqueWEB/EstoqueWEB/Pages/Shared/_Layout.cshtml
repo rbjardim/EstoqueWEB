@@ -84,16 +84,22 @@
                     var user = await UserManager.GetUserAsync(User);
                     if (user != null && await UserManager.IsInRoleAsync(user, "Admin"))
                     {
-                        <a class="navbar-brand" asp-area="" asp-page="/Admin">EstoqueWEB</a>
+                        <a class="navbar-brand" asp-area="" asp-page="/Admin">
+                            <img src="~/images/logo.png" alt="Logo" style="height: 30px;" />
+                        </a>
                     }
                     else
                     {
-                        <a class="navbar-brand" asp-area="" asp-page="/Local">EstoqueWEB</a>
+                        <a class="navbar-brand" asp-area="" asp-page="/Local">
+                            <img src="~/images/logo.png" alt="Logo" style="height: 30px;" />
+                        </a>
                     }
                 }
                 else
                 {
-                    <a class="navbar-brand" asp-area="" asp-page="/Index">EstoqueWEB</a>
+                    <a class="navbar-brand" asp-area="" asp-page="/Index">
+                        <img src="~/images/logo.png" alt="Logo" style="height: 30px;" />
+                    </a>
                 }
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -110,6 +116,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-white social-button github-button" href="https://github.com/rbjardim" target="_blank">GitHub</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                    <a class="nav-link text-blackalert-dark" asp-area="" asp-page="/Devolucao">Devolução</a>
+                            </li>
+                        }
                     </ul>
                     <div class="btn-group-custom">
                         @if (User.Identity.IsAuthenticated)

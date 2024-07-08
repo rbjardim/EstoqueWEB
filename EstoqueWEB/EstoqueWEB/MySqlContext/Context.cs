@@ -10,5 +10,7 @@ namespace EstoqueWEB.MySqlContext
         public Context(DbContextOptions<Context> options) : base(options)
         { }
         public DbSet<Estoque> Estoque { get; set; }
+        public DbSet<AplicationUser> Users {  get; set; }   
+        public DbSet<Devolucao> Devolucao { get; set; }
     }
 }
