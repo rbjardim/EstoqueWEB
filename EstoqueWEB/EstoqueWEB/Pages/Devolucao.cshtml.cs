@@ -103,8 +103,8 @@ namespace EstoqueWEB.Pages
         {
             try
             {
-                var estoqueToDelete = await _devolucaoService.GetDevolucaoById(id);
-                if (estoqueToDelete == null)
+                var devolucaoToDelete = await _devolucaoService.GetDevolucaoById(id);
+                if (devolucaoToDelete == null)
                 {
                     TempData["Error"] = "Item de devolução não encontrado.";
                     return RedirectToPage("/Devolucao");
@@ -171,8 +171,10 @@ namespace EstoqueWEB.Pages
                 devolucaoToUpdate.Chamado = Devolucao.Chamado;
                 devolucaoToUpdate.Nome = Devolucao.Nome;
                 devolucaoToUpdate.Patrimonio = Devolucao.Patrimonio;
+                devolucaoToUpdate.Data = Devolucao.Data;
                 devolucaoToUpdate.Modelo = Devolucao.Modelo;
                 devolucaoToUpdate.ChamadoArmazenagem = Devolucao.ChamadoArmazenagem;
+                devolucaoToUpdate.Responsavel = Devolucao.Responsavel;
 
                 await _devolucaoService.UpdateDevolucao(devolucaoToUpdate);
                 TempData["Message"] = "Item de devolução atualizado com sucesso!";

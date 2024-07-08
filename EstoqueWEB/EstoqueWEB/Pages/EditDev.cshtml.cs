@@ -1,17 +1,16 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using EstoqueWEB.Interface.Repository;
 using EstoqueWEB.Model;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace EstoqueWEB.Pages.Local
+namespace EstoqueWEB.Pages
 {
     public class EditDevModel : PageModel
     {
         private readonly IDevolucaoRepository _devolucaoRepository;
 
         [BindProperty]
-        public Estoque Estoque { get; set; }
+        public Devolucao Devolucao { get; set; }
 
         public EditDevModel(IDevolucaoRepository devolucaoRepository)
         {
@@ -20,9 +19,9 @@ namespace EstoqueWEB.Pages.Local
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            Estoque = await _devolucaoRepository.GetDevolucaoByIdAsync(id);
+            Devolucao = await _devolucaoRepository.GetDevolucaoByIdAsync(id);
 
-            if (Estoque == null)
+            if (Devolucao == null)
             {
                 return NotFound();
             }
@@ -39,7 +38,7 @@ namespace EstoqueWEB.Pages.Local
 
             await _devolucaoRepository.UpdateDevolucaoAsync(Devolucao);
 
-            return RedirectToPage("/Local/Index");
+            return RedirectToPage("/Devolucao/Index");
         }
     }
 }

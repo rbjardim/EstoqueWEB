@@ -7,13 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\**" />
     <Compile Remove="Pages\Admin\**" />
-    <Content Remove="Migrations\**" />
     <Content Remove="Pages\Admin\**" />
-    <EmbeddedResource Remove="Migrations\**" />
     <EmbeddedResource Remove="Pages\Admin\**" />
-    <None Remove="Migrations\**" />
     <None Remove="Pages\Admin\**" />
   </ItemGroup>
 
@@ -22,20 +18,18 @@
     <Compile Remove="Model\User.cs" />
     <Compile Remove="Model\UserWithEstoque.cs" />
     <Compile Remove="Pages\Admin2.cshtml.cs" />
-    <Compile Remove="Pages\EditDev.cshtml.cs" />
     <Compile Remove="Pages\Index1.cshtml.cs" />
     <Compile Remove="Pages\Privacy.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Pages\Admin2.cshtml" />
-    <Content Remove="Pages\EditDev.cshtml" />
     <Content Remove="Pages\Index1.cshtml" />
     <Content Remove="Pages\Privacy.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
@@ -50,6 +44,10 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2" />
     <PackageReference Include="System.Linq" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

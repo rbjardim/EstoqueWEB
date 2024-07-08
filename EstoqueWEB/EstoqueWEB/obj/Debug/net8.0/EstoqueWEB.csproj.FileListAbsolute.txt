@@ -241,16 +241,11 @@ C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\ru\Microsoft.CodeA
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\win-arm64\native\sni.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\win-x64\native\sni.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\win-x86\native\sni.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
-C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
-C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\obj\Debug\net8.0\staticwebassets.build.json
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\obj\Debug\net8.0\staticwebassets.development.json
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\obj\Debug\net8.0\staticwebassets\msbuild.EstoqueWEB.Microsoft.AspNetCore.StaticWebAssets.props
@@ -264,3 +259,8 @@ C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\obj\Debug\net8.0\scopedcss\projectb
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\obj\Debug\net8.0\EstoqueWEB.csproj.Up2Date
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\obj\Debug\net8.0\EstoqueWEB.genruntimeconfig.cache
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\obj\Debug\net8.0\ref\EstoqueWEB.dll
+C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll

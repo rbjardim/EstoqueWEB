@@ -219,19 +219,19 @@
         }
     });
 
-    function openEditModal(id, chamado, nome, cargo, patrimonio, modelo, data) {
+    function openEditDevModal(id, chamado, nome, patrimonio, data, modelo, chamadoarmazenagem, responsavel) {
         document.getElementById("editId").value = id;
-        document.getElementById("editChamadoDevolucao").value = chamadodevolucao;
+        document.getElementById("editChamado").value = chamado;
         document.getElementById("editNome").value = nome;
         document.getElementById("editPatrimonio").value = patrimonio;
-        document.getElementById("editModelo").value = modelo;
         document.getElementById("editData").value = data;
+        document.getElementById("editModelo").value = modelo;
         document.getElementById("editChamadoArmazenagem").value = chamadoarmazenagem;
         document.getElementById("editResponsavel").value = responsavel;
         document.getElementById("editModal").style.display = "block";
     }
 
-    function closeEditModal() {
+    function closeEditDevModal() {
         document.getElementById("editModal").style.display = "none";
     }
 
@@ -240,9 +240,9 @@
         var patrimonio = document.getElementById("Patrimonio").value;
 
         if (chamado) {
-            window.location.href = `./Local?handler=Search&Chamado=${chamado}`;
+            window.location.href = `./Devolucao?handler=Search&Chamado=${chamado}`;
         } else if (patrimonio) {
-            window.location.href = `./Local?handler=SearchByPatrimonio&Patrimonio=${patrimonio}`;
+            window.location.href = `./Devolucao?handler=SearchByPatrimonio&Patrimonio=${patrimonio}`;
         } else {
             alert("Por favor, informe um número de Chamado ou Patrimônio.");
         }
@@ -256,7 +256,7 @@
         <form method="post" asp-page-handler="Post" class="form">
             <div class="form-group">
                 <label asp-for="Devolucao.Chamado"></label>
-                <input asp-for="Devolucao.Chamado" class="form-control" id="Chamado Devolução" />
+                <input asp-for="Devolucao.Chamado" class="form-control" id="Chamado" />
             </div>
             <div class="form-group">
                 <label asp-for="Devolucao.Nome"></label>
@@ -268,7 +268,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Devolucao.Data"></label>
-                <input asp-for="Devolucao.Data" class="form-control" id="Data Devolução" />
+                <input asp-for="Devolucao.Data" class="form-control" id="Data" type="date" asp-format="{0:dd/MM/yyyy}" />
             </div>
             <div class="form-group">
                 <label asp-for="Devolucao.Modelo"></label>
@@ -285,11 +285,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Devolucao.ChamadoArmazenagem"></label>
-                <input asp-for="Devolucao.ChamadoArmazenagem" class="form-control" id="Chamado Armazenagem" />
+                <input asp-for="Devolucao.ChamadoArmazenagem" class="form-control" id="ChamadoArmazenagem" />
             </div>
             <div class="form-group">
                 <label asp-for="Devolucao.Responsavel"></label>
-                <input asp-for="Devolucao.Responsavel" class="form-control" id="Responsável Pela Devolução" />
+                <input asp-for="Devolucao.Responsavel" class="form-control" id="Responsavel" />
             </div>
                 <p></p>
             <button type="submit" class="btn btn-salvar">Salvar</button>
@@ -302,7 +302,7 @@
 
 <div>
     <div class="filter-container">
-        <h4>Itens de Estoque Existentes</h4>
+        <h4>Itens de Devolução Existentes</h4>
         <div>
             <button type="button" class="filter-btn" onclick="toggleFilter()">Filtrar</button>
             <button type="button" class="toggle-btn" id="toggleButton" onclick="toggleTable()">Exibir</button>
@@ -325,14 +325,14 @@
 <table id="inventoryTable" class="table table-striped">
     <thead>
         <tr>
-            <th>Chamado Devolução</th>
+            <th>Chamado</th>
             <th>Nome</th>
             <th>Patrimônio</th>
             <th>Modelo</th>
             <th>Data</th>
-            <th>Status</th>
             <th>Chamado Armazenagem</th>
-            <th>Responsável</th>
+            <th>Responsavel</th>
+            <th>Status</th>
             <th>Ações</th>
         </tr>
     </thead>
@@ -361,7 +361,7 @@
                 </td>
                 <td>
                     <div class="button-group">
-                        <button type="button" class="btn btn-salvar2" onclick="openEditModal('@devolucao.Id', '@devolucao.Chamado', '@devolucao.Nome', '@devolucao.Patrimonio', '@devolucao.Modelo', '@devolucao.Data', '@devolucao.ChamadoArmazenagem', '@devolucao.Responsavel)">Editar</button>
+                        <button type="button" class="btn btn-salvar2" onclick="openEditDevModal('@devolucao.Id', '@devolucao.Chamado', '@devolucao.Nome', '@devolucao.Patrimonio', '@devolucao.Modelo', '@devolucao.Data', '@devolucao.ChamadoArmazenagem', '@devolucao.Responsavel)">Editar</button>
                         <form method="post" asp-page-handler="Delete" style="display:inline;">
                             <input type="hidden" name="id" value="@devolucao.Id" />
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este item?')">Excluir</button>
@@ -374,15 +374,15 @@
 </table>
 </div>
 
-<div id="editModal" class="modal">
+<div id="editDevModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeEditModal()">&times;</span>
+        <span class="close" onclick="closeEditDevModal()">&times;</span>
         <h2>Editar Item de Estoque</h2>
         <form method="post" asp-page-handler="Edit">
             <input type="hidden" id="editId" name="id" />
             <div class="form-group">
-                <label for="editChamadoDevolucao">Chamado Devolução</label>
-                <input type="text" id="editChamadoDevolucao" name="ChamadoDevolucao" class="form-control" />
+                <label for="editChamado">Chamado Devolução</label>
+                <input type="text" id="editChamado" name="Chamado" class="form-control" />
             </div>
             <div class="form-group">
                 <label for="editNome">Nome</label>
@@ -391,6 +391,10 @@
             <div class="form-group">
                 <label for="editPatrimonio">Patrimônio</label>
                 <input type="text" id="editPatrimonio" name="Patrimonio" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="editData">Data</label>
+                <input type="date" id="editData" name="Data" class="form-control" asp-format="{0:dd/MM/yyyy}" />
             </div>
             <div class="form-group">
                 <label for="editModelo">Modelo</label>
@@ -405,15 +409,11 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="editData">Data</label>
-                <input type="text" id="editData" name="Data" class="form-control" />
+                <label for="editoArmazenagem">ChamadoArmazenagem</label>
+                <input type="text" id="editArmazenagem" name="Armazenagem" class="form-control" />
             </div>
             <div class="form-group">
-                <label for="editChamadoArmazenagem">Chamado Armazenagem</label>
-                <input type="text" id="editChamadoArmazenagem" name="ChamadoArmazenagem" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="editResponsavel">Responsável Pela Devolução</label>
+                <label for="editResponsavel">Responsavel</label>
                 <input type="text" id="editResponsavel" name="Responsavel" class="form-control" />
             </div>
             <p></p>
