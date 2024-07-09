@@ -7,12 +7,19 @@
 <style>
     .titulo {
         text-align: center;
+        color: #0096c7;
+        margin-bottom: 20px;
+    }
+
+    .text {
+        color: #0096c7;
+        margin-bottom: 20px;
     }
 
     .btn-salvar,
     .btn-salvar2 {
-        background-color: #28a745;
-        border-color: #28a745;
+        background-color: #0096c7;
+        border-color: none;
         color: white;
         border: none;
         border-radius: 5px;
@@ -22,8 +29,7 @@
 
         .btn-salvar:hover,
         .btn-salvar2:hover {
-            background-color: #218838;
-            border-color: #1e7e34;
+            background-color: #0096c7;
         }
 
     .btn-danger {
@@ -37,13 +43,13 @@
     }
 
         .btn-danger:hover {
-            background-color: #c82333;
-            border-color: #bd2130;
+            background-color: #dc3545;
+            border-color: #dc3545;
         }
 
     .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
+        background-color: #6c757d;
+        border-color: none;
         color: white;
         border: none;
         border-radius: 5px;
@@ -52,8 +58,8 @@
     }
 
         .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #004085;
+            background-color: #0096c7;
+            border-color: #0096c7;
         }
 
     .form-control {
@@ -61,7 +67,7 @@
     }
 
     .filter-btn {
-        background-color: #007bff;
+        background-color: #0096c7;
         border: none;
         color: white;
         padding: 10px 20px;
@@ -72,7 +78,7 @@
     }
 
         .filter-btn:hover {
-            background-color: #0056b3;
+            background-color: #0096c7;
         }
 
     .filter-container {
@@ -117,7 +123,7 @@
     }
 
     .linha-cinza {
-        background-color: #f2f2f2;
+        background-color: #212529;
     }
 
     .toggle-btn {
@@ -137,10 +143,77 @@
 
 
     .alert-danger {
-        color: #721c24;
+        color: #dc3545;
         background-color: #f8d7da;
         border-color: #f5c6cb;
     }
+
+    .table th,
+    .table td {
+        padding: 12px;
+        text-align: left;
+        border-top: 1px solid #e9ecef;
+        border-bottom: 1px solid black;
+    }
+
+    .table th {
+        background-color: #0096c7;
+        color: white;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f2f2f2;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 60px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .logout-button {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        margin-left: 10px;
+    }
+
+        .logout-button:hover {
+            background-color: #bb2d3b;
+            ;
+        }
 </style>
 
 <h2 class="titulo">Gerenciar Devoluções</h2>
@@ -219,21 +292,20 @@
         }
     });
 
-    function openEditDevModal(id, chamado, nome, patrimonio, data, modelo, chamadoarmazenagem, responsavel) {
-        document.getElementById("editId").value = id;
-        document.getElementById("editChamado").value = chamado;
-        document.getElementById("editNome").value = nome;
-        document.getElementById("editPatrimonio").value = patrimonio;
-        document.getElementById("editData").value = data;
-        document.getElementById("editModelo").value = modelo;
-        document.getElementById("editChamadoArmazenagem").value = chamadoarmazenagem;
-        document.getElementById("editResponsavel").value = responsavel;
-        document.getElementById("editModal").style.display = "block";
-    }
+    function openEditDevModal(id, chamado, nome, patrimonio, data, modelo, chamadoarmazenagem) {
+            document.getElementById("editId").value = id;
+            document.getElementById("editChamado").value = chamado;
+            document.getElementById("editNome").value = nome;
+            document.getElementById("editPatrimonio").value = patrimonio;
+            document.getElementById("editData").value = data;
+            document.getElementById("editModelo").value = modelo;
+            document.getElementById("editChamadoArmazenagem").value = chamadoarmazenagem;
+            document.getElementById("editModal").style.display = "block";
+        }
 
     function closeEditDevModal() {
-        document.getElementById("editModal").style.display = "none";
-    }
+            document.getElementById("editModal").style.display = "none";
+        }
 
     function buscarItens() {
         var chamado = document.getElementById("Chamado").value;
@@ -252,7 +324,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <h4>Adicionar Devolução</h4>
+        <h4 class="text">Adicionar Devolução</h4>
         <form method="post" asp-page-handler="Post" class="form">
             <div class="form-group">
                 <label asp-for="Devolucao.Chamado"></label>
@@ -287,10 +359,6 @@
                 <label asp-for="Devolucao.ChamadoArmazenagem"></label>
                 <input asp-for="Devolucao.ChamadoArmazenagem" class="form-control" id="ChamadoArmazenagem" />
             </div>
-            <div class="form-group">
-                <label asp-for="Devolucao.Responsavel"></label>
-                <input asp-for="Devolucao.Responsavel" class="form-control" id="Responsavel" />
-            </div>
                 <p></p>
             <button type="submit" class="btn btn-salvar">Salvar</button>
             <button type="button" class="btn btn-primary" onclick="buscarItens()">Buscar</button>
@@ -302,10 +370,11 @@
 
 <div>
     <div class="filter-container">
-        <h4>Itens de Devolução Existentes</h4>
+        <h4 class="text">Itens de Devolução Existentes</h4>
         <div>
             <button type="button" class="filter-btn" onclick="toggleFilter()">Filtrar</button>
             <button type="button" class="toggle-btn" id="toggleButton" onclick="toggleTable()">Exibir</button>
+            <p></p>
             <div id="filterSection" class="filter-section">
                 <form method="get" asp-page-handler="Filter" class="form-inline">
                     <div class="form-group">
@@ -331,7 +400,6 @@
             <th>Modelo</th>
             <th>Data</th>
             <th>Chamado Armazenagem</th>
-            <th>Responsavel</th>
             <th>Status</th>
             <th>Ações</th>
         </tr>
@@ -348,7 +416,6 @@
                 <td>@devolucao.Modelo</td>
                 <td>@devolucao.Data</td>
                 <td>@devolucao.ChamadoArmazenagem</td>
-                <th>@devolucao.Responsavel</th>
                 <td>
                     <form method="post" asp-page-handler="UpdateStatus">
                         <input type="hidden" name="id" value="@devolucao.Id" />
@@ -361,7 +428,7 @@
                 </td>
                 <td>
                     <div class="button-group">
-                        <button type="button" class="btn btn-salvar2" onclick="openEditDevModal('@devolucao.Id', '@devolucao.Chamado', '@devolucao.Nome', '@devolucao.Patrimonio', '@devolucao.Modelo', '@devolucao.Data', '@devolucao.ChamadoArmazenagem', '@devolucao.Responsavel)">Editar</button>
+                        <button type="button" class="btn btn-salvar2" onclick="openEditDevModal('@devolucao.Id', '@devolucao.Chamado', '@devolucao.Nome', '@devolucao.Patrimonio', '@devolucao.Modelo', '@devolucao.Data', '@devolucao.ChamadoArmazenagem')">Editar</button>
                         <form method="post" asp-page-handler="Delete" style="display:inline;">
                             <input type="hidden" name="id" value="@devolucao.Id" />
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este item?')">Excluir</button>
@@ -374,10 +441,10 @@
 </table>
 </div>
 
-<div id="editDevModal" class="modal">
+<div id="editModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeEditDevModal()">&times;</span>
-        <h2>Editar Item de Estoque</h2>
+        <h2 class="text">Editar Item de Devolução</h2>
         <form method="post" asp-page-handler="Edit">
             <input type="hidden" id="editId" name="id" />
             <div class="form-group">
@@ -411,10 +478,6 @@
             <div class="form-group">
                 <label for="editoArmazenagem">ChamadoArmazenagem</label>
                 <input type="text" id="editArmazenagem" name="Armazenagem" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="editResponsavel">Responsavel</label>
-                <input type="text" id="editResponsavel" name="Responsavel" class="form-control" />
             </div>
             <p></p>
             <button type="submit" class="btn btn-salvar2">Salvar Alterações</button>

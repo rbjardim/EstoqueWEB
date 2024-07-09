@@ -7,12 +7,19 @@
 <style>
     .titulo {
         text-align: center;
+        color: #0096c7;
+        margin-bottom: 20px;
+    }
+
+    .text {
+        color: #0096c7;
+        margin-bottom: 20px;
     }
 
     .btn-salvar,
     .btn-salvar2 {
-        background-color: #28a745;
-        border-color: #28a745;
+        background-color: #0096c7;
+        border-color: none;
         color: white;
         border: none;
         border-radius: 5px;
@@ -22,8 +29,7 @@
 
         .btn-salvar:hover,
         .btn-salvar2:hover {
-            background-color: #218838;
-            border-color: #1e7e34;
+            background-color: #0096c7;
         }
 
     .btn-danger {
@@ -37,13 +43,13 @@
     }
 
         .btn-danger:hover {
-            background-color: #c82333;
-            border-color: #bd2130;
+            background-color: #dc3545;
+            border-color: #dc3545;
         }
 
     .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
+        background-color: #6c757d;
+        border-color: none;
         color: white;
         border: none;
         border-radius: 5px;
@@ -52,8 +58,8 @@
     }
 
         .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #004085;
+            background-color: #0096c7;
+            border-color: #0096c7;
         }
 
     .form-control {
@@ -61,7 +67,7 @@
     }
 
     .filter-btn {
-        background-color: #007bff;
+        background-color: #0096c7;
         border: none;
         color: white;
         padding: 10px 20px;
@@ -72,7 +78,7 @@
     }
 
         .filter-btn:hover {
-            background-color: #0056b3;
+            background-color: #0096c7;
         }
 
     .filter-container {
@@ -117,7 +123,7 @@
     }
 
     .linha-cinza {
-        background-color: #f2f2f2;
+        background-color: #212529;
     }
 
     .toggle-btn {
@@ -137,10 +143,77 @@
 
 
     .alert-danger {
-        color: #721c24;
+        color: #dc3545;
         background-color: #f8d7da;
         border-color: #f5c6cb;
     }
+
+    .table th,
+    .table td {
+        padding: 12px;
+        text-align: left;
+        border-top: 1px solid #e9ecef;
+        border-bottom: 1px solid black;
+    }
+
+    .table th {
+        background-color: #0096c7;
+        color: white;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f2f2f2;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 60px;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .logout-button {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        margin-left: 10px;
+    }
+
+        .logout-button:hover {
+            background-color: #bb2d3b;
+            ;
+        }
 </style>
 
 <h2 class="titulo">Gerenciar Estoque</h2>
@@ -251,7 +324,7 @@
 
 <div class="row">
     <div class="col-md-6">
-        <h4>Adicionar novo Equipamento</h4>
+        <h4 class="text">Adicionar novo Equipamento</h4>
         <form method="post" asp-page-handler="Post" class="form">
             <div class="form-group">
                 <label asp-for="Estoque.Chamado"></label>
@@ -297,18 +370,19 @@
 
 <div>
     <div class="filter-container">
-        <h4>Itens de Estoque Existentes</h4>
+        <h4 class="text">Itens de Estoque Existentes</h4>
         <div>
             <button type="button" class="filter-btn" onclick="toggleFilter()">Filtrar</button>
             <button type="button" class="toggle-btn" id="toggleButton" onclick="toggleTable()">Exibir</button>
+            <p></p>
             <div id="filterSection" class="filter-section">
                 <form method="get" asp-page-handler="Filter" class="form-inline">
                     <div class="form-group">
                         <select id="filterStatus" name="StatusFiltro" class="form-control" onchange="this.form.submit()">
                             <option value="">Todos</option>
-                            <option value="configurando" selected="@((Model.StatusFiltro == "configurando") ? "selected" : null)">Configurando</option>
-                            <option value="aguardando" selected="@((Model.StatusFiltro == "aguardando") ? "selected" : null)">Aguardando retirada</option>
-                            <option value="entregue" selected="@((Model.StatusFiltro == "entregue") ? "selected" : null)">Entregue</option>
+                            <option value="configurando" selected="@((Model.StatusFiltro == "Configurando") ? "selected" : null)">Configurando</option>
+                            <option value="aguardando" selected="@((Model.StatusFiltro == "Aguardando") ? "selected" : null)">Aguardando retirada</option>
+                            <option value="entregue" selected="@((Model.StatusFiltro == "Entregue") ? "selected" : null)">Entregue</option>
                         </select>
                     </div>
 
@@ -346,9 +420,9 @@
                             <form method="post" asp-page-handler="UpdateStatus">
                                 <input type="hidden" name="id" value="@estoque.Id" />
                                 <select name="status" class="form-control">
-                                    <option value="configurando" selected="@(estoque.Status == "configurando" ? "selected" : null)">Configurando</option>
-                                    <option value="aguardando" selected="@(estoque.Status == "aguardando" ? "selected" : null)">Aguardando retirada</option>
-                                    <option value="entregue" selected="@(estoque.Status == "entregue" ? "selected" : null)">Entregue</option>
+                                    <option value="configurando" selected="@(estoque.Status == "Configurando" ? "selected" : null)">Configurando</option>
+                                    <option value="aguardando" selected="@(estoque.Status == "Aguardando" ? "selected" : null)">Aguardando retirada</option>
+                                    <option value="entregue" selected="@(estoque.Status == "Entregue" ? "selected" : null)">Entregue</option>
                             </select>
                         </form>
                     </td>
@@ -370,7 +444,7 @@
 <div id="editModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeEditModal()">&times;</span>
-        <h2>Editar Item de Estoque</h2>
+        <h2 class="text">Editar Item de Estoque</h2>
         <form method="post" asp-page-handler="Edit">
             <input type="hidden" id="editId" name="id" />
             <div class="form-group">

@@ -24,17 +24,16 @@ namespace EstoqueWEB.Model
         [Required(ErrorMessage = "O campo Chamado Armazenagem é obrigatório.")]
         public string ChamadoArmazenagem { get; set; }
 
-        public string Responsavel { get; set; }
-
         public string Status { get; set; }
 
-
+        public string Responsavel { get; set; }
 
         public Devolucao()
         {
 
             Modelo = "";
             Status = "Retirar no RH";
+            Responsavel = "default_value";
         }
     }
 }

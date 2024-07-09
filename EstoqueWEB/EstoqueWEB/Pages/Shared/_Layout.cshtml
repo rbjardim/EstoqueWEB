@@ -11,22 +11,79 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <style>
-        .navbar-custom {
-            background-color: #f0f0f0;
+        body {
+            background-color: #e7ecef;
+            font-family: Arial, sans-serif;
         }
 
-        .social-button {
-            display: inline-block;
+        .navbar-custom {
+            background-color: #0096c7;
             padding: 10px 20px;
-            margin-right: 5px;
-            text-decoration: none;
-            color: white;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
         }
+
+            .navbar-custom .navbar-brand {
+                color: white;
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+
+            .navbar-custom .navbar-nav .nav-link {
+                color: white;
+                margin-right: 5px;
+            }
+
+        .search-bar {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #e7ecef;
+            border-radius: 4px;
+        }
+
+        .search-button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background-color: #0096c7;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .search-button:hover {
+                background-color: #007bb5;
+            }
+
+        .footer {
+            background-color: #0096c7;
+            padding: 20px 0;
+            text-align: center;
+            color: white;
+        }
+
+            .footer a {
+                color: white;
+                text-decoration: none;
+            }
+
+                .footer a:hover {
+                    text-decoration: underline;
+                }
 
         .linkedin-button {
             background-color: #0077b5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-left: 5px;
         }
 
             .linkedin-button:hover {
@@ -35,6 +92,11 @@
 
         .github-button {
             background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-left: 5px;
         }
 
             .github-button:hover {
@@ -42,36 +104,17 @@
             }
 
         .logout-button {
-            background-color: #cc0000;
-            border-color: #cc0000;
+            background-color: #dc3545;
             color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-left: 10px;
         }
 
             .logout-button:hover {
-                background-color: #aa0000;
-                border-color: #aa0000;
-            }
-
-        .sim-button {
-            background-color: #28a745;
-            border-color: #28a745;
-            color: white;
-        }
-
-            .sim-button:hover {
-                background-color: #218838;
-                border-color: #1e7e34;
-            }
-
-        .nao-button {
-            background-color: #cc0000;
-            border-color: #cc0000;
-            color: white;
-        }
-
-            .nao-button:hover {
-                background-color: #aa0000;
-                border-color: #aa0000;
+                background-color: #bb2d3b;
+                ;
             }
     </style>
 </head>
@@ -108,10 +151,10 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/About">Sobre</a>
+                            <a class="nav-link text-white" asp-area="" asp-page="/About">Sobre</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark social-button linkedin-button" href="https://www.linkedin.com/in/ruan-bueno-jardim/" target="_blank">LinkedIn</a>
+                            <a class="nav-link text-white social-button linkedin-button" href="https://www.linkedin.com/in/ruan-bueno-jardim/" target="_blank">LinkedIn</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white social-button github-button" href="https://github.com/rbjardim" target="_blank">GitHub</a>
@@ -119,7 +162,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                    <a class="nav-link text-blackalert-dark" asp-area="" asp-page="/Devolucao">Devolução</a>
+                                    <a class="nav-link text-white" asp-area="" asp-page="/Devolucao">Devolução</a>
                             </li>
                         }
                     </ul>

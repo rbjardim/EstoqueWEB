@@ -1,7 +1,7 @@
 ﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-a.navbar-brand {
+/*a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
@@ -87,9 +87,9 @@ button.accept-policy {
 }
 
     .logout-button:hover {
-        background-color: #aa0000; /* cor do hover do logout */
-        border-color: #aa0000; /* cor do hover do logout */
-    }
+        background-color: #aa0000;*
+        /*border-color: #aa0000;*
+    /*}
 
 .sim-button {
     background-color: #28a745;
@@ -111,6 +111,6 @@ button.accept-policy {
 }
 
     .nao-button:hover {
-        background-color: #aa0000; /* cor do hover do não */
-        border-color: #aa0000; /* cor do hover do não */
-    }
+        background-color: #aa0000;*
+        /*border-color: #aa0000;*
+    /*}*/

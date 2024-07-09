@@ -71,6 +71,7 @@ namespace EstoqueWEB.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
+
             try
             {
                 var user = await _userManager.GetUserAsync(User);
@@ -79,7 +80,7 @@ namespace EstoqueWEB.Pages
                     return RedirectToPage("/Devolucao");
                 }
 
-                if (string.IsNullOrEmpty(Devolucao.Chamado) || string.IsNullOrEmpty(Devolucao.Nome) || string.IsNullOrEmpty(Devolucao.Modelo) || string.IsNullOrEmpty(Devolucao.ChamadoArmazenagem))
+                if (string.IsNullOrEmpty(Devolucao.Chamado) || string.IsNullOrEmpty(Devolucao.Nome) || string.IsNullOrEmpty(Devolucao.Patrimonio) || string.IsNullOrEmpty(Devolucao.Data) || string.IsNullOrEmpty(Devolucao.Modelo) || string.IsNullOrEmpty(Devolucao.ChamadoArmazenagem))
                 {
                     TempData["Error"] = "Todos os campos são obrigatórios.";
                     ItensDeDevolucao = await _devolucaoService.ListDevolucao();
@@ -87,13 +88,22 @@ namespace EstoqueWEB.Pages
                 }
 
                 await _devolucaoService.CreateDevolucao(Devolucao);
-                TempData["Message"] = "Registro salvo!";
+                TempData["Message"] = "Item de devolução adicionado com sucesso!";
                 ItensDeDevolucao = await _devolucaoService.ListDevolucao();
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao salvar informações de devolução");
-                TempData["Error"] = $"Erro ao salvar informações: {ex.Message}";
+
+                if (ex.InnerException != null)
+                {
+                    _logger.LogError(ex.InnerException, "Inner exception ao salvar informações de devolução");
+                    TempData["Error"] = $"Erro ao salvar informações: {ex.InnerException.Message}";
+                }
+                else
+                {
+                    TempData["Error"] = $"Erro ao salvar informações: {ex.Message}";
+                }
             }
 
             return RedirectToPage("/Devolucao");
@@ -174,7 +184,6 @@ namespace EstoqueWEB.Pages
                 devolucaoToUpdate.Data = Devolucao.Data;
                 devolucaoToUpdate.Modelo = Devolucao.Modelo;
                 devolucaoToUpdate.ChamadoArmazenagem = Devolucao.ChamadoArmazenagem;
-                devolucaoToUpdate.Responsavel = Devolucao.Responsavel;
 
                 await _devolucaoService.UpdateDevolucao(devolucaoToUpdate);
                 TempData["Message"] = "Item de devolução atualizado com sucesso!";

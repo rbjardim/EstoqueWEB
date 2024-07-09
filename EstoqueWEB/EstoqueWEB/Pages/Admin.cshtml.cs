@@ -53,20 +53,41 @@ namespace EstoqueWEB.Pages
 
         public async Task<IActionResult> OnPostDeleteItemAsync(int id)
         {
+            bool isEstoqueDeleted = false;
+            bool isDevolucaoDeleted = false;
+
             try
             {
                 await _estoqueService.DeleteEstoqueAsync(id);
-                TempData["Message"] = "Item de Devolução excluído com sucesso!";
+                TempData["MessageEstoque"] = "Item de Estoque excluído com sucesso!";
+                isEstoqueDeleted = true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao excluir item de estoque");
+                TempData["ErrorEstoque"] = "Erro ao excluir item de estoque: " + ex.Message;
+            }
+
+            try
+            {
                 await _devolucaoService.DeleteDevolucaoAsync(id);
-                TempData["Message"] = "Item de Devolução excluído com sucesso!";
+                TempData["MessageDevolucao"] = "Item de Devolução excluído com sucesso!";
+                isDevolucaoDeleted = true;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao excluir item de devolução");
-                TempData["Error"] = "Erro ao excluir item de devolução: " + ex.Message;
+                TempData["ErrorDevolucao"] = "Erro ao excluir item de devolução: " + ex.Message;
+            }
+
+            if (!isEstoqueDeleted && !isDevolucaoDeleted)
+            {
+                TempData["Error"] = "Erro ao excluir item: nenhum dos itens foi excluído com sucesso.";
             }
 
             return RedirectToPage();
         }
+
+
     }
 }

@@ -31,7 +31,7 @@ namespace EstoqueWEB.Service
                 return await _devolucaoRepository.CreateDevolucao(devolucao) != null;
             }
 
-            public async Task<bool> DeleteEstoqueAsync(int Idlocal)
+            public async Task<bool> DeleteDevolucaoAsync(int Idlocal)
             {
                 await _devolucaoRepository.DeleteDevolucaoAsync(Idlocal);
                 return true;
@@ -84,10 +84,6 @@ namespace EstoqueWEB.Service
                     .ToListAsync();
             }
 
-            public Task<bool> DeleteDevolucaoAsync(int id)
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 }

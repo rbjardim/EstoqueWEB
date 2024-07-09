@@ -22,6 +22,7 @@ namespace EstoqueWEB.Pages
             [EmailAddress]
             public string Email { get; set; }
 
+
             [Display(Name = "Nome do Usuário")]
             public string Nome { get; set; }
 

@@ -87,7 +87,7 @@ namespace EstoqueWEB.Pages
                 }
 
                 await _estoqueService.CreateEstoque(Estoque);
-                TempData["Message"] = "Registro salvo!";
+                TempData["Message"] = "Item de Estoque adicionado com sucesso!";
                 ItensDeEstoque = await _estoqueService.ListEstoque();
             }
             catch (Exception ex)
