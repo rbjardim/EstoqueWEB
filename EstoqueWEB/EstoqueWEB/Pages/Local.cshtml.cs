@@ -1,4 +1,4 @@
-using EstoqueWEB.Interface.Service;
+ï»¿using EstoqueWEB.Interface.Service;
 using EstoqueWEB.Model;
 using EstoqueWEB.Service.EstoqueWEB.Service;
 using Microsoft.AspNetCore.Identity;
@@ -81,7 +81,7 @@ namespace EstoqueWEB.Pages
 
                 if (string.IsNullOrEmpty(Estoque.Chamado) || string.IsNullOrEmpty(Estoque.Nome) || string.IsNullOrEmpty(Estoque.Cargo) || string.IsNullOrEmpty(Estoque.Modelo) || string.IsNullOrEmpty(Estoque.RQ))
                 {
-                    TempData["Error"] = "Todos os campos são obrigatórios.";
+                    TempData["Error"] = "Todos os campos sÃ£o obrigatÃ³rios.";
                     ItensDeEstoque = await _estoqueService.ListEstoque();
                     return Page();
                 }
@@ -92,8 +92,8 @@ namespace EstoqueWEB.Pages
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao salvar informações de estoque");
-                TempData["Error"] = $"Erro ao salvar informações: {ex.Message}";
+                _logger.LogError(ex, "Erro ao salvar informaÃ§Ãµes de estoque");
+                TempData["Error"] = $"Erro ao salvar informaÃ§Ãµes: {ex.Message}";
             }
 
             return RedirectToPage("/Local");
@@ -106,12 +106,12 @@ namespace EstoqueWEB.Pages
                 var estoqueToDelete = await _estoqueService.GetEstoqueById(id);
                 if (estoqueToDelete == null)
                 {
-                    TempData["Error"] = "Item de estoque não encontrado.";
+                    TempData["Error"] = "Item de estoque nÃ£o encontrado.";
                     return RedirectToPage("/Local");
                 }
 
                 await _estoqueService.DeleteEstoqueAsync(id);
-                TempData["Message"] = "Item de estoque excluído com sucesso!";
+                TempData["Message"] = "Item de estoque excluÃ­do com sucesso!";
             }
             catch (Exception ex)
             {
@@ -135,7 +135,7 @@ namespace EstoqueWEB.Pages
                 var estoque = await _estoqueService.GetEstoqueById(id);
                 if (estoque == null)
                 {
-                    TempData["Error"] = "Item de estoque não encontrado.";
+                    TempData["Error"] = "Item de estoque nÃ£o encontrado.";
                     return RedirectToPage("/Local");
                 }
 
@@ -164,7 +164,7 @@ namespace EstoqueWEB.Pages
                 var estoqueToUpdate = await _estoqueService.GetEstoqueById(Estoque.Id);
                 if (estoqueToUpdate == null)
                 {
-                    TempData["Error"] = "Item de estoque não encontrado.";
+                    TempData["Error"] = "Item de estoque nÃ£o encontrado.";
                     return RedirectToPage("/Local");
                 }
 
@@ -187,40 +187,40 @@ namespace EstoqueWEB.Pages
             return RedirectToPage("/Local");
         }
 
-public async Task<IActionResult> OnGetSearchAsync(string Chamado)
-{
-    try
-    {
-        if (string.IsNullOrWhiteSpace(Chamado))
+        public async Task<IActionResult> OnGetSearchAsync(string Chamado)
         {
-            TempData["Messages"] = "Por favor, informe o número de chamado para busca.";
-            TempData["MessageClass"] = "alert alert-danger";
+            try
+            {
+                if (string.IsNullOrWhiteSpace(Chamado))
+                {
+                    TempData["Messages"] = "Por favor, informe o nÃºmero de chamado para busca.";
+                    TempData["MessageClass"] = "alert alert-danger";
                     return RedirectToPage("/Local");
-        }
+                }
 
                 ItensDeEstoque = await _estoqueService.SearchByChamado(Chamado);
 
-        if (ItensDeEstoque == null || !ItensDeEstoque.Any())
-        {
-            TempData["Messages"] = "Nenhum resultado encontrado.";
-            TempData["MessageClass"] = "alert alert-danger";
-        }
-    }
-    catch (Exception ex)
-    {
-        _logger.LogError(ex, "Erro ao buscar itens de estoque por chamado");
-        TempData["Error"] = $"Erro ao buscar itens de estoque: {ex.Message}";
-    }
+                if (ItensDeEstoque == null || !ItensDeEstoque.Any())
+                {
+                    TempData["Messages"] = "Nenhum resultado encontrado.";
+                    TempData["MessageClass"] = "alert alert-danger";
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao buscar itens de estoque por chamado");
+                TempData["Error"] = $"Erro ao buscar itens de estoque: {ex.Message}";
+            }
 
-    return Page();
-}
+            return Page();
+        }
         public async Task<IActionResult> OnGetSearchByPatrimonioAsync(string Patrimonio)
         {
             try
             {
                 if (string.IsNullOrWhiteSpace(Patrimonio))
                 {
-                    TempData["Messages"] = "Por favor, informe o número de patrimônio para busca.";
+                    TempData["Messages"] = "Por favor, informe o nÃºmero de patrimÃ´nio para busca.";
                     TempData["MessageClass"] = "alert alert-danger";
                     return RedirectToPage("/Local");
                 }
@@ -235,7 +235,7 @@ public async Task<IActionResult> OnGetSearchAsync(string Chamado)
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao buscar itens de estoque por patrimônio");
+                _logger.LogError(ex, "Erro ao buscar itens de estoque por patrimÃ´nio");
                 TempData["Error"] = $"Erro ao buscar itens de estoque: {ex.Message}";
             }
 
