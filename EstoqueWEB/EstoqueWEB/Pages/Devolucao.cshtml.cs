@@ -87,6 +87,8 @@ namespace EstoqueWEB.Pages
                     return Page();
                 }
 
+                Devolucao.Responsavel = user.Nome;
+
                 await _devolucaoService.CreateDevolucao(Devolucao);
                 TempData["Message"] = "Item de devolução adicionado com sucesso!";
                 ItensDeDevolucao = await _devolucaoService.ListDevolucao();

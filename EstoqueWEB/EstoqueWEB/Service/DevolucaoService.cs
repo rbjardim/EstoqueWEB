@@ -84,6 +84,10 @@ namespace EstoqueWEB.Service
                     .ToListAsync();
             }
 
+            public Task AddAsync(Devolucao devolucao)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

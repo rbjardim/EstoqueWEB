@@ -83,6 +83,11 @@ namespace EstoqueWEB.Service
 
                     .ToListAsync();
             }
+
+            public Task AddAsync(Estoque estoque)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

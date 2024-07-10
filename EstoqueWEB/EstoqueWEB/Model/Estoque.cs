@@ -28,6 +28,8 @@ namespace EstoqueWEB.Model
 
         public int Quantidade { get; set; }
 
+        public string Responsavel { get; set; }
+
 
         public Estoque()
         {

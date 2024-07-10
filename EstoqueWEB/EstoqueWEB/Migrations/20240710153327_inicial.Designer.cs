@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EstoqueWEB.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240709050011_inicial")]
+    [Migration("20240710153327_inicial")]
     partial class inicial
     {
         /// <inheritdoc />
@@ -170,6 +170,10 @@ namespace EstoqueWEB.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("RQ")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Responsavel")
                         .IsRequired()
                         .HasColumnType("longtext");
 

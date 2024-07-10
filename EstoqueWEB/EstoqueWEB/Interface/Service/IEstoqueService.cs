@@ -14,5 +14,7 @@ namespace EstoqueWEB.Interface.Service
         Task<List<Estoque>> FilterByStatus(string status);
         Task<List<Estoque>> SearchByChamado(string chamado);
         Task<List<Estoque>> SearchByPatrimonio(string patrimonio);
+
+        Task AddAsync(Estoque estoque);
     }
 }

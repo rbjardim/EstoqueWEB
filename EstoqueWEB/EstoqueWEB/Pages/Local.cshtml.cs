@@ -86,6 +86,9 @@ namespace EstoqueWEB.Pages
                     return Page();
                 }
 
+                Estoque.Responsavel = user.Nome;
+
+
                 await _estoqueService.CreateEstoque(Estoque);
                 TempData["Message"] = "Item de Estoque adicionado com sucesso!";
                 ItensDeEstoque = await _estoqueService.ListEstoque();
