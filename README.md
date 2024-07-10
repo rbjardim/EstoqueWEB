@@ -3,19 +3,22 @@ Sobre
 Aplicação Web desenvolvida em C#, construida para o gerenciamento de Estoque, com opções criação, memorização e edição!
 
 Tela Inicial
-![Tela Inicial](https://github.com/rbjardim/EstoqueWEB/assets/118462663/d362b3f9-4570-4db8-aefd-f3b8cd8524da)
+![PaginaInicial](https://github.com/rbjardim/EstoqueWEB/assets/118462663/3c538da1-e8f3-477b-9e6c-838a99d231bb)
 
 Tela de Administração 
-![TelaAdmin](https://github.com/rbjardim/EstoqueWEB/assets/118462663/b44c7174-28ac-421a-8765-5d42747559f0)
+![Telaadmin](https://github.com/rbjardim/EstoqueWEB/assets/118462663/739e76b9-3b0a-4916-8b98-1884e93b1cec)
 
 Tela de Usuário 
-![TelaLocal](https://github.com/rbjardim/EstoqueWEB/assets/118462663/cb607882-92e1-4804-9178-a0f777849d7a)
+![TelaUsuario](https://github.com/rbjardim/EstoqueWEB/assets/118462663/541a0170-9ed5-4be7-bd41-3cd534bef1bc)
+
+Tela de Usuário 2
+![TelaUsuarioDev](https://github.com/rbjardim/EstoqueWEB/assets/118462663/5d7721c7-6967-4e47-8fe6-f4b409c2722c)
 
 Visual Studio
-![TelaVisual](https://github.com/rbjardim/EstoqueWEB/assets/118462663/01012210-6570-42cc-870c-6438d5e3d929)
+![TelaVIsual](https://github.com/rbjardim/EstoqueWEB/assets/118462663/2e1332d5-ee3f-405e-9a5c-1c66f0f054e2)
 
 Banco de Dados
-![TelaBanco](https://github.com/rbjardim/EstoqueWEB/assets/118462663/6c434298-a9fa-4414-b4a4-cbfa718e3776)
+![banco](https://github.com/rbjardim/EstoqueWEB/assets/118462663/4c6c15fd-978d-46e8-867d-4db4e2a920d3)
 
 Back-End
 
