@@ -292,7 +292,7 @@
         }
     });
 
-    function openEditDevModal(id, chamado, nome, patrimonio, data, modelo, chamadoarmazenagem) {
+    function openEditModal(id, chamado, nome, patrimonio, data, modelo, chamadoarmazenagem) {
             document.getElementById("editId").value = id;
             document.getElementById("editChamado").value = chamado;
             document.getElementById("editNome").value = nome;
@@ -303,7 +303,7 @@
             document.getElementById("editModal").style.display = "block";
         }
 
-    function closeEditDevModal() {
+    function closeEditModal() {
             document.getElementById("editModal").style.display = "none";
         }
 
@@ -428,7 +428,7 @@
                 </td>
                 <td>
                     <div class="button-group">
-                        <button type="button" class="btn btn-salvar2" onclick="openEditDevModal('@devolucao.Id', '@devolucao.Chamado', '@devolucao.Nome', '@devolucao.Patrimonio', '@devolucao.Modelo', '@devolucao.Data', '@devolucao.ChamadoArmazenagem')">Editar</button>
+                        <button type="button" class="btn btn-salvar2" onclick="openEditModal('@devolucao.Id', '@devolucao.Chamado', '@devolucao.Nome', '@devolucao.Patrimonio', '@devolucao.Modelo', '@devolucao.Data', '@devolucao.ChamadoArmazenagem')">Editar</button>
                         <form method="post" asp-page-handler="Delete" style="display:inline;">
                             <input type="hidden" name="id" value="@devolucao.Id" />
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este item?')">Excluir</button>
@@ -443,7 +443,7 @@
 
 <div id="editModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeEditDevModal()">&times;</span>
+        <span class="close" onclick="closeEditModal()">&times;</span>
         <h2 class="text">Editar Item de Devolução</h2>
         <form method="post" asp-page-handler="Edit">
             <input type="hidden" id="editId" name="id" />
@@ -476,8 +476,8 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="editoArmazenagem">ChamadoArmazenagem</label>
-                <input type="text" id="editArmazenagem" name="Armazenagem" class="form-control" />
+                <label for="editChamadoArmazenagem">ChamadoArmazenagem</label>
+                <input type="text" id="editChamadoArmazenagem" name="ChamadoArmazenagem" class="form-control" />
             </div>
             <p></p>
             <button type="submit" class="btn btn-salvar2">Salvar Alterações</button>

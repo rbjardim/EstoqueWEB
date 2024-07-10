@@ -18,12 +18,14 @@
     <Compile Remove="Model\User.cs" />
     <Compile Remove="Model\UserWithEstoque.cs" />
     <Compile Remove="Pages\Admin2.cshtml.cs" />
+    <Compile Remove="Pages\EditDev.cshtml.cs" />
     <Compile Remove="Pages\Index1.cshtml.cs" />
     <Compile Remove="Pages\Privacy.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Pages\Admin2.cshtml" />
+    <Content Remove="Pages\EditDev.cshtml" />
     <Content Remove="Pages\Index1.cshtml" />
     <Content Remove="Pages\Privacy.cshtml" />
   </ItemGroup>
