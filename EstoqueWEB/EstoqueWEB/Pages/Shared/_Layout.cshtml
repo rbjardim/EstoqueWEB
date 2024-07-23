@@ -62,20 +62,11 @@
             }
 
         .footer {
-            background-color: #0096c7;
-            padding: 20px 0;
+            padding: 20px, 10px;
             text-align: center;
             color: white;
         }
 
-            .footer a {
-                color: white;
-                text-decoration: none;
-            }
-
-                .footer a:hover {
-                    text-decoration: underline;
-                }
 
         .linkedin-button {
             background-color: #0077b5;
@@ -116,6 +107,42 @@
                 background-color: #bb2d3b;
                 ;
             }
+
+        .italic-text {
+            font-style: italic;
+            padding: 10px 20px;
+            margin-left: 5px
+        }
+
+        .services-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .services-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .services-dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .services-dropdown-content a:hover {
+                    background-color: #0096c7;
+                }
+
+        .services-dropdown:hover .services-dropdown-content {
+            display: block;
+        }
+
     </style>
 </head>
 <body>
@@ -133,7 +160,7 @@
                     }
                     else
                     {
-                        <a class="navbar-brand" asp-area="" asp-page="/Local">
+                        <a class="navbar-brand" asp-area="" asp-page="/Index">
                             <img src="~/images/logo.png" alt="Logo" style="height: 30px;" />
                         </a>
                     }
@@ -161,8 +188,13 @@
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="" asp-page="/Devolucao">Devolução</a>
+                            <li class="nav-item services-dropdown">
+                                <a class="nav-link text-white services-dropdown-btn" href="#">Serviços</a>
+                                <div class="services-dropdown-content">
+                                    <a class="nav-link text-black" asp-area="" asp-page="/Local">Estoque</a>
+                                    <a class="nav-link text-black" asp-area="" asp-page="/Devolucao">Devoluções</a>
+                                    <a class="nav-link text-black" asp-area="" asp-page="/Celular">Celulares</a>
+                                </div>
                             </li>
                         }
                     </ul>
@@ -188,7 +220,7 @@
             @RenderBody()
         </main>
     </div>
-    <footer class="border-top footer text-muted">
+    <footer class="border-end footer text-muted">
         <div class="container">
             &copy; 2024 - EstoqueWEB - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>

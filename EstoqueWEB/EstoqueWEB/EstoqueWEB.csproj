@@ -1,12 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-	  <Version>1.2.2.2407</Version>
+	  <Version>1.3.3.2407</Version>
 	  <FileVersion>1.0.0.0</FileVersion>
-	  <AssemblyVersion>1.2.2.2407</AssemblyVersion>
+	  <AssemblyVersion>1.3.3.2407</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -49,10 +49,6 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="8.0.2" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.Design" Version="1.1.2" />
     <PackageReference Include="System.Linq" Version="4.3.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

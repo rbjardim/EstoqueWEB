@@ -1,7 +1,7 @@
 ﻿@page
-@model EstoqueWEB.Pages.DevolucaoModel
+@model EstoqueWEB.Pages.CelularModel
 @{
-    ViewData["Title"] = "Gerenciar Devoluções";
+    ViewData["Title"] = "Gerenciar Celulares";
 }
 
 <style>
@@ -217,7 +217,7 @@
         }
 </style>
 
-<h2 class="titulo">Gerenciar Devoluções</h2>
+<h2 class="titulo">Gerenciar Celulares</h2>
 
 @if (TempData["Message"] != null)
 {
@@ -293,29 +293,29 @@
         }
     });
 
-    function openEditModal(id, chamado, nome, patrimonio, data, modelo, chamadoarmazenagem) {
+    function openEditModal(id, chamado, nome, patrimonio, imei, modelo, data) {
         document.getElementById("editId").value = id;
         document.getElementById("editChamado").value = chamado;
         document.getElementById("editNome").value = nome;
         document.getElementById("editPatrimonio").value = patrimonio;
-        document.getElementById("editData").value = data;
+        document.getElementById("editIMEI").value = imei;
         document.getElementById("editModelo").value = modelo;
-        document.getElementById("editChamadoArmazenagem").value = chamadoarmazenagem;
+        document.getElementById("editData").value = data;
         document.getElementById("editModal").style.display = "block";
     }
 
     function closeEditModal() {
-            document.getElementById("editModal").style.display = "none";
-        }
+        document.getElementById("editModal").style.display = "none";
+    }
 
     function buscarItens() {
         var chamado = document.getElementById("Chamado").value;
         var patrimonio = document.getElementById("Patrimonio").value;
 
         if (chamado) {
-            window.location.href = `./Devolucao?handler=Search&Chamado=${chamado}`;
+            window.location.href = `./Celular?handler=Search&Chamado=${chamado}`;
         } else if (patrimonio) {
-            window.location.href = `./Devolucao?handler=SearchByPatrimonio&Patrimonio=${patrimonio}`;
+            window.location.href = `./Celular?handler=SearchByPatrimonio&Patrimonio=${patrimonio}`;
         } else {
             alert("Por favor, informe um número de Chamado ou Patrimônio.");
         }
@@ -323,9 +323,9 @@
     function filterByUnit() {
         var unidade = document.getElementById("Unidade").value;
         if (unidade) {
-            window.location.href = `./Devolucao?handler=FilterByUnit&Unidade=${unidade}`;
+            window.location.href = `./Celular?handler=FilterByUnit&Unidade=${unidade}`;
         } else {
-            window.location.href = `./Devolucao`;
+            window.location.href = `./Celular`;
         }
     }
 
@@ -333,42 +333,33 @@
 
 <div class="row">
     <div class="col-md-6">
-        <h4 class="text">Adicionar nova Devolução</h4>
+        <h4 class="text">Adicionar novo Celular</h4>
         <form method="post" asp-page-handler="Post" class="form">
             <div class="form-group">
-                <label asp-for="Devolucao.Chamado"></label>
-                <input asp-for="Devolucao.Chamado" class="form-control" id="Chamado" />
+                <label asp-for="celular.Chamado"></label>
+                <input asp-for="celular.Chamado" class="form-control" id="Chamado" />
             </div>
             <div class="form-group">
-                <label asp-for="Devolucao.Nome"></label>
-                <input asp-for="Devolucao.Nome" class="form-control" />
+                <label asp-for="celular.Nome"></label>
+                <input asp-for="celular.Nome" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Devolucao.Patrimonio"></label>
-                <input asp-for="Devolucao.Patrimonio" class="form-control" id="Patrimonio" />
+                <label asp-for="celular.Patrimonio"></label>
+                <input asp-for="celular.Patrimonio" class="form-control" id="Patrimonio" />
             </div>
             <div class="form-group">
-                <label asp-for="Devolucao.Data"></label>
-                <input asp-for="Devolucao.Data" class="form-control" id="Data" type="date" asp-format="{0:dd/MM/yyyy}" />
+                <label asp-for="celular.IMEI"></label>
+                <input asp-for="celular.IMEI" class="form-control" id="IMEI" />
             </div>
             <div class="form-group">
-                <label asp-for="Devolucao.Modelo"></label>
-                <select asp-for="Devolucao.Modelo" class="form-control">
-                    <option value="">Selecione um modelo</option>
-                    <option value="Dell Latitude 3400">Dell Latitude 3400</option>
-                    <option value="Dell Latitude 3410">Dell Latitude 3410</option>
-                    <option value="Dell Latitude 3420">Dell Latitude 3420</option>
-                    <option value="Dell Latitude 3440">Dell Latitude 3440</option>
-                    <option value="Dell Latitude 3490">Dell Latitude 3490</option>
-                    <option value="HP 240 G7">HP 240 G7</option>
-                    <option value="HP 250 G8">HP 250 G8</option>
-                </select>
+                <label asp-for="celular.Modelo"></label>
+                <input asp-for="celular.Modelo" class="form-control" id="Modelo" />
             </div>
             <div class="form-group">
-                <label asp-for="Devolucao.ChamadoArmazenagem"></label>
-                <input asp-for="Devolucao.ChamadoArmazenagem" class="form-control" id="ChamadoArmazenagem" />
+                <label asp-for="celular.Data"></label>
+                <input asp-for="celular.Data" class="form-control" id="Data" type="date" asp-format="{0:dd/MM/yyyy}" />
             </div>
-                <p></p>
+            <p></p>
             <button type="submit" class="btn btn-salvar">Salvar</button>
             <button type="button" class="btn btn-primary" onclick="buscarItens()">Buscar</button>
         </form>
@@ -379,7 +370,7 @@
 
 <div>
     <div class="filter-container">
-        <h4 class="text">Devolução Existentes</h4>
+        <h4 class="text">Celulares Existentes</h4>
         <div>
             <button type="button" class="filter-btn" onclick="toggleFilter()">Filtrar</button>
             <button type="button" class="toggle-btn" id="toggleButton" onclick="toggleTable()">Exibir</button>
@@ -432,42 +423,42 @@
             <th>Chamado</th>
             <th>Nome</th>
             <th>Patrimônio</th>
-            <th>Modelo</th>
+            <th>IMEI</th>
+            <th>Marca/Modelo</th>
             <th>Data</th>
-            <th>Armazenagem</th>
-            <th style ="min-width: 150px;">Status</th>
+            <th style="min-width: 150px;">Status</th>
             <th>Adicionado Por</th>
             <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-        @for (var i = 0; i < Model.ItensDeDevolucao.Count; i++)
+        @for (var i = 0; i < Model.ItensDeCelular.Count; i++)
         {
-            var devolucao = Model.ItensDeDevolucao[i];
+            var celular = Model.ItensDeCelular[i];
             var classeLinha = i % 1 == 0 ? "linha-branca" : "linha-cinza";
             <tr class="@classeLinha">
-                <td>@devolucao.Chamado</td>
-                <td>@devolucao.Nome</td>
-                <td>@devolucao.Patrimonio</td>
-                <td>@devolucao.Modelo</td>
-                <td>@devolucao.Data</td>
-                <td>@devolucao.ChamadoArmazenagem</td>
+                <td>@celular.Chamado</td>
+                <td>@celular.Nome</td>
+                <td>@celular.Patrimonio</td>
+                <td>@celular.IMEI</td>
+                <td>@celular.Modelo</td>
+                <td>@celular.Data</td>
                 <td>
                     <form method="post" asp-page-handler="UpdateStatus">
-                        <input type="hidden" name="id" value="@devolucao.Id" />
+                        <input type="hidden" name="id" value="@celular.Id" />
                         <select name="status" class="form-control">
-                            <option value="Retirar no RH" selected="@(devolucao.Status == "Retirar no RH" ? "selected" : null)">Retirar no RH</option>
-                            <option value="Devolvido" selected="@(devolucao.Status == "Devolvido" ? "selected" : null)">Devolvido</option>
-                            <option value="Armazenado" selected="@(devolucao.Status == "Armazenado" ? "selected" : null)">Armazenado</option>
+                            <option value="Retirar no RH" selected="@(celular.Status == "Retirar no RH" ? "selected" : null)">Retirar no RH</option>
+                            <option value="Devolvido" selected="@(celular.Status == "Devolvido" ? "selected" : null)">Devolvido</option>
+                            <option value="Armazenado" selected="@(celular.Status == "Armazenado" ? "selected" : null)">Armazenado</option>
                         </select>
                     </form>
                 </td>
-                <td>@devolucao.Responsavel</td>
+                <td>@celular.Responsavel</td>
                 <td>
                     <div class="button-group">
-                        <button type="button" class="btn btn-salvar2" onclick="openEditModal('@devolucao.Id', '@devolucao.Chamado', '@devolucao.Nome', '@devolucao.Patrimonio', '@devolucao.Data', '@devolucao.Modelo', '@devolucao.ChamadoArmazenagem')">Editar</button>
+                        <button type="button" class="btn btn-salvar2" onclick="openEditModal('@celular.Id', '@celular.Chamado', '@celular.Nome', '@celular.Patrimonio', '@celular.IMEI', '@celular.Modelo', '@celular.Data')">Editar</button>
                         <form method="post" asp-page-handler="Delete" style="display:inline;">
-                            <input type="hidden" name="id" value="@devolucao.Id" />
+                            <input type="hidden" name="id" value="@celular.Id" />
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este item?')">Excluir</button>
                         </form>
                     </div>
@@ -481,11 +472,11 @@
 <div id="editModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeEditModal()">&times;</span>
-        <h2 class="text">Editar Devolução</h2>
+        <h2 class="text">Editar Celular</h2>
         <form method="post" asp-page-handler="Edit">
             <input type="hidden" id="editId" name="id" />
             <div class="form-group">
-                <label for="editChamado">Chamado Devolução</label>
+                <label for="editChamado">Chamado</label>
                 <input type="text" id="editChamado" name="Chamado" class="form-control" />
             </div>
             <div class="form-group">
@@ -497,24 +488,16 @@
                 <input type="text" id="editPatrimonio" name="Patrimonio" class="form-control" />
             </div>
             <div class="form-group">
+                <label for="editIMEI">IMEI</label>
+                <input type="text" id="editIMEI" name="IMEI" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="editModelo">Marca/Modelo</label>
+                <input type="text" id="editModelo" name="Modelo" class="form-control" />
+            </div>
+            <div class="form-group">
                 <label for="editData">Data</label>
                 <input type="date" id="editData" name="Data" class="form-control" asp-format="{0:dd/MM/yyyy}" />
-            </div>
-            <div class="form-group">
-                <label for="editModelo">Modelo</label>
-                <select id="editModelo" name="modelo" class="form-control">
-                    <option value="Dell Latitude 3400">Dell Latitude 3400</option>
-                    <option value="Dell Latitude 3410">Dell Latitude 3410</option>
-                    <option value="Dell Latitude 3420">Dell Latitude 3420</option>
-                    <option value="Dell Latitude 3440">Dell Latitude 3440</option>
-                    <option value="Dell Latitude 3490">Dell Latitude 3490</option>
-                    <option value="HP 240 G7">HP 240 G7</option>
-                    <option value="HP 250 G8">HP 250 G8</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="editChamadoArmazenagem">ChamadoArmazenagem</label>
-                <input type="text" id="editChamadoArmazenagem" name="ChamadoArmazenagem" class="form-control" />
             </div>
             <p></p>
             <button type="submit" class="btn btn-salvar2">Salvar Alterações</button>

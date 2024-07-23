@@ -2,6 +2,7 @@
 using EstoqueWEB.Interface.Service;
 using EstoqueWEB.Model;
 using EstoqueWEB.MySqlContext;
+using EstoqueWEB.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -87,6 +88,10 @@ namespace EstoqueWEB.Service
             public Task AddAsync(Devolucao devolucao)
             {
                 throw new NotImplementedException();
+            }
+            public async Task<List<Devolucao>> GetByUnitAsync(string unit)
+            {
+                return await _devolucaoRepository.GetByUnitAsync(unit);
             }
         }
     }

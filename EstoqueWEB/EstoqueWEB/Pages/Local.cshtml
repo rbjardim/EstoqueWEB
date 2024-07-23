@@ -154,6 +154,7 @@
         text-align: left;
         border-top: 1px solid #e9ecef;
         border-bottom: 1px solid black;
+        white-space: nowrap;
     }
 
     .table th {
@@ -303,6 +304,14 @@
             window.location.href = `./Local?handler=SearchByPatrimonio&Patrimonio=${patrimonio}`;
         } else {
             alert("Por favor, informe um número de Chamado ou Patrimônio.");
+       }
+    }
+    function filterByUnit() {
+        var unidade = document.getElementById("Unidade").value;
+        if (unidade) {
+            window.location.href = `./Local?handler=FilterByUnit&Unidade=${unidade}`;
+        } else {
+            window.location.href = `./Local`;
         }
     }
 
@@ -356,7 +365,7 @@
 
 <div>
     <div class="filter-container">
-        <h4 class="text">Itens de Estoque Existentes</h4>
+        <h4 class="text">Estoque Existentes</h4>
         <div>
             <button type="button" class="filter-btn" onclick="toggleFilter()">Filtrar</button>
             <button type="button" class="toggle-btn" id="toggleButton" onclick="toggleTable()">Exibir</button>
@@ -377,6 +386,32 @@
         </div>
     </div>
 </div>
+<div class="form-group">
+    <label for="Unidade">Selecione a Unidade</label>
+    <select id="Unidade" name="Unidade" class="form-control" asp-for="Unidade" onchange="filterByUnit()">
+        <option value="">Selecione...</option>
+        <option value="CPV">Campina Grande - CPV</option>
+        <option value="ES1">Espirito Santo - ES1</option>
+        <option value="ES3">Espirito Santo - ES3</option>
+        <option value="EST">Estação - EST</option>
+        <option value="GOV">Governador Valadares - GOV</option>
+        <option value="JPA">João Pessoa 2 - JPA</option>
+        <option value="JP3">João Pessoa 3 - JP3</option>
+        <option value="JNE">Juazeiro do Norte 1 - JNE</option>
+        <option value="JN2">Juazeiro do Norte 2 - JN2</option>
+        <option value="MOC">Montes Claros - MOC</option>
+        <option value="ORI">Orion - ORI</option>
+        <option value="MRO">Mossoro - MRO</option>
+        <option value="RJO">Cidade Nova - RJO</option>
+        <option value="SP0">Vila Mariana - SP0</option>
+        <option value="SP2">Tatuapé - SP2</option>
+        <option value="SP3">RochaVera - SP3</option>
+        <option value="SP5">Paramount - SP5</option>
+        <option value="SP6">Campinas - SP6</option>
+        <option value="SP7">Bonfiglioli - SP7</option>
+    </select>
+</div>
+<p></p>
 <table id="inventoryTable" class="table table-striped">
     <thead>
         <tr>
@@ -386,7 +421,7 @@
             <th>Patrimônio</th>
             <th>Modelo</th>
             <th>RQ</th>
-            <th>Status</th>
+            <th style="min-width: 150px;">Status</th>
             <th>Adicionado Por</th>
             <th>Ações</th>
         </tr>
@@ -432,7 +467,7 @@
 <div id="editModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeEditModal()">&times;</span>
-        <h2 class="text">Editar Item de Estoque</h2>
+        <h2 class="text">Editar Estoque</h2>
         <form method="post" asp-page-handler="Edit">
             <input type="hidden" id="editId" name="id" />
             <div class="form-group">

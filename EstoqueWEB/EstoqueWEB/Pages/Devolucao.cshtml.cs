@@ -38,6 +38,7 @@ namespace EstoqueWEB.Pages
 
         [BindProperty(SupportsGet = true)]
         public string Patrimonio { get; set; }
+        public string Unidade { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -51,6 +52,10 @@ namespace EstoqueWEB.Pages
                 {
                     ItensDeDevolucao = await _devolucaoService.FilterByStatus(StatusFiltro);
                 }
+                else if (!string.IsNullOrEmpty(Unidade))
+                {
+                    ItensDeDevolucao = await _devolucaoService.GetByUnitAsync(Unidade);
+                }
                 else
                 {
                     ItensDeDevolucao = await _devolucaoService.ListDevolucao();
@@ -63,9 +68,9 @@ namespace EstoqueWEB.Pages
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao carregar itens de devolução");
+                _logger.LogError(ex, "Erro ao carregar devolução");
                 ItensDeDevolucao = new List<Devolucao>();
-                TempData["Error"] = "Erro ao carregar itens de devolução: " + ex.Message;
+                TempData["Error"] = "Erro ao carregar devolução: " + ex.Message;
             }
         }
 
@@ -90,7 +95,7 @@ namespace EstoqueWEB.Pages
                 Devolucao.Responsavel = user.Nome;
 
                 await _devolucaoService.CreateDevolucao(Devolucao);
-                TempData["Message"] = "Item de devolução adicionado com sucesso!";
+                TempData["Message"] = "Devolução adicionado com sucesso!";
                 ItensDeDevolucao = await _devolucaoService.ListDevolucao();
             }
             catch (Exception ex)
@@ -118,17 +123,17 @@ namespace EstoqueWEB.Pages
                 var devolucaoToDelete = await _devolucaoService.GetDevolucaoById(id);
                 if (devolucaoToDelete == null)
                 {
-                    TempData["Error"] = "Item de devolução não encontrado.";
+                    TempData["Error"] = "Devolução não encontrado.";
                     return RedirectToPage("/Devolucao");
                 }
 
                 await _devolucaoService.DeleteDevolucaoAsync(id);
-                TempData["Message"] = "Item de devolução excluído com sucesso!";
+                TempData["Message"] = "Devolução excluído com sucesso!";
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao excluir item de devolução");
-                TempData["Error"] = $"Erro ao excluir item de devolução: {ex.Message}";
+                _logger.LogError(ex, "Erro ao excluir devolução");
+                TempData["Error"] = $"Erro ao excluir devolução: {ex.Message}";
             }
 
             return RedirectToPage("/Devolucao");
@@ -147,7 +152,7 @@ namespace EstoqueWEB.Pages
                 var devolucao = await _devolucaoService.GetDevolucaoById(id);
                 if (devolucao == null)
                 {
-                    TempData["Error"] = "Item de devolução não encontrado.";
+                    TempData["Error"] = "Devolução não encontrado.";
                     return RedirectToPage("/Devolucao");
                 }
 
@@ -156,7 +161,7 @@ namespace EstoqueWEB.Pages
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao atualizar status do devolução");
+                _logger.LogError(ex, "Erro ao atualizar status de devolução");
                 TempData["Error"] = $"Erro ao atualizar status: {ex.Message}";
             }
 
@@ -176,7 +181,7 @@ namespace EstoqueWEB.Pages
                 var devolucaoToUpdate = await _devolucaoService.GetDevolucaoById(Devolucao.Id);
                 if (devolucaoToUpdate == null)
                 {
-                    TempData["Error"] = "Item de devolução não encontrado.";
+                    TempData["Error"] = "Devolução não encontrado.";
                     return RedirectToPage("/Devolucao");
                 }
 
@@ -188,7 +193,7 @@ namespace EstoqueWEB.Pages
                 devolucaoToUpdate.ChamadoArmazenagem = Devolucao.ChamadoArmazenagem;
 
                 await _devolucaoService.UpdateDevolucao(devolucaoToUpdate);
-                TempData["Message"] = "Item de devolução atualizado com sucesso!";
+                TempData["Message"] = "Devolução atualizado com sucesso!";
             }
             catch (Exception ex)
             {
@@ -220,8 +225,8 @@ namespace EstoqueWEB.Pages
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao buscar itens de devolução por chamado");
-                TempData["Error"] = $"Erro ao buscar itens de devolução: {ex.Message}";
+                _logger.LogError(ex, "Erro ao buscar devolução por chamado");
+                TempData["Error"] = $"Erro ao buscar devolução: {ex.Message}";
             }
 
             return Page();
@@ -247,11 +252,16 @@ namespace EstoqueWEB.Pages
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao buscar itens de devolução por patrimônio");
-                TempData["Error"] = $"Erro ao buscar itens de devolução: {ex.Message}";
+                _logger.LogError(ex, "Erro ao buscar devolução por patrimônio");
+                TempData["Error"] = $"Erro ao buscar devolução: {ex.Message}";
             }
 
             return Page();
+        }
+        public async Task OnGetFilterByUnitAsync(string unidade)
+        {
+            Unidade = unidade;
+            ItensDeDevolucao = await _devolucaoService.GetByUnitAsync(unidade);
         }
 
     }

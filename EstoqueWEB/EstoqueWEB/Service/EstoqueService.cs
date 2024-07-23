@@ -88,6 +88,11 @@ namespace EstoqueWEB.Service
             {
                 throw new NotImplementedException();
             }
+
+            public async Task<List<Estoque>> GetByUnitAsync(string unit)
+            {
+                return await _estoqueRepository.GetByUnitAsync(unit);
+            }
         }
     }
 }

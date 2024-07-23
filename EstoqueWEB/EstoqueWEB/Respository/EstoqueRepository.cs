@@ -74,5 +74,12 @@ namespace EstoqueWEB.Repository
         {
             throw new NotImplementedException();
         }
+
+        public async Task<List<Estoque>> GetByUnitAsync(string unit)
+        {
+            return await _context.Estoque
+                .Where(e => e.Chamado.StartsWith(unit))
+                .ToListAsync();
+        }
     }
 }

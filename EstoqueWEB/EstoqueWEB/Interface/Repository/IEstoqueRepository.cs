@@ -16,5 +16,6 @@ namespace EstoqueWEB.Interface.Repository
         Task<List<Estoque>> GetEstoqueByUserId(string userId);
 
         Task<List<Estoque>> FilterByStatus(string status);
+        Task<List<Estoque>> GetByUnitAsync(string unit);
     }
 }

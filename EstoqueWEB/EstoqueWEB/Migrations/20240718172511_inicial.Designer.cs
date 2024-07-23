@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EstoqueWEB.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240710153327_inicial")]
+    [Migration("20240718172511_inicial")]
     partial class inicial
     {
         /// <inheritdoc />
@@ -91,6 +91,51 @@ namespace EstoqueWEB.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("EstoqueWEB.Model.Celular", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Chamado")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Data")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("IMEI")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Modelo")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Patrimonio")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Responsavel")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Celular");
                 });
 
             modelBuilder.Entity("EstoqueWEB.Model.Devolucao", b =>

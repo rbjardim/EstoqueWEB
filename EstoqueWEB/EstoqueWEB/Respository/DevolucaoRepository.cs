@@ -66,12 +66,12 @@ namespace EstoqueWEB.Repository
         }
 
 
-        public Task<Estoque> GetDevolucaoByIdAsync(int id)
+        public Task<Devolucao> GetDevolucaoByIdAsync(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public async Task<List<Estoque>> GetDevolucaoByUserId(string userId)
+        public async Task<List<Devolucao>> GetDevolucaoByUserId(string userId)
         {
             throw new System.NotImplementedException();
         }
@@ -84,6 +84,12 @@ namespace EstoqueWEB.Repository
         Task<List<Devolucao>> IDevolucaoRepository.GetDevolucaoByUserId(string userId)
         {
             throw new NotImplementedException();
+        }
+        public async Task<List<Devolucao>> GetByUnitAsync(string unit)
+        {
+            return await _context.Devolucao
+                .Where(e => e.Chamado.StartsWith(unit))
+                .ToListAsync();
         }
     }
 }

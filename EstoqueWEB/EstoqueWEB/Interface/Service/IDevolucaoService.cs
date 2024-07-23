@@ -14,6 +14,7 @@ namespace EstoqueWEB.Interface.Service
         Task<List<Devolucao>> FilterByStatus(string status);
         Task<List<Devolucao>> SearchByChamado(string chamado);
         Task<List<Devolucao>> SearchByPatrimonio(string patrimonio);
+        Task<List<Devolucao>> GetByUnitAsync(string unit);
         Task AddAsync(Devolucao devolucao);
     }
 }

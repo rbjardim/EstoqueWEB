@@ -38,6 +38,8 @@ namespace EstoqueWEB.Pages
 
         [BindProperty(SupportsGet = true)]
         public string Patrimonio { get; set; }
+        public string Unidade { get; set; }
+
 
         public async Task OnGetAsync()
         {
@@ -50,6 +52,10 @@ namespace EstoqueWEB.Pages
                 else if (!string.IsNullOrEmpty(StatusFiltro))
                 {
                     ItensDeEstoque = await _estoqueService.FilterByStatus(StatusFiltro);
+                }
+                else if (!string.IsNullOrEmpty(Unidade))
+                {
+                    ItensDeEstoque = await _estoqueService.GetByUnitAsync(Unidade);
                 }
                 else
                 {
@@ -90,7 +96,7 @@ namespace EstoqueWEB.Pages
 
 
                 await _estoqueService.CreateEstoque(Estoque);
-                TempData["Message"] = "Item de Estoque adicionado com sucesso!";
+                TempData["Message"] = "Estoque adicionado com sucesso!";
                 ItensDeEstoque = await _estoqueService.ListEstoque();
             }
             catch (Exception ex)
@@ -109,12 +115,12 @@ namespace EstoqueWEB.Pages
                 var estoqueToDelete = await _estoqueService.GetEstoqueById(id);
                 if (estoqueToDelete == null)
                 {
-                    TempData["Error"] = "Item de estoque não encontrado.";
+                    TempData["Error"] = "Estoque não encontrado.";
                     return RedirectToPage("/Local");
                 }
 
                 await _estoqueService.DeleteEstoqueAsync(id);
-                TempData["Message"] = "Item de estoque excluído com sucesso!";
+                TempData["Message"] = "Estoque excluído com sucesso!";
             }
             catch (Exception ex)
             {
@@ -138,13 +144,14 @@ namespace EstoqueWEB.Pages
                 var estoque = await _estoqueService.GetEstoqueById(id);
                 if (estoque == null)
                 {
-                    TempData["Error"] = "Item de estoque não encontrado.";
+                    TempData["Error"] = "Estoque não encontrado.";
                     return RedirectToPage("/Local");
                 }
 
                 estoque.Status = status;
                 await _estoqueService.UpdateEstoque(estoque);
             }
+
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao atualizar status do estoque");
@@ -167,7 +174,7 @@ namespace EstoqueWEB.Pages
                 var estoqueToUpdate = await _estoqueService.GetEstoqueById(Estoque.Id);
                 if (estoqueToUpdate == null)
                 {
-                    TempData["Error"] = "Item de estoque não encontrado.";
+                    TempData["Error"] = "Estoque não encontrado.";
                     return RedirectToPage("/Local");
                 }
 
@@ -179,7 +186,7 @@ namespace EstoqueWEB.Pages
                 estoqueToUpdate.RQ = Estoque.RQ;
 
                 await _estoqueService.UpdateEstoque(estoqueToUpdate);
-                TempData["Message"] = "Item de estoque atualizado com sucesso!";
+                TempData["Message"] = "Estoque atualizado com sucesso!";
             }
             catch (Exception ex)
             {
@@ -211,8 +218,8 @@ namespace EstoqueWEB.Pages
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao buscar itens de estoque por chamado");
-                TempData["Error"] = $"Erro ao buscar itens de estoque: {ex.Message}";
+                _logger.LogError(ex, "Erro ao buscar estoque por chamado");
+                TempData["Error"] = $"Erro ao buscar estoque: {ex.Message}";
             }
 
             return Page();
@@ -238,13 +245,20 @@ namespace EstoqueWEB.Pages
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Erro ao buscar itens de estoque por patrimônio");
-                TempData["Error"] = $"Erro ao buscar itens de estoque: {ex.Message}";
+                _logger.LogError(ex, "Erro ao buscar estoque por patrimônio");
+                TempData["Error"] = $"Erro ao buscar estoque: {ex.Message}";
             }
 
             return Page();
         }
-
+        public async Task OnGetFilterByUnitAsync(string unidade)
+        {
+            Unidade = unidade;
+            ItensDeEstoque = await _estoqueService.GetByUnitAsync(unidade);
+        }
     }
 
 }
+
+
+

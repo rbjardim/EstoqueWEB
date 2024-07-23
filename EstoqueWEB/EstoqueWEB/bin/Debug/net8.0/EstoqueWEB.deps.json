@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "EstoqueWEB/1.0.0": {
+      "EstoqueWEB/1.2.2.2407": {
         "dependencies": {
           "EntityFramework": "6.5.1",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.6",
@@ -1453,7 +1453,7 @@
     }
   },
   "libraries": {
-    "EstoqueWEB/1.0.0": {
+    "EstoqueWEB/1.2.2.2407": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
