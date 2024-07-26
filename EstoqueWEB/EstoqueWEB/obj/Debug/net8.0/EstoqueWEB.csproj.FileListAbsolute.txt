@@ -264,3 +264,10 @@ C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\unix\lib\
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\ClosedXML.dll
+C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\DocumentFormat.OpenXml.dll
+C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\ExcelNumberFormat.dll
+C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\Irony.dll
+C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\SixLabors.Fonts.dll
+C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\System.IO.Packaging.dll
+C:\Projetos\EstoqueWEB\EstoqueWEB\EstoqueWEB\bin\Debug\net8.0\XLParser.dll

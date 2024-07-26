@@ -13,5 +13,6 @@ namespace EstoqueWEB.MySqlContext
         public DbSet<AplicationUser> Users {  get; set; }   
         public DbSet<Devolucao> Devolucao { get; set; }
         public DbSet<Celular> Celular { get; set; }
+
     }
 }

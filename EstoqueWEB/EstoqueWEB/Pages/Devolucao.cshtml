@@ -154,7 +154,7 @@
         text-align: left;
         border-top: 1px solid #e9ecef;
         border-bottom: 1px solid black;
-        white-space: nowrap;
+        /* white-space: nowrap; */
     }
 
     .table th {
@@ -293,14 +293,16 @@
         }
     });
 
-    function openEditModal(id, chamado, nome, patrimonio, data, modelo, chamadoarmazenagem) {
+    function openEditModal(id, chamado, nome, patrimonio, data, fluig, modelo, chamadoarmazenagem, observacao) {
         document.getElementById("editId").value = id;
         document.getElementById("editChamado").value = chamado;
         document.getElementById("editNome").value = nome;
         document.getElementById("editPatrimonio").value = patrimonio;
         document.getElementById("editData").value = data;
+        document.getElementById("editFluig").value = fluig;
         document.getElementById("editModelo").value = modelo;
         document.getElementById("editChamadoArmazenagem").value = chamadoarmazenagem;
+        document.getElementById("editObservacao").value = observacao;
         document.getElementById("editModal").style.display = "block";
     }
 
@@ -329,6 +331,10 @@
         }
     }
 
+    function exportarTabela() {
+        window.location.href = '@Url.Page("Devolucao", new { handler = "Export" })';
+    }
+
 </script>
 
 <div class="row">
@@ -352,6 +358,10 @@
                 <input asp-for="Devolucao.Data" class="form-control" id="Data" type="date" asp-format="{0:dd/MM/yyyy}" />
             </div>
             <div class="form-group">
+                <label asp-for="Devolucao.Fluig"></label>
+                <input asp-for="Devolucao.Fluig" class="form-control" id="Fluig" />
+            </div>
+            <div class="form-group">
                 <label asp-for="Devolucao.Modelo"></label>
                 <select asp-for="Devolucao.Modelo" class="form-control">
                     <option value="">Selecione um modelo</option>
@@ -368,6 +378,10 @@
                 <label asp-for="Devolucao.ChamadoArmazenagem"></label>
                 <input asp-for="Devolucao.ChamadoArmazenagem" class="form-control" id="ChamadoArmazenagem" />
             </div>
+            <div class="form-group">
+                <label asp-for="Devolucao.Observacao"></label>
+                <input asp-for="Devolucao.Observacao" class="form-control" id="Observacao" />
+            </div>
                 <p></p>
             <button type="submit" class="btn btn-salvar">Salvar</button>
             <button type="button" class="btn btn-primary" onclick="buscarItens()">Buscar</button>
@@ -381,6 +395,7 @@
     <div class="filter-container">
         <h4 class="text">Devolução Existentes</h4>
         <div>
+            <button type="button" class="btn btn-primary" onclick="exportarTabela()">Exportar</button>
             <button type="button" class="filter-btn" onclick="toggleFilter()">Filtrar</button>
             <button type="button" class="toggle-btn" id="toggleButton" onclick="toggleTable()">Exibir</button>
             <p></p>
@@ -432,9 +447,11 @@
             <th>Chamado</th>
             <th>Nome</th>
             <th>Patrimônio</th>
-            <th>Modelo</th>
             <th>Data</th>
+            <th>Fluig</th>
+            <th>Modelo</th>
             <th>Armazenagem</th>
+            <th>Observação</th>
             <th style ="min-width: 150px;">Status</th>
             <th>Adicionado Por</th>
             <th>Ações</th>
@@ -449,9 +466,11 @@
                 <td>@devolucao.Chamado</td>
                 <td>@devolucao.Nome</td>
                 <td>@devolucao.Patrimonio</td>
-                <td>@devolucao.Modelo</td>
                 <td>@devolucao.Data</td>
+                <td>@devolucao.Fluig</td>
+                <td>@devolucao.Modelo</td>              
                 <td>@devolucao.ChamadoArmazenagem</td>
+                <td>@devolucao.Observacao</td>
                 <td>
                     <form method="post" asp-page-handler="UpdateStatus">
                         <input type="hidden" name="id" value="@devolucao.Id" />
@@ -465,7 +484,7 @@
                 <td>@devolucao.Responsavel</td>
                 <td>
                     <div class="button-group">
-                        <button type="button" class="btn btn-salvar2" onclick="openEditModal('@devolucao.Id', '@devolucao.Chamado', '@devolucao.Nome', '@devolucao.Patrimonio', '@devolucao.Data', '@devolucao.Modelo', '@devolucao.ChamadoArmazenagem')">Editar</button>
+                        <button type="button" class="btn btn-salvar2" onclick="openEditModal('@devolucao.Id', '@devolucao.Chamado', '@devolucao.Nome', '@devolucao.Patrimonio', '@devolucao.Data', '@devolucao.Fluig', '@devolucao.Modelo', '@devolucao.ChamadoArmazenagem', '@devolucao.Observacao')">Editar</button>
                         <form method="post" asp-page-handler="Delete" style="display:inline;">
                             <input type="hidden" name="id" value="@devolucao.Id" />
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este item?')">Excluir</button>
@@ -501,6 +520,10 @@
                 <input type="date" id="editData" name="Data" class="form-control" asp-format="{0:dd/MM/yyyy}" />
             </div>
             <div class="form-group">
+                <label for="editFluig">Fluig</label>
+                <input type="text" id="editFluig" name="Fluig" class="form-control" />
+            </div>
+            <div class="form-group">
                 <label for="editModelo">Modelo</label>
                 <select id="editModelo" name="modelo" class="form-control">
                     <option value="Dell Latitude 3400">Dell Latitude 3400</option>
@@ -513,8 +536,12 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="editChamadoArmazenagem">ChamadoArmazenagem</label>
+                <label for="editChamadoArmazenagem">Chamado Armazenagem</label>
                 <input type="text" id="editChamadoArmazenagem" name="ChamadoArmazenagem" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="editObservacao">Observação</label>
+                <input type="text" id="editObservacao" name="Observacao" class="form-control" />
             </div>
             <p></p>
             <button type="submit" class="btn btn-salvar2">Salvar Alterações</button>

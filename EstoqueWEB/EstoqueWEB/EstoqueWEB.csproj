@@ -4,9 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-	  <Version>1.3.3.2407</Version>
+	  <Version>1.3.4.2407</Version>
 	  <FileVersion>1.0.0.0</FileVersion>
-	  <AssemblyVersion>1.3.3.2407</AssemblyVersion>
+	  <AssemblyVersion>1.3.4.2407</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.102.3" />
     <PackageReference Include="EntityFramework" Version="6.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />

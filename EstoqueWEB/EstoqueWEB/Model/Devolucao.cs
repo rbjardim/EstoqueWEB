@@ -21,9 +21,13 @@ namespace EstoqueWEB.Model
         [Required(ErrorMessage = "O campo Data é obrigatório.")]
         public string Data { get; set; }
 
+        [Required(ErrorMessage = "O campo Fluig é obrigatório.")]
+        public string Fluig { get; set; }
+
         [Required(ErrorMessage = "O campo Chamado Armazenagem é obrigatório.")]
         public string ChamadoArmazenagem { get; set; }
 
+        public string Observacao { get; set; }
         public string Status { get; set; }
 
         public string Responsavel { get; set; }

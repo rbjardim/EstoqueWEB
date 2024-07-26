@@ -1,4 +1,5 @@
-﻿using EstoqueWEB.Interface.Service;
+﻿using ClosedXML.Excel;
+using EstoqueWEB.Interface.Service;
 using EstoqueWEB.Model;
 using EstoqueWEB.Service.EstoqueWEB.Service;
 using Microsoft.AspNetCore.Identity;
@@ -256,7 +257,48 @@ namespace EstoqueWEB.Pages
             Unidade = unidade;
             ItensDeEstoque = await _estoqueService.GetByUnitAsync(unidade);
         }
+        public async Task<IActionResult> OnGetExportAsync()
+        {
+            var estoques = await _estoqueService.ListEstoque();
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Estoques");
+                var currentRow = 1;
+
+                worksheet.Cell(currentRow, 1).Value = "Chamado";
+                worksheet.Cell(currentRow, 2).Value = "Nome";
+                worksheet.Cell(currentRow, 3).Value = "Cargo";
+                worksheet.Cell(currentRow, 4).Value = "Patromônio";
+                worksheet.Cell(currentRow, 5).Value = "Modelo";
+                worksheet.Cell(currentRow, 6).Value = "RQ";
+                worksheet.Cell(currentRow, 7).Value = "Status";
+                worksheet.Cell(currentRow, 8).Value = "Adicionado Por";
+
+                foreach (var estoque in estoques)
+                {
+                    currentRow++;
+                    worksheet.Cell(currentRow, 1).Value = estoque.Chamado;
+                    worksheet.Cell(currentRow, 2).Value = estoque.Nome;
+                    worksheet.Cell(currentRow, 3).Value = estoque.Cargo;
+                    worksheet.Cell(currentRow, 4).Value = estoque.Patrimonio;
+                    worksheet.Cell(currentRow, 5).Value = estoque.Modelo;
+                    worksheet.Cell(currentRow, 6).Value = estoque.RQ;
+                    worksheet.Cell(currentRow, 7).Value = estoque.Status;
+                    worksheet.Cell(currentRow, 8).Value = estoque.Responsavel;
+
+                }
+
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Estoque.xlsx");
+                }
+            }
+        }
     }
+
 
 }
 

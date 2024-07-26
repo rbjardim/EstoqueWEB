@@ -91,5 +91,10 @@ namespace EstoqueWEB.Repository
                 .Where(e => e.Chamado.StartsWith(unit))
                 .ToListAsync();
         }
+
+        public Task<List<Devolucao>> OnGetExportAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

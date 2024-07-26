@@ -17,5 +17,6 @@ namespace EstoqueWEB.Interface.Repository
 
         Task<List<Devolucao>> FilterByStatus(string status);
         Task<List<Devolucao>> GetByUnitAsync(string unit);
+        Task<List<Devolucao>> OnGetExportAsync();
     }
 }

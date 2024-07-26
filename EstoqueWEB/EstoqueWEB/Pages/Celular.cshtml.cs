@@ -1,3 +1,4 @@
+using ClosedXML.Excel;
 using EstoqueWEB.Interface.Service;
 using EstoqueWEB.Model;
 using EstoqueWEB.Service.EstoqueWEB.Service;
@@ -262,7 +263,48 @@ namespace EstoqueWEB.Pages
             Unidade = unidade;
             ItensDeCelular = await _celularService.GetByUnitAsync(unidade);
         }
+        public async Task<IActionResult> OnGetExportAsync()
+        {
+            var celulares = await _celularService.ListCelular();
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Estoques");
+                var currentRow = 1;
+
+                worksheet.Cell(currentRow, 1).Value = "Chamado";
+                worksheet.Cell(currentRow, 2).Value = "Nome";
+                worksheet.Cell(currentRow, 3).Value = "Patrimônio";
+                worksheet.Cell(currentRow, 4).Value = "IMEI";
+                worksheet.Cell(currentRow, 5).Value = "Marca/Modelo";
+                worksheet.Cell(currentRow, 6).Value = "Data";
+                worksheet.Cell(currentRow, 7).Value = "Status";
+                worksheet.Cell(currentRow, 8).Value = "Adicionado Por";
+
+                foreach (var celular in celulares)
+                {
+                    currentRow++;
+                    worksheet.Cell(currentRow, 1).Value = celular.Chamado;
+                    worksheet.Cell(currentRow, 2).Value = celular.Nome;
+                    worksheet.Cell(currentRow, 3).Value = celular.Patrimonio;
+                    worksheet.Cell(currentRow, 4).Value = celular.IMEI;
+                    worksheet.Cell(currentRow, 5).Value = celular.Modelo;
+                    worksheet.Cell(currentRow, 6).Value = celular.Data;
+                    worksheet.Cell(currentRow, 7).Value = celular.Status;
+                    worksheet.Cell(currentRow, 8).Value = celular.Responsavel;
+
+                }
+
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Celular.xlsx");
+                }
+            }
+        }
 
     }
+
 
 }

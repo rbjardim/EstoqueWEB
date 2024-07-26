@@ -93,6 +93,11 @@ namespace EstoqueWEB.Service
             {
                 return await _devolucaoRepository.GetByUnitAsync(unit);
             }
+
+            public Task<List<Devolucao>> OnGetExportAsync()
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

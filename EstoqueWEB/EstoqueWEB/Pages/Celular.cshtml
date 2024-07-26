@@ -154,7 +154,7 @@
         text-align: left;
         border-top: 1px solid #e9ecef;
         border-bottom: 1px solid black;
-        white-space: nowrap;
+        /* white-space: nowrap; */
     }
 
     .table th {
@@ -328,6 +328,9 @@
             window.location.href = `./Celular`;
         }
     }
+    function exportarTabela() {
+        window.location.href = '@Url.Page("Celular", new { handler = "Export" })';
+    }
 
 </script>
 
@@ -372,6 +375,7 @@
     <div class="filter-container">
         <h4 class="text">Celulares Existentes</h4>
         <div>
+            <button type="button" class="btn btn-primary" onclick="exportarTabela()">Exportar</button>
             <button type="button" class="filter-btn" onclick="toggleFilter()">Filtrar</button>
             <button type="button" class="toggle-btn" id="toggleButton" onclick="toggleTable()">Exibir</button>
             <p></p>

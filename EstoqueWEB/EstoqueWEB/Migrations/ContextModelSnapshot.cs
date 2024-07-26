@@ -155,11 +155,19 @@ namespace EstoqueWEB.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Fluig")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Modelo")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Observacao")
                         .IsRequired()
                         .HasColumnType("longtext");
 

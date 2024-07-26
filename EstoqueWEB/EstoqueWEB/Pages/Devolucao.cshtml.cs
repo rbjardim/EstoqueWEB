@@ -1,3 +1,4 @@
+using ClosedXML.Excel;
 using EstoqueWEB.Interface.Service;
 using EstoqueWEB.Model;
 using EstoqueWEB.Service.EstoqueWEB.Service;
@@ -18,11 +19,13 @@ namespace EstoqueWEB.Pages
         private readonly UserManager<AplicationUser> _userManager;
         private readonly ILogger<DevolucaoModel> _logger;
 
+
         public DevolucaoModel(IDevolucaoService devolucaoService, UserManager<AplicationUser> userManager, ILogger<DevolucaoModel> logger)
         {
             _devolucaoService = devolucaoService ?? throw new ArgumentNullException(nameof(devolucaoService));
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+
         }
 
         [BindProperty]
@@ -85,7 +88,7 @@ namespace EstoqueWEB.Pages
                     return RedirectToPage("/Devolucao");
                 }
 
-                if (string.IsNullOrEmpty(Devolucao.Chamado) || string.IsNullOrEmpty(Devolucao.Nome) || string.IsNullOrEmpty(Devolucao.Patrimonio) || string.IsNullOrEmpty(Devolucao.Data) || string.IsNullOrEmpty(Devolucao.Modelo) || string.IsNullOrEmpty(Devolucao.ChamadoArmazenagem))
+                if (string.IsNullOrEmpty(Devolucao.Chamado) || string.IsNullOrEmpty(Devolucao.Nome) || string.IsNullOrEmpty(Devolucao.Patrimonio) || string.IsNullOrEmpty(Devolucao.Data) || string.IsNullOrEmpty(Devolucao.Fluig) || string.IsNullOrEmpty(Devolucao.Modelo) || string.IsNullOrEmpty(Devolucao.ChamadoArmazenagem) || string.IsNullOrEmpty(Devolucao.Observacao))
                 {
                     TempData["Error"] = "Todos os campos são obrigatórios.";
                     ItensDeDevolucao = await _devolucaoService.ListDevolucao();
@@ -189,8 +192,10 @@ namespace EstoqueWEB.Pages
                 devolucaoToUpdate.Nome = Devolucao.Nome;
                 devolucaoToUpdate.Patrimonio = Devolucao.Patrimonio;
                 devolucaoToUpdate.Data = Devolucao.Data;
+                devolucaoToUpdate.Fluig = Devolucao.Fluig;
                 devolucaoToUpdate.Modelo = Devolucao.Modelo;
                 devolucaoToUpdate.ChamadoArmazenagem = Devolucao.ChamadoArmazenagem;
+                devolucaoToUpdate.Observacao = Devolucao.Observacao;
 
                 await _devolucaoService.UpdateDevolucao(devolucaoToUpdate);
                 TempData["Message"] = "Devolução atualizado com sucesso!";
@@ -264,6 +269,48 @@ namespace EstoqueWEB.Pages
             ItensDeDevolucao = await _devolucaoService.GetByUnitAsync(unidade);
         }
 
-    }
+        public async Task<IActionResult> OnGetExportAsync()
+        {
+            var devolucoes = await _devolucaoService.ListDevolucao();
 
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Devoluções");
+                var currentRow = 1;
+
+                worksheet.Cell(currentRow, 1).Value = "Chamado";
+                worksheet.Cell(currentRow, 2).Value = "Nome";
+                worksheet.Cell(currentRow, 3).Value = "Patrimônio";
+                worksheet.Cell(currentRow, 4).Value = "Data";
+                worksheet.Cell(currentRow, 5).Value = "Fluig";
+                worksheet.Cell(currentRow, 6).Value = "Modelo";
+                worksheet.Cell(currentRow, 7).Value = "Armazenagem";
+                worksheet.Cell(currentRow, 8).Value = "Observação";
+                worksheet.Cell(currentRow, 9).Value = "Status";
+                worksheet.Cell(currentRow, 10).Value = "Adicionado Por";
+
+                foreach (var devolucao in devolucoes)
+                {
+                    currentRow++;
+                    worksheet.Cell(currentRow, 1).Value = devolucao.Chamado;
+                    worksheet.Cell(currentRow, 2).Value = devolucao.Nome;
+                    worksheet.Cell(currentRow, 3).Value = devolucao.Patrimonio;
+                    worksheet.Cell(currentRow, 4).Value = devolucao.Data;
+                    worksheet.Cell(currentRow, 5).Value = devolucao.Fluig;
+                    worksheet.Cell(currentRow, 6).Value = devolucao.Modelo;
+                    worksheet.Cell(currentRow, 7).Value = devolucao.ChamadoArmazenagem;
+                    worksheet.Cell(currentRow, 8).Value = devolucao.Observacao;
+                    worksheet.Cell(currentRow, 9).Value = devolucao.Status;
+                    worksheet.Cell(currentRow, 10).Value = devolucao.Responsavel;
+                }
+
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Devolucoes.xlsx");
+                }
+            }
+        }
+    }
 }
