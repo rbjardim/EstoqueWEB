@@ -62,37 +62,11 @@
             }
 
         .footer {
-            padding: 20px, 10px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
             text-align: center;
-            color: white;
         }
-
-
-        .linkedin-button {
-            background-color: #0077b5;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            margin-left: 5px;
-        }
-
-            .linkedin-button:hover {
-                background-color: #005582;
-            }
-
-        .github-button {
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            margin-left: 5px;
-        }
-
-            .github-button:hover {
-                background-color: #24292e;
-            }
 
         .logout-button {
             background-color: #dc3545;
@@ -122,25 +96,36 @@
         .services-dropdown-content {
             display: none;
             position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            background-color: #fff;
+            min-width: 200px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            top: 100%;
+            left: 0;
             z-index: 1;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
         }
 
             .services-dropdown-content a {
-                color: black;
-                padding: 12px 16px;
+                color: #333;
+                padding: 10px 15px;
                 text-decoration: none;
                 display: block;
+                transition: background-color 0.3s ease, color 0.3s ease;
             }
 
                 .services-dropdown-content a:hover {
                     background-color: #0096c7;
+                    color: #fff;
                 }
 
         .services-dropdown:hover .services-dropdown-content {
             display: block;
+            opacity: 1;
+            visibility: visible;
         }
 
     </style>
@@ -177,15 +162,6 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-page="/About">Sobre</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white social-button linkedin-button" href="https://www.linkedin.com/in/ruan-bueno-jardim/" target="_blank">LinkedIn</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white social-button github-button" href="https://github.com/rbjardim" target="_blank">GitHub</a>
-                        </li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item services-dropdown">

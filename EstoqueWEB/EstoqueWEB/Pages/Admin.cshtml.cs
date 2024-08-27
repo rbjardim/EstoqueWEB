@@ -14,25 +14,42 @@ namespace EstoqueWEB.Pages
         private readonly IUserService _userService;
         private readonly IEstoqueService _estoqueService;
         private readonly IDevolucaoService _devolucaoService;
+        private readonly ICelularService _celularService;
         private readonly ILogger<AdminModel> _logger;
 
-        public AdminModel(IUserService userService, IEstoqueService estoqueService, IDevolucaoService devolucaoService, ILogger<AdminModel> logger)
+        public AdminModel(IUserService userService, IEstoqueService estoqueService, IDevolucaoService devolucaoService, ICelularService celularService, ILogger<AdminModel> logger)
         {
             _userService = userService ?? throw new ArgumentNullException(nameof(userService));
             _estoqueService = estoqueService ?? throw new ArgumentNullException(nameof(estoqueService));
             _devolucaoService = devolucaoService ?? throw new ArgumentNullException(nameof(devolucaoService));
+            _celularService = celularService ?? throw new ArgumentNullException(nameof(celularService));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public IList<AplicationUser> Users { get; private set; }
         public IList<Estoque> ItensDeEstoque { get; private set; }
-
         public IList<Devolucao> ItensDeDevolucao { get; private set; }
+        public IList<Celular> ItensDeCelular { get; private set; }
+
+        // Adicione as propriedades para contadores
+        public int TotalUsuarios { get; private set; }
+        public int TotalItensEstoque { get; private set; }
+        public int TotalItensDevolucao { get; private set; }
+        public int TotalItensCelular { get; private set; }
+
         public async Task OnGetAsync()
         {
             Users = await _userService.GetAllUsersAsync();
             ItensDeEstoque = await _estoqueService.ListEstoque();
             ItensDeDevolucao = await _devolucaoService.ListDevolucao();
+            ItensDeCelular = await _celularService.ListCelular();
+
+            // Defina os valores dos contadores
+            TotalUsuarios = Users.Count;
+            TotalItensEstoque = ItensDeEstoque.Count;
+            TotalItensDevolucao = ItensDeDevolucao.Count;
+            TotalItensCelular = ItensDeCelular.Count;
+
         }
 
         public async Task<IActionResult> OnPostDeleteUserAsync(string id)
@@ -87,7 +104,5 @@ namespace EstoqueWEB.Pages
 
             return RedirectToPage();
         }
-
-
     }
 }

@@ -8336,7 +8336,7 @@
     "C:\\Users\\ruan.jardim\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "1.3.4.2407",
+    "version": "1.4.5.2408",
     "restore": {
       "projectUniqueName": "C:\\Projetos\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB.csproj",
       "projectName": "EstoqueWEB",
@@ -8353,6 +8353,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8440,7 +8441,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

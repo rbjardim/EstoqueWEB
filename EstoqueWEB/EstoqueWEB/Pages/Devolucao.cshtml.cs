@@ -265,7 +265,7 @@ namespace EstoqueWEB.Pages
         }
         public async Task OnGetFilterByUnitAsync(string unidade)
         {
-            Unidade = unidade;
+            this.Unidade = Unidade;
             ItensDeDevolucao = await _devolucaoService.GetByUnitAsync(unidade);
         }
 

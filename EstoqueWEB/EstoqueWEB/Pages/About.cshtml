@@ -1,75 +1,172 @@
 ﻿@page
 @model EstoqueWEB.Pages.AboutModel
 @{
-    ViewData["Title"] = "Sobre";
+    ViewData["Title"] = "Saiba Mais";
 }
 
 <style>
-    .logout-button {
-        background-color: #dc3545;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-left: 10px;
+ .header {
+        text-align: center;
+        margin-bottom: 40px;
     }
 
-        .logout-button:hover {
-            background-color: #dc3545;
-            ;
-        }
-
-        h1, h3 {
+        .header h1 {
             color: #0096c7;
+            margin: 0;
         }
 
-        h3 {
-            margin-top: 20px;
+        .header p {
+            font-size: 18px;
+            color: #666;
+        }
+
+    .section {
+        margin-bottom: 30px;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .section h3 {
+            color: #0096c7;
+            border-bottom: 2px solid #0096c7;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            font-size: 16px;
+            color: #555;
             margin-bottom: 10px;
         }
 
-    .italic-text {
-        font-style: italic;
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+            .section ul li {
+                padding: 8px 0;
+                display: flex;
+                align-items: center;
+            }
+
+                .section ul li::before {
+                    content: "•";
+                    color: #0096c7;
+                    font-size: 18px;
+                    margin-right: 10px;
+                }
+
+    .card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 15px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
     }
 
-    </style>
+        .card:hover {
+            transform: translateY(-5px);
+        }
 
-<h1>@ViewData["Title"]</h1>
+        .card img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
 
-<p>Aplicação Web desenvolvida em C#, construida para o gerenciamento de Estoque, com opções criação, memorização e edição!</p>
+        .card h4 {
+            margin: 0;
+            color: #333;
+        }
 
-<br />
-<h3>
-    Back-End
-</h3>
-    • C# <br />
-    • .Net Core <br />
-    • Entity Framework Core <br />
-    • Razor<br />
-<br>
+        .card p {
+            margin: 5px 0;
+            color: #666;
+        }
 
-<h3>
-    Front-End
-</h3>
-    • HTML <br />
-    • CSS <br />
-    • JavaScript <br />
-<br>
-<h3>
-    Banco de Dados
-</h3>
-    • MySQL
-<br />
-    <br />
-<h3>
-    Pacotes NuGet
-</h3>
-    • EntityFramework<br />
-    • Microsoft.AspNetCore.Identity.EntityFrameworkCore<br />
-    • Microsoft.EntityFrameworkCore<br />
-    • Microsoft.EntityFrameworkCore.Desing<br />
-    • Microsoft.EntityFrameworkCore.Tools<br />
-    • Microsoft.Extensions.Identity.Core<br />
-    • Pomelo.EntityFrameworkCore.MySql<br />
-    • System.Linq<br />
-<br />
+    .btn-back {
+        display: inline-block;
+        background-color: #0096c7;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+        .btn-back:hover {
+            background-color: #007bb5;
+        }
+
+</style>
+
+<div class="container">
+    <div class="header">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+
+    <div class="section">
+        <h3>Sobre</h3>
+        <ul>
+            <li>Aplicação Web desenvolvida em C#, para gerenciamento de estoque com funcionalidades de criação, memorização e edição!</li>
+            <li>Objetivo: Otimizar processos, controlar melhor o estoque, gerenciar demandas de forma padronizada!</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>Back-End</h3>
+        <ul>
+            <li>C#</li>
+            <li>.Net Core</li>
+            <li>Entity Framework Core</li>
+            <li>Razor</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>Front-End</h3>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>Banco de Dados</h3>
+        <ul>
+            <li>MySQL</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3>Pacotes NuGet</h3>
+        <div class="card">
+            <img src="https://static-00.iconduck.com/assets.00/c-sharp-c-icon-1822x2048-wuf3ijab.png" alt="C# Icon" />
+            <div>
+                <h4>EntityFramework</h4>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/.NET_Core_Logo.svg/2048px-.NET_Core_Logo.svg.png" alt=".NET Core Icon" />
+            <div>
+                <h4>Microsoft.EntityFrameworkCore</h4>
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://img.icons8.com/color/48/000000/mysql-logo.png" alt="MySQL Icon" />
+            <div>
+                <h4>Pomelo.EntityFrameworkCore.MySql</h4>
+            </div>
+        </div>
+</div>
+    <a href="/" class="btn-back">Voltar para a Página Principal</a>

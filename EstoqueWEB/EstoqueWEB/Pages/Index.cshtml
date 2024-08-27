@@ -1,22 +1,74 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Pagina Inicial";
+    ViewData["Title"] = "Página Inicial";
 }
 <style>
-    .titulo {
+    .welcome-container {
         text-align: center;
-        color: #0096c7;
-        margin-bottom: 20px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        padding: 50px;
+        max-width: 600px;
+        width: 90%;
+        margin: 100px auto;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .italic-text {
-        font-style: italic;
+        .welcome-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .welcome-container h1 {
+            color: #0096c7;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .welcome-container p {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+
+    .btn-custom {
+        display: inline-block;
+        background-color: #0096c7;
+        color: #ffffff;
+        padding: 14px 28px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 1.1rem;
+        margin: 5px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
     }
+
+        .btn-custom:hover {
+            background-color: #0096c7;
+            transform: translateY(-3px);
+        }
+
+        .btn-custom:active {
+            transform: translateY(1px);
+        }
+
+        .btn-custom:focus {
+            outline: none;
+        }
+
+        .btn-custom:focus, .btn-custom:hover {
+            box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
+        }
+
 </style>
 
-<div class="text-center">
-    <h1 class="titulo">EstoqueWEB</h1>
-    <p class="italic-text">Desenvolvimento WEB em Asp.Net Core para gerenciamento de Estoque!"</p>
-
+<div class="welcome-container">
+    <h1>Bem-vindo ao EstoqueWEB</h1>
+    <p>Sistema para gestão de estoque. Explore nossas funcionalidades e navegue abaixo para saber mais.</p>
+    <a href="/about" class="btn-custom">Saiba Mais</a>
+    <a href="/contact" class="btn-custom">Contato</a>
 </div>

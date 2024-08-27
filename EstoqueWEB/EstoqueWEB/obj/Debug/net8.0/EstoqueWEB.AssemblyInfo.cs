@@ -14,10 +14,10 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EstoqueWEB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.3.4.2407+16ae8f7493a234efce3915b5003476c5a40289c0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.4.5.2408+e85a2d8d59ef3699741b6bf06da706d0d06e85c5")]
 [assembly: System.Reflection.AssemblyProductAttribute("EstoqueWEB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EstoqueWEB")]
-[assembly: System.Reflection.AssemblyVersionAttribute("1.3.4.2407")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.4.5.2408")]
 
 // Gerado pela classe WriteCodeFragment do MSBuild.
 

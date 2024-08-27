@@ -215,6 +215,7 @@
             background-color: #bb2d3b;
             ;
         }
+
 </style>
 
 <h2 class="titulo">Gerenciar Devoluções</h2>
@@ -370,8 +371,11 @@
                     <option value="Dell Latitude 3420">Dell Latitude 3420</option>
                     <option value="Dell Latitude 3440">Dell Latitude 3440</option>
                     <option value="Dell Latitude 3490">Dell Latitude 3490</option>
+                    <option value="Dell Vostro 3401">Dell Vostro 3401</option>
                     <option value="HP 240 G7">HP 240 G7</option>
                     <option value="HP 250 G8">HP 250 G8</option>
+                    <option value="HP 250 G8">Lenovo B330</option>
+                    <option value="HP Probook 440 G5">HP Probook 440 G5</option>
                 </select>
             </div>
             <div class="form-group">
@@ -406,6 +410,8 @@
                             <option value="">Todos</option>
                             <option value="Retirar no RH" selected="@((Model.StatusFiltro == "Retirar no RH") ? "selected" : null)">Retirar no RH</option>
                             <option value="Devolvido" selected="@((Model.StatusFiltro == "Devolvido") ? "selected" : null)">Devolvido</option>
+                            <option value="Reutilizado" selected="@((Model.StatusFiltro == "Reutilizado") ? "selected" : null)">Reutilizado</option>
+                            <option value="Descarte" selected="@((Model.StatusFiltro == "Descarte") ? "selected" : null)">Descarte</option>
                             <option value="Armazenado" selected="@((Model.StatusFiltro == "Armazenado") ? "selected" : null)">Armazenado</option>
                         </select>
                     </div>
@@ -438,6 +444,7 @@
         <option value="SP5">Paramount - SP5</option>
         <option value="SP6">Campinas - SP6</option>
         <option value="SP7">Bonfiglioli - SP7</option>
+        <option value="TUP">Tupis - TUP</option>
     </select>
 </div>
 <p></p>
@@ -477,6 +484,8 @@
                         <select name="status" class="form-control">
                             <option value="Retirar no RH" selected="@(devolucao.Status == "Retirar no RH" ? "selected" : null)">Retirar no RH</option>
                             <option value="Devolvido" selected="@(devolucao.Status == "Devolvido" ? "selected" : null)">Devolvido</option>
+                            <option value="Reutilizado" selected="@((devolucao.Status == "Reutilizado") ? "selected" : null)">Reutilizado</option>
+                            <option value="Descarte" selected="@((devolucao.Status == "Descarte") ? "selected" : null)">Descarte</option>
                             <option value="Armazenado" selected="@(devolucao.Status == "Armazenado" ? "selected" : null)">Armazenado</option>
                         </select>
                     </form>
@@ -531,8 +540,11 @@
                     <option value="Dell Latitude 3420">Dell Latitude 3420</option>
                     <option value="Dell Latitude 3440">Dell Latitude 3440</option>
                     <option value="Dell Latitude 3490">Dell Latitude 3490</option>
+                    <option value="Dell Vostro 3401">Dell Vostro 3401</option>
                     <option value="HP 240 G7">HP 240 G7</option>
                     <option value="HP 250 G8">HP 250 G8</option>
+                    <option value="HP 250 G8">Lenovo B330</option>
+                    <option value="HP Probook 440 G5">HP Probook 440 G5</option>
                 </select>
             </div>
             <div class="form-group">

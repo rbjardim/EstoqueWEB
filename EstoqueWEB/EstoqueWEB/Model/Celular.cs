@@ -29,12 +29,5 @@ namespace EstoqueWEB.Model
 
         public string Responsavel { get; set; }
 
-        public Celular()
-        {
-
-            Modelo = "";
-            Status = "Retirar no RH";
-            Responsavel = "default_value";
-        }
     }
 }
