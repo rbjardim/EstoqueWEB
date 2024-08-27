@@ -44,6 +44,7 @@ public class Startup
                 new MySqlServerVersion(new Version(8, 0, 21))));
 
         services.AddIdentity<AplicationUser, IdentityRole>(options =>
+
         {
             options.Password.RequireDigit = true;
             options.Password.RequiredLength = 12;
@@ -54,6 +55,7 @@ public class Startup
         .AddEntityFrameworkStores<Context>()
         .AddDefaultTokenProviders();
 
+        services.AddScoped<IRoleInitializer, RoleInitializer>();
         services.AddScoped<IEstoqueService, EstoqueService>();
         services.AddScoped<IEstoqueRepository, EstoqueRepository>();
         services.AddScoped<IDevolucaoService, DevolucaoService>();
@@ -67,7 +69,7 @@ public class Startup
         services.AddRazorPages();
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IRoleInitializer roleInitializer)
     {
         if (env.IsDevelopment())
         {
@@ -86,6 +88,8 @@ public class Startup
 
         app.UseAuthentication();
         app.UseAuthorization();
+
+        roleInitializer.InitializeRoles().Wait();
 
         app.UseEndpoints(endpoints =>
         {

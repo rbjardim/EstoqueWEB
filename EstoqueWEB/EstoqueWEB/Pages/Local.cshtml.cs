@@ -97,7 +97,7 @@ namespace EstoqueWEB.Pages
 
 
                 await _estoqueService.CreateEstoque(Estoque);
-                TempData["Message"] = "Estoque adicionado com sucesso!";
+                TempData["LocalMessage"] = "Estoque adicionado com sucesso!";
                 ItensDeEstoque = await _estoqueService.ListEstoque();
             }
             catch (Exception ex)
@@ -121,7 +121,7 @@ namespace EstoqueWEB.Pages
                 }
 
                 await _estoqueService.DeleteEstoqueAsync(id);
-                TempData["Message"] = "Estoque excluído com sucesso!";
+                TempData["LocalMessage"] = "Estoque excluído com sucesso!";
             }
             catch (Exception ex)
             {
@@ -187,7 +187,7 @@ namespace EstoqueWEB.Pages
                 estoqueToUpdate.RQ = Estoque.RQ;
 
                 await _estoqueService.UpdateEstoque(estoqueToUpdate);
-                TempData["Message"] = "Estoque atualizado com sucesso!";
+                TempData["LocalMessage"] = "Estoque atualizado com sucesso!";
             }
             catch (Exception ex)
             {
@@ -257,6 +257,7 @@ namespace EstoqueWEB.Pages
             this.Unidade = Unidade;
             ItensDeEstoque = await _estoqueService.GetByUnitAsync(unidade);
         }
+
         public async Task<IActionResult> OnGetExportAsync()
         {
             var estoques = await _estoqueService.ListEstoque();

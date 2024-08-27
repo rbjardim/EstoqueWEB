@@ -1,0 +1,38 @@
+﻿@page
+@model ManageUsersModel
+@{
+    ViewData["Title"] = "Gerenciar Usuários";
+}
+
+<h2>Gerenciar Usuários</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Role Atual</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@string.Join(", ", user.Role)</td>
+                <td>
+                    <form asp-page-handler="ChangeUserRole" method="post">
+                        <input type="hidden" name="userId" value="@user.Id" />
+                        <select name="newRole">
+                            <option value="Admin">Admin</option>
+                            <option value="User">User</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">Alterar Role</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

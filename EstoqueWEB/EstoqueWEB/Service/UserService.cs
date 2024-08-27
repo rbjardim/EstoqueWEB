@@ -1,6 +1,7 @@
 ﻿using EstoqueWEB.Interface.Service;
 using EstoqueWEB.Model;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -32,4 +33,17 @@ public class UserService : IUserService
             await _userManager.DeleteAsync(user);
         }
     }
+    public async Task<IdentityResult> AddUserToRoleAsync(string userId, string role)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user == null) return IdentityResult.Failed(new IdentityError { Description = "Usuário não encontrado." });
+
+        return await _userManager.AddToRoleAsync(user, role);
+    }
+
+    public Task<IActionResult> OnPostPromoteUserAsync(string userId)
+    {
+        throw new NotImplementedException();
+    }
 }
+

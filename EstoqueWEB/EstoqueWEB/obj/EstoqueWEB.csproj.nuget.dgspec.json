@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\Projetos\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB.csproj": {
-      "version": "1.4.5.2408",
+      "version": "1.4.6.2408",
       "restore": {
         "projectUniqueName": "C:\\Projetos\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB\\EstoqueWEB.csproj",
         "projectName": "EstoqueWEB",
@@ -60,7 +60,7 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.8, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",

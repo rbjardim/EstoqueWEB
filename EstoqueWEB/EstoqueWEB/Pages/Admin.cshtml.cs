@@ -1,10 +1,12 @@
 using EstoqueWEB.Interface.Service;
 using EstoqueWEB.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace EstoqueWEB.Pages
@@ -16,6 +18,7 @@ namespace EstoqueWEB.Pages
         private readonly IDevolucaoService _devolucaoService;
         private readonly ICelularService _celularService;
         private readonly ILogger<AdminModel> _logger;
+        private readonly UserManager<AplicationUser> _userManager;
 
         public AdminModel(IUserService userService, IEstoqueService estoqueService, IDevolucaoService devolucaoService, ICelularService celularService, ILogger<AdminModel> logger)
         {
@@ -26,12 +29,23 @@ namespace EstoqueWEB.Pages
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
+        [BindProperty]
+        public Estoque Estoque { get; set; }
+       
+        [BindProperty(SupportsGet = true)]
+        public string StatusFiltro { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string Chamado { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public string Patrimonio { get; set; }
+        public string Unidade { get; set; }
         public IList<AplicationUser> Users { get; private set; }
         public IList<Estoque> ItensDeEstoque { get; private set; }
         public IList<Devolucao> ItensDeDevolucao { get; private set; }
         public IList<Celular> ItensDeCelular { get; private set; }
 
-        // Adicione as propriedades para contadores
         public int TotalUsuarios { get; private set; }
         public int TotalItensEstoque { get; private set; }
         public int TotalItensDevolucao { get; private set; }
@@ -44,12 +58,10 @@ namespace EstoqueWEB.Pages
             ItensDeDevolucao = await _devolucaoService.ListDevolucao();
             ItensDeCelular = await _celularService.ListCelular();
 
-            // Defina os valores dos contadores
             TotalUsuarios = Users.Count;
             TotalItensEstoque = ItensDeEstoque.Count;
             TotalItensDevolucao = ItensDeDevolucao.Count;
             TotalItensCelular = ItensDeCelular.Count;
-
         }
 
         public async Task<IActionResult> OnPostDeleteUserAsync(string id)
@@ -57,7 +69,7 @@ namespace EstoqueWEB.Pages
             try
             {
                 await _userService.DeleteUserAsync(id);
-                TempData["Message"] = "Usuário excluído com sucesso!";
+                TempData["AdminMessage"] = "Usuário excluído com sucesso!";
             }
             catch (Exception ex)
             {
@@ -104,5 +116,8 @@ namespace EstoqueWEB.Pages
 
             return RedirectToPage();
         }
+
     }
+
 }
+

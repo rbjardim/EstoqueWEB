@@ -6,5 +6,6 @@ namespace EstoqueWEB.Model
     {
         public string Nome { get; set; }
 
+
     }
 }
