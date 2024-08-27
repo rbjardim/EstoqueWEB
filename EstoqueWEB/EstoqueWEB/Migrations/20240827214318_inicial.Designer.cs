@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EstoqueWEB.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240827175432_inicial")]
+    [Migration("20240827214318_inicial")]
     partial class inicial
     {
         /// <inheritdoc />
@@ -42,6 +42,9 @@ namespace EstoqueWEB.Migrations
                         .HasColumnType("varchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsAdmin")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("LockoutEnabled")

@@ -29,6 +29,10 @@ namespace EstoqueWEB.Pages
         public async Task OnGetAsync()
         {
             Users = await _userService.GetAllUsersAsync();
+            foreach (var user in Users)
+            {
+                user.IsAdmin = await _userService.CheckIfUserIsAdmin(user.Id);
+            }
 
         }
 
@@ -42,7 +46,7 @@ namespace EstoqueWEB.Pages
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao excluir usuário");
-                TempData["Error"] = "Erro ao excluir usuário: " + ex.Message;
+                TempData["AdminError"] = "Erro ao excluir usuário: " + ex.Message;
             }
 
             return RedirectToPage();
@@ -61,7 +65,7 @@ namespace EstoqueWEB.Pages
             }
             else
             {
-                TempData["AdminError"] = "Erro ao promover usuário: " + string.Join(", ", result.Errors.Select(e => e.Description));
+                TempData["AdminError"] = "Erro ao promover usuário para administrador!";
             }
 
             return RedirectToPage("/Admin");

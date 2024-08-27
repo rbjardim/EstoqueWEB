@@ -1,210 +1,212 @@
 ﻿@page
-@model EstoqueWEB.Pages.AdminModel
+@model EstoqueWEB.Pages.AdminUserModel
 @{
     ViewData["Title"] = "Administração";
 }
 <div class="main-content">
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"] - Administração</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
-        }
-
-        .sidebar {
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: #343a40;
-            padding-top: 20px;
-            color: white;
-            z-index: 100;
-        }
-
-            .sidebar a {
-                padding: 10px 15px;
-                text-decoration: none;
-                color: white;
-                display: block;
-                border-radius: 5px;
-                transition: background-color 0.3s ease;
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewData["Title"] - Administração</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <style>
+            body {
+                background-color: #f8f9fa;
+                font-family: Arial, sans-serif;
             }
 
-                .sidebar a:hover {
-                    background-color: #495057;
+            .sidebar {
+                height: 100%;
+                width: 250px;
+                position: fixed;
+                top: 0;
+                left: 0;
+                background-color: #343a40;
+                padding-top: 20px;
+                color: white;
+                z-index: 100;
+            }
+
+                .sidebar a {
+                    padding: 10px 15px;
+                    text-decoration: none;
+                    color: white;
+                    display: block;
+                    border-radius: 5px;
+                    transition: background-color 0.3s ease;
                 }
 
-        .main-content {
-            margin-left: 260px;
-            padding: 20px;
-        }
+                    .sidebar a:hover {
+                        background-color: #495057;
+                    }
 
-        .header {
-            background-color: #343a40;
-            color: white;
-            padding: 10px 20px;
-            position: fixed;
-            top: 0;
-            left: 250px;
-            width: calc(100% - 250px);
-            z-index: 101;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+            .main-content {
+                margin-left: 260px;
+                padding: 20px;
+            }
 
-            .header .logout-button {
-                background-color: #dc3545;
-                border: none;
-                border-radius: 5px;
+            .header {
+                background-color: #343a40;
                 color: white;
                 padding: 10px 20px;
-                cursor: pointer;
+                position: fixed;
+                top: 0;
+                left: 250px;
+                width: calc(100% - 250px);
+                z-index: 101;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
             }
 
-                .header .logout-button:hover {
-                    background-color: #bb2d3b;
+                .header .logout-button {
+                    background-color: #dc3545;
+                    border: none;
+                    border-radius: 5px;
+                    color: white;
+                    padding: 10px 20px;
+                    cursor: pointer;
                 }
 
-        .dashboard-cards {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
+                    .header .logout-button:hover {
+                        background-color: #bb2d3b;
+                    }
 
-        .dashboard-card {
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            flex: 1;
-            margin: 0 10px;
-            text-align: center;
-        }
-
-            .dashboard-card h4 {
-                margin: 0;
-                font-size: 1.5rem;
-                color: #0096c7;
+            .dashboard-cards {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 20px;
             }
 
-            .dashboard-card p {
-                margin: 10px 0;
-                font-size: 1.2rem;
-                color: #555;
+            .dashboard-card {
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                flex: 1;
+                margin: 0 10px;
+                text-align: center;
             }
 
-        .table-responsive {
-            margin-top: 20px;
-        }
+                .dashboard-card h4 {
+                    margin: 0;
+                    font-size: 1.5rem;
+                    color: #0096c7;
+                }
 
-        .table th, .table td {
-            padding: 15px;
-            text-align: center;
-            vertical-align: middle;
-        }
+                .dashboard-card p {
+                    margin: 10px 0;
+                    font-size: 1.2rem;
+                    color: #555;
+                }
 
-        .table th {
-            background-color: #343a40;
-            color: white;
-        }
-
-        .table tbody tr:nth-of-type(odd) {
-            background-color: #f9f9f9;
-        }
-
-        .table tbody tr:hover {
-            background-color: #e9ecef;
-        }
-
-        .action-cell {
-            white-space: nowrap;
-        }
-
-            .action-cell .btn {
-                margin: 0 5px;
+            .table-responsive {
+                margin-top: 20px;
             }
 
-        .btn-custom2 {
-            display: inline-block;
-            background-color: #dc3545;
-            color: #ffffff;
-            padding: 14px 28px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1.1rem;
-            margin: 5px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
+            .table th, .table td {
+                padding: 15px;
+                text-align: center;
+                vertical-align: middle;
+            }
 
-            .btn-custom2:hover {
+            .table th {
+                background-color: #343a40;
+                color: white;
+            }
+
+            .table tbody tr:nth-of-type(odd) {
+                background-color: #f9f9f9;
+            }
+
+            .table tbody tr:hover {
+                background-color: #e9ecef;
+            }
+
+            .action-cell {
+                white-space: nowrap;
+            }
+
+                .action-cell .btn {
+                    margin: 0 5px;
+                }
+
+            .btn-custom2 {
+                display: inline-block;
                 background-color: #dc3545;
-                transform: translateY(-3px);
+                color: #ffffff;
+                padding: 14px 28px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-size: 1.1rem;
+                margin: 5px;
+                transition: background-color 0.3s ease, transform 0.3s ease;
             }
 
-            .btn-custom2:active {
-                transform: translateY(1px);
-            }
+                .btn-custom2:hover {
+                    background-color: #dc3545;
+                    transform: translateY(-3px);
+                }
 
-            .btn-custom2:focus {
-                outline: none;
-            }
+                .btn-custom2:active {
+                    transform: translateY(1px);
+                }
 
-            .btn-custom2:focus, .btn-custom2:hover {
-                box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
-            }
+                .btn-custom2:focus {
+                    outline: none;
+                }
 
-        .btn-custom {
-            display: inline-block;
-            background-color: #0096c7;
-            color: #ffffff;
-            padding: 14px 28px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1.1rem;
-            margin: 5px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
+                .btn-custom2:focus, .btn-custom2:hover {
+                    box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
+                }
 
-            .btn-custom:hover {
+            .btn-custom {
+                display: inline-block;
                 background-color: #0096c7;
-                transform: translateY(-3px);
+                color: #ffffff;
+                padding: 14px 28px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-size: 1.1rem;
+                margin: 5px;
+                transition: background-color 0.3s ease, transform 0.3s ease;
             }
 
-            .btn-custom:active {
-                transform: translateY(1px);
-            }
+                .btn-custom:hover {
+                    background-color: #0096c7;
+                    transform: translateY(-3px);
+                }
 
-            .btn-custom:focus {
-                outline: none;
-            }
+                .btn-custom:active {
+                    transform: translateY(1px);
+                }
 
-            .btn-custom:focus, .btn-custom:hover {
-                box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
-            }
-    </style>
-</head>
-<body>
-    <div class="sidebar">
-        <h4 class="text-center">Administração</h4>
-        <a href="#" onclick="loadPage('/Local'); return false;">Estoque</a>
-        <a href="#" onclick="loadPage('/Devolucao'); return false;">Devolução</a>
-        <a href="#" onclick="loadPage('/Celular'); return false;">Celulares</a>
-    </div>
+                .btn-custom:focus {
+                    outline: none;
+                }
 
-    <div class="header">
-        <span class="h4 mx-auto">Bem-vindo ao Painel de Administração</span>
-        <button class="btn btn-danger logout-button" onclick="window.location.href='/logout'">Logout</button>
-    </div>
+                .btn-custom:focus, .btn-custom:hover {
+                    box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
+                }
+        </style>
+    </head>
+    <body>
+        <div class="sidebar">
+            <h4 class="text-center" style="margin-bottom: 20px;">Administração</h4>
+            <a href="/admin" style="display: block; text-decoration: none; color: white; font-size: 1.5rem; margin-bottom: 20px; text-align: center;">Início</a>
+            <a href="#" onclick="loadPage('/AdminUser'); return false;">Usuários</a>
+            <a href="#" onclick="loadPage('/Local'); return false;">Estoque</a>
+            <a href="#" onclick="loadPage('/Devolucao'); return false;">Devolução</a>
+            <a href="#" onclick="loadPage('/Celular'); return false;">Celulares</a>
+        </div>
+
+        <div class="header">
+            <span class="h4 mx-auto">Bem-vindo ao Painel de Administração</span>
+            <button class="btn btn-danger logout-button" onclick="window.location.href='/logout'">Logout</button>
+        </div>
 
         <h3>Usuários</h3>
         <div class="table-responsive">
@@ -213,6 +215,7 @@
                     <tr>
                         <th>Nome</th>
                         <th>Email</th>
+                        <th>Administrador</th>
                         <th class="text-center action-cell">Ações</th>
                     </tr>
                 </thead>
@@ -222,12 +225,13 @@
                         <tr>
                             <td>@user.Nome</td>
                             <td>@user.Email</td>
+                            <td>@(user.IsAdmin ? "Sim" : "Não")</td> 
                             <td class="action-cell">
                                 <form method="post" asp-page-handler="DeleteUser" asp-route-id="@user.Id" style="display:inline;">
                                     <button type="submit" class="btn btn-custom2">Excluir</button>
                                 </form>
                                 <form method="post" asp-page-handler="PromoteUser" asp-route-userId="@user.Id" style="display:inline;">
-                                    <button type="submit" class="btn btn-custom">Promover a Admin</button>
+                                    <button type="submit" class="btn btn-custom" @(user.IsAdmin ? "disabled" : "")>Promover a Admin</button>
                                 </form>
                             </td>
                         </tr>
@@ -236,5 +240,13 @@
             </table>
         </div>
 
-</body>
+        <script>
+            setTimeout(function () {
+                var errorMessage = document.getElementById('errorMessage');
+                if (errorMessage) {
+                    errorMessage.style.display = 'none';
+                }
+            }, 5000);
+        </script>
+    </body>
 </html>

@@ -69,12 +69,12 @@ namespace EstoqueWEB.Pages
             try
             {
                 await _userService.DeleteUserAsync(id);
-                TempData["AdminMessage"] = "Usuário excluído com sucesso!";
+                TempData["Admin2Message"] = "Usuário excluído com sucesso!";
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao excluir usuário");
-                TempData["Error"] = "Erro ao excluir usuário: " + ex.Message;
+                TempData["Admin2Error"] = "Erro ao excluir usuário: " + ex.Message;
             }
 
             return RedirectToPage();
@@ -88,30 +88,30 @@ namespace EstoqueWEB.Pages
             try
             {
                 await _estoqueService.DeleteEstoqueAsync(id);
-                TempData["MessageEstoque"] = "Item de Estoque excluído com sucesso!";
+                TempData["Admin2MessageEstoque"] = "Item de Estoque excluído com sucesso!";
                 isEstoqueDeleted = true;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao excluir item de estoque");
-                TempData["ErrorEstoque"] = "Erro ao excluir item de estoque: " + ex.Message;
+                TempData["Admin2ErrorEstoque"] = "Erro ao excluir item de estoque: " + ex.Message;
             }
 
             try
             {
                 await _devolucaoService.DeleteDevolucaoAsync(id);
-                TempData["MessageDevolucao"] = "Item de Devolução excluído com sucesso!";
+                TempData["Admin2MessageDevolucao"] = "Item de Devolução excluído com sucesso!";
                 isDevolucaoDeleted = true;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao excluir item de devolução");
-                TempData["ErrorDevolucao"] = "Erro ao excluir item de devolução: " + ex.Message;
+                TempData["Admin2ErrorDevolucao"] = "Erro ao excluir item de devolução: " + ex.Message;
             }
 
             if (!isEstoqueDeleted && !isDevolucaoDeleted)
             {
-                TempData["Error"] = "Erro ao excluir item: nenhum dos itens foi excluído com sucesso.";
+                TempData["Admin2Error"] = "Erro ao excluir item: nenhum dos itens foi excluído com sucesso.";
             }
 
             return RedirectToPage();

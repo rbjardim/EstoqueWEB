@@ -13,5 +13,6 @@ namespace EstoqueWEB.Interface.Service
         Task DeleteUserAsync(string id);
         Task<IActionResult> OnPostPromoteUserAsync(string userId);
         Task<IdentityResult> AddUserToRoleAsync(string userId, string role);
+        Task<bool> CheckIfUserIsAdmin(string userId);
     }
 }

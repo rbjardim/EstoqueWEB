@@ -45,5 +45,15 @@ public class UserService : IUserService
     {
         throw new NotImplementedException();
     }
+
+    public async Task<bool> CheckIfUserIsAdmin(string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user == null) return false;
+
+        var roles = await _userManager.GetRolesAsync(user);
+        return roles.Contains("Admin");
+    }
+
 }
 

@@ -193,13 +193,32 @@
             }
     </style>
 </head>
+@if (TempData["AdminMessage"] != null)
+{
+    <div id="message" class="alert alert-success">
+        @TempData["AdminMessage"]
+    </div>
+}
+@if (TempData["AdminError"] != null)
+{
+    <div id="error" class="alert alert-danger">
+        @TempData["AdminError"]
+    </div>
+}
+@if (TempData["AdminMessages"] != null)
+{
+    <div id="message" class="@TempData["MessageClass"]">
+        @TempData["AdminMessages"]
+    </div>
+}
 <body>
     <div class="sidebar">
-        <h4 class="text-center">Administração</h4>
+        <h4 class="text-center" style="margin-bottom: 20px;">Administração</h4>
+        <a href="/admin" style="display: block; text-decoration: none; color: white; font-size: 1.5rem; margin-bottom: 20px; text-align: center;">Início</a>
+        <a href="#" onclick="loadPage('/AdminUser'); return false;">Usuários</a>
         <a href="#" onclick="loadPage('/Local'); return false;">Estoque</a>
         <a href="#" onclick="loadPage('/Devolucao'); return false;">Devolução</a>
         <a href="#" onclick="loadPage('/Celular'); return false;">Celulares</a>
-        <a href="#" onclick="loadPage('/AdminUser'); return false;">Usuários</a>
     </div>
 
     <div class="header">
@@ -256,6 +275,14 @@
                 $("#message").fadeOut("slow");
             }, 3000);
         });
+    </script>
+    <script>
+        setTimeout(function () {
+            var errorMessage = document.getElementById('errorMessage');
+            if (errorMessage) {
+                errorMessage.style.display = 'none';
+            }
+        }, 5000);
     </script>
 </body>
 </html>
