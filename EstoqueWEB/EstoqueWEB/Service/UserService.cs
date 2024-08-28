@@ -55,5 +55,22 @@ public class UserService : IUserService
         return roles.Contains("Admin");
     }
 
+    public Task<IActionResult> OnPostDemoteUserAsync(string userId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<IdentityResult> RemoveUserFromRoleAsync(string userId, string role)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user == null)
+        {
+            return IdentityResult.Failed(new IdentityError { Description = "Usuário não encontrado." });
+        }
+
+        // Remove o usuário do papel
+        return await _userManager.RemoveFromRoleAsync(user, role);
+    }
 }
+
 

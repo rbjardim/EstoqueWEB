@@ -16,10 +16,11 @@
         body {
             background-color: #f8f9fa;
             font-family: Arial, sans-serif;
+            margin: 0;
         }
 
         .sidebar {
-            height: 100%;
+            height: 100vh;
             width: 250px;
             position: fixed;
             top: 0;
@@ -30,21 +31,21 @@
             z-index: 100;
         }
 
-            .sidebar a {
-                padding: 10px 15px;
-                text-decoration: none;
-                color: white;
-                display: block;
-                border-radius: 5px;
-                transition: background-color 0.3s ease;
-            }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: white;
+            display: block;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
 
-                .sidebar a:hover {
-                    background-color: #495057;
-                }
+        .sidebar a:hover {
+            background-color: #495057;
+        }
 
         .main-content {
-            margin-left: 260px;
+            margin-left: 250px;
             padding: 20px;
         }
 
@@ -62,18 +63,18 @@
             align-items: center;
         }
 
-            .header .logout-button {
-                background-color: #dc3545;
-                border: none;
-                border-radius: 5px;
-                color: white;
-                padding: 10px 20px;
-                cursor: pointer;
-            }
+        .header .logout-button {
+            background-color: #dc3545;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
 
-                .header .logout-button:hover {
-                    background-color: #bb2d3b;
-                }
+        .header .logout-button:hover {
+            background-color: #bb2d3b;
+        }
 
         .dashboard-cards {
             display: flex;
@@ -91,17 +92,17 @@
             text-align: center;
         }
 
-            .dashboard-card h4 {
-                margin: 0;
-                font-size: 1.5rem;
-                color: #0096c7;
-            }
+        .dashboard-card h4 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #0096c7;
+        }
 
-            .dashboard-card p {
-                margin: 10px 0;
-                font-size: 1.2rem;
-                color: #555;
-            }
+        .dashboard-card p {
+            margin: 10px 0;
+            font-size: 1.2rem;
+            color: #555;
+        }
 
         .table-responsive {
             margin-top: 20px;
@@ -130,10 +131,6 @@
             white-space: nowrap;
         }
 
-            .action-cell .btn {
-                margin: 0 5px;
-            }
-
         .btn-custom2 {
             display: inline-block;
             background-color: #dc3545;
@@ -146,22 +143,22 @@
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-            .btn-custom2:hover {
-                background-color: #dc3545;
-                transform: translateY(-3px);
-            }
+        .btn-custom2:hover {
+            background-color: #dc3545;
+            transform: translateY(-3px);
+        }
 
-            .btn-custom2:active {
-                transform: translateY(1px);
-            }
+        .btn-custom2:active {
+            transform: translateY(1px);
+        }
 
-            .btn-custom2:focus {
-                outline: none;
-            }
+        .btn-custom2:focus {
+            outline: none;
+        }
 
-            .btn-custom2:focus, .btn-custom2:hover {
-                box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
-            }
+        .btn-custom2:focus, .btn-custom2:hover {
+            box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
+        }
 
         .btn-custom {
             display: inline-block;
@@ -175,22 +172,28 @@
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-            .btn-custom:hover {
-                background-color: #0096c7;
-                transform: translateY(-3px);
-            }
+        .btn-custom:hover {
+            background-color: #0096c7;
+            transform: translateY(-3px);
+        }
 
-            .btn-custom:active {
-                transform: translateY(1px);
-            }
+        .btn-custom:active {
+            transform: translateY(1px);
+        }
 
-            .btn-custom:focus {
-                outline: none;
-            }
+        .btn-custom:focus {
+            outline: none;
+        }
 
-            .btn-custom:focus, .btn-custom:hover {
-                box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
-            }
+        .btn-custom:focus, .btn-custom:hover {
+            box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
     </style>
 </head>
 @if (TempData["AdminMessage"] != null)
@@ -207,15 +210,16 @@
 }
 @if (TempData["AdminMessages"] != null)
 {
-    <div id="message" class="@TempData["MessageClass"]">
+    <div id="message" class="@TempData["AdminMessageClass"]">
         @TempData["AdminMessages"]
     </div>
 }
+
 <body>
     <div class="sidebar">
         <h4 class="text-center" style="margin-bottom: 20px;">Administração</h4>
         <a href="/admin" style="display: block; text-decoration: none; color: white; font-size: 1.5rem; margin-bottom: 20px; text-align: center;">Início</a>
-        <a href="#" onclick="loadPage('/AdminUser'); return false;">Usuários</a>
+        <a href="#" onclick="loadPage('/AdminUser'); return false;" id="admin-user-link">Usuários</a>
         <a href="#" onclick="loadPage('/Local'); return false;">Estoque</a>
         <a href="#" onclick="loadPage('/Devolucao'); return false;">Devolução</a>
         <a href="#" onclick="loadPage('/Celular'); return false;">Celulares</a>
@@ -245,7 +249,6 @@
                 <p>@Model.TotalItensCelular</p>
             </div>
         </div>
-        <br />
 
         <div id="dynamic-content">
 
@@ -256,33 +259,41 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function loadPage(url) {
-            $.ajax({
-                url: url,
-                type: 'GET',
-                success: function (data) {
+            if (url === '/AdminUser') {
+                window.location.href = url;
+            } else {
+                var iframe = document.createElement('iframe');
+                iframe.src = url;
+                iframe.style.position = 'absolute';
+                iframe.style.left = '0';
+                iframe.style.width = '100%'; 
+                iframe.style.height = '1000px';
+                iframe.style.border = 'none';
 
-                    var newContent = $(data).find('.main-content').html();
-                    $('#dynamic-content').html(newContent);
-                },
-                error: function () {
-                    alert('Erro ao carregar a página. Por favor, tente novamente.');
-                }
-            });
+                var dynamicContent = document.getElementById('dynamic-content');
+                dynamicContent.innerHTML = '';
+                dynamicContent.appendChild(iframe);
+            }
         }
 
-        $(document).ready(function () {
-            setTimeout(function () {
-                $("#message").fadeOut("slow");
-            }, 3000);
+        $(document).ready(function() {
+            loadPage('/Local');
         });
-    </script>
-    <script>
-        setTimeout(function () {
-            var errorMessage = document.getElementById('errorMessage');
-            if (errorMessage) {
-                errorMessage.style.display = 'none';
-            }
-        }, 5000);
+
+            setTimeout(function () {
+        var message = document.getElementById('message');
+        if (message) {
+            message.style.display = 'none';
+        }
+    }, 3000);
+
+
+    setTimeout(function () {
+        var error = document.getElementById('error');
+        if (error) {
+            error.style.display = 'none';
+        }
+    }, 3000);
     </script>
 </body>
 </html>

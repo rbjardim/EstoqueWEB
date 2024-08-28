@@ -136,7 +136,7 @@
 
             .btn-custom2 {
                 display: inline-block;
-                background-color: #dc3545;
+                background-color: #0096c7;
                 color: #ffffff;
                 padding: 14px 28px;
                 border-radius: 8px;
@@ -147,7 +147,7 @@
             }
 
                 .btn-custom2:hover {
-                    background-color: #dc3545;
+                    background-color: #0096c7;
                     transform: translateY(-3px);
                 }
 
@@ -165,7 +165,7 @@
 
             .btn-custom {
                 display: inline-block;
-                background-color: #0096c7;
+                background-color: dimgrey;
                 color: #ffffff;
                 padding: 14px 28px;
                 border-radius: 8px;
@@ -176,7 +176,7 @@
             }
 
                 .btn-custom:hover {
-                    background-color: #0096c7;
+                    background-color: dimgrey;
                     transform: translateY(-3px);
                 }
 
@@ -191,8 +191,55 @@
                 .btn-custom:focus, .btn-custom:hover {
                     box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
                 }
+                .btn-custom3 {
+                display: inline-block;
+                background-color: #dc3545;
+                color: #ffffff;
+                padding: 14px 28px;
+                border-radius: 8px;
+                text-decoration: none;
+                font-size: 1.1rem;
+                margin: 5px;
+                transition: background-color 0.3s ease, transform 0.3s ease;
+            }
+
+                .btn-custom3:hover {
+                    background-color: #dc3545;
+                    transform: translateY(-3px);
+                }
+
+                .btn-custom3:active {
+                    transform: translateY(1px);
+                }
+
+                .btn-custom3:focus {
+                    outline: none;
+                }
+
+                .btn-custom3:focus, .btn-custom3:hover {
+                    box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
+                }
         </style>
     </head>
+    @if (TempData["Admin2Message"] != null)
+    {
+        <div id="message" class="alert alert-success">
+            @TempData["Admin2Message"]
+        </div>
+    }
+    @if (TempData["Admin2Error"] != null)
+    {
+        <div id="error" class="alert alert-danger">
+            @TempData["Admin2Error"]
+        </div>
+    }
+    @if (TempData["Admin2Messages"] != null)
+    {
+        <div id="message" class="@TempData["Admin2MessageClass"]">
+            @TempData["Admin2Messages"]
+        </div>
+    }
+
     <body>
         <div class="sidebar">
             <h4 class="text-center" style="margin-bottom: 20px;">Administração</h4>
@@ -233,6 +280,9 @@
                                 <form method="post" asp-page-handler="PromoteUser" asp-route-userId="@user.Id" style="display:inline;">
                                     <button type="submit" class="btn btn-custom" @(user.IsAdmin ? "disabled" : "")>Promover a Admin</button>
                                 </form>
+                                    <form method="post" asp-page-handler="DemoteUser" asp-route-userId="@user.Id" style="display:inline;">
+                                    <button type="submit" class="btn btn-custom3" @(user.IsAdmin ? "" : "disabled")>Rebaixar</button>
+                                </form>
                             </td>
                         </tr>
                     }
@@ -241,12 +291,21 @@
         </div>
 
         <script>
-            setTimeout(function () {
-                var errorMessage = document.getElementById('errorMessage');
-                if (errorMessage) {
-                    errorMessage.style.display = 'none';
-                }
-            }, 5000);
+
+    setTimeout(function () {
+        var message = document.getElementById('message');
+        if (message) {
+            message.style.display = 'none';
+        }
+    }, 3000);
+
+
+    setTimeout(function () {
+        var error = document.getElementById('error');
+        if (error) {
+            error.style.display = 'none';
+        }
+    }, 3000);
         </script>
     </body>
 </html>

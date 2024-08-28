@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace EstoqueWEB.Pages
@@ -22,9 +21,7 @@ namespace EstoqueWEB.Pages
         }
 
         public IList<AplicationUser> Users { get; private set; }
-
         public int TotalUsuarios { get; private set; }
-
 
         public async Task OnGetAsync()
         {
@@ -33,7 +30,6 @@ namespace EstoqueWEB.Pages
             {
                 user.IsAdmin = await _userService.CheckIfUserIsAdmin(user.Id);
             }
-
         }
 
         public async Task<IActionResult> OnPostDeleteUserAsync(string id)
@@ -41,15 +37,15 @@ namespace EstoqueWEB.Pages
             try
             {
                 await _userService.DeleteUserAsync(id);
-                TempData["AdminMessage"] = "Usuário excluído com sucesso!";
+                TempData["Admin2Message"] = "Usuário excluído com sucesso!";
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Erro ao excluir usuário");
-                TempData["AdminError"] = "Erro ao excluir usuário: " + ex.Message;
+                TempData["Admin2Error"] = "Erro ao excluir usuário: " + ex.Message;
             }
 
-            return RedirectToPage();
+            return RedirectToPage("/AdminUser");
         }
 
         public async Task<IActionResult> OnPostPromoteUserAsync(string userId)
@@ -61,15 +57,33 @@ namespace EstoqueWEB.Pages
 
             if (result.Succeeded)
             {
-                TempData["AdminMessage"] = "Usuário promovido a administrador com sucesso!";
+                TempData["Admin2Message"] = "Usuário promovido a administrador com sucesso!";
             }
             else
             {
-                TempData["AdminError"] = "Erro ao promover usuário para administrador!";
+                TempData["Admin2Error"] = "Erro ao promover usuário para administrador!";
             }
 
-            return RedirectToPage("/Admin");
+            return RedirectToPage("/AdminUser");
+        }
+
+        public async Task<IActionResult> OnPostDemoteUserAsync(string userId)
+        {
+            var user = await _userService.GetUserByIdAsync(userId);
+            if (user == null) return NotFound();
+
+            var result = await _userService.RemoveUserFromRoleAsync(userId, "Admin");
+
+            if (result.Succeeded)
+            {
+                TempData["Admin2Message"] = "Usuário rebaixado com sucesso!";
+            }
+            else
+            {
+                TempData["Admin2Error"] = "Erro ao rebaixar usuário!";
+            }
+
+            return RedirectToPage("/AdminUser");
         }
     }
 }
-
