@@ -32,17 +32,25 @@ EstoqueWEB é um sistema de gerenciamento de inventário desenvolvido em ASP.NET
 
 ## Screenshots📷
 
-Figura 1: Tela inicial do sistema de gerenciamento de estoque.
+Figura 1: Tela de Login
 
-![PaginaInicial](https://github.com/rbjardim/EstoqueWEB/assets/118462663/3c538da1-e8f3-477b-9e6c-838a99d231bb)
+![PaginaLogin](https://github.com/user-attachments/assets/c2805126-6705-49c6-be8b-5fb1b67ce0c9)
 
-Figura 2: Tela de cadastro de novo item no inventário.
+Figura 2: Tela de Registro
 
-![TelaUsuario](https://github.com/rbjardim/EstoqueWEB/assets/118462663/541a0170-9ed5-4be7-bd41-3cd534bef1bc)
+![TelRegistro](https://github.com/user-attachments/assets/2620f30b-a828-4244-a538-0519712a4dde)
 
-Figura 3: Tela de pesquisa de itens por chamado ou patrimônio.
+Figura 3: Tela de Usuário
 
-![TelaUsuarioDev](https://github.com/rbjardim/EstoqueWEB/assets/118462663/5d7721c7-6967-4e47-8fe6-f4b409c2722c)
+![TelaUsuario](https://github.com/user-attachments/assets/1543f52e-7677-4f6c-ba9c-838e2239febc)
+
+Figura 4: Tela de Administrador
+
+![TelaAdministrador](https://github.com/user-attachments/assets/42268716-d60e-406c-b44e-78d448c9be10)
+
+Figura 5: Tela Logout
+
+![TelaLogout](https://github.com/user-attachments/assets/ff3f640f-1e8f-472a-a155-f704aeea8ac1)
 
 ## Tecnologias Utilizadas👨🏽‍💻
 Este projeto utiliza as seguintes tecnologias e frameworks:
