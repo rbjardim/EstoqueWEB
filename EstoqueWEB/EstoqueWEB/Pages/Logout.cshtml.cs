@@ -9,10 +9,12 @@ namespace EstoqueWEB.Pages
     public class LogoutModel : PageModel
     {
         private readonly SignInManager<AplicationUser> _signInManager;
+        private readonly UserManager<AplicationUser> _userManager;
 
-        public LogoutModel(SignInManager<AplicationUser> signInManager)
+        public LogoutModel(SignInManager<AplicationUser> signInManager, UserManager<AplicationUser> userManager)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         public void OnGet()
@@ -25,9 +27,22 @@ namespace EstoqueWEB.Pages
             return RedirectToPage("/Index");
         }
 
-        public IActionResult OnPostDontLogoutAsync()
+        public async Task<IActionResult> OnPostDontLogoutAsync()
         {
-            return RedirectToPage("/Index");
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+            {
+
+                return RedirectToPage("/Index");
+            }
+
+            if (await _userManager.IsInRoleAsync(user, "Admin"))
+            {
+                return RedirectToPage("/Admin");
+            }
+
+            return RedirectToPage("/Local");
         }
     }
 }

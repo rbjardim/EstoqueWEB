@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #e7ecef;
             font-family: Arial, sans-serif;
             margin: 0;
         }
@@ -31,18 +31,18 @@
             z-index: 100;
         }
 
-        .sidebar a {
-            padding: 10px 15px;
-            text-decoration: none;
-            color: white;
-            display: block;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
+            .sidebar a {
+                padding: 10px 15px;
+                text-decoration: none;
+                color: white;
+                display: block;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
 
-        .sidebar a:hover {
-            background-color: #495057;
-        }
+                .sidebar a:hover {
+                    background-color: #495057;
+                }
 
         .main-content {
             margin-left: 250px;
@@ -63,22 +63,23 @@
             align-items: center;
         }
 
-        .header .logout-button {
-            background-color: #dc3545;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
+            .header .logout-button {
+                background-color: #dc3545;
+                border: none;
+                border-radius: 5px;
+                color: white;
+                padding: 10px 20px;
+                cursor: pointer;
+            }
 
-        .header .logout-button:hover {
-            background-color: #bb2d3b;
-        }
+                .header .logout-button:hover {
+                    background-color: #bb2d3b;
+                }
 
         .dashboard-cards {
             display: flex;
             justify-content: space-between;
+            margin-top: 80px;
             margin-bottom: 20px;
         }
 
@@ -92,17 +93,17 @@
             text-align: center;
         }
 
-        .dashboard-card h4 {
-            margin: 0;
-            font-size: 1.5rem;
-            color: #0096c7;
-        }
+            .dashboard-card h4 {
+                margin: 0;
+                font-size: 1.5rem;
+                color: #0096c7;
+            }
 
-        .dashboard-card p {
-            margin: 10px 0;
-            font-size: 1.2rem;
-            color: #555;
-        }
+            .dashboard-card p {
+                margin: 10px 0;
+                font-size: 1.2rem;
+                color: #555;
+            }
 
         .table-responsive {
             margin-top: 20px;
@@ -143,22 +144,22 @@
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        .btn-custom2:hover {
-            background-color: #dc3545;
-            transform: translateY(-3px);
-        }
+            .btn-custom2:hover {
+                background-color: #dc3545;
+                transform: translateY(-3px);
+            }
 
-        .btn-custom2:active {
-            transform: translateY(1px);
-        }
+            .btn-custom2:active {
+                transform: translateY(1px);
+            }
 
-        .btn-custom2:focus {
-            outline: none;
-        }
+            .btn-custom2:focus {
+                outline: none;
+            }
 
-        .btn-custom2:focus, .btn-custom2:hover {
-            box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
-        }
+            .btn-custom2:focus, .btn-custom2:hover {
+                box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
+            }
 
         .btn-custom {
             display: inline-block;
@@ -172,22 +173,22 @@
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        .btn-custom:hover {
-            background-color: #0096c7;
-            transform: translateY(-3px);
-        }
+            .btn-custom:hover {
+                background-color: #0096c7;
+                transform: translateY(-3px);
+            }
 
-        .btn-custom:active {
-            transform: translateY(1px);
-        }
+            .btn-custom:active {
+                transform: translateY(1px);
+            }
 
-        .btn-custom:focus {
-            outline: none;
-        }
+            .btn-custom:focus {
+                outline: none;
+            }
 
-        .btn-custom:focus, .btn-custom:hover {
-            box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
-        }
+            .btn-custom:focus, .btn-custom:hover {
+                box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
+            }
 
         iframe {
             width: 100%;
@@ -251,7 +252,6 @@
         </div>
 
         <div id="dynamic-content">
-
         </div>
     </div>
 
@@ -259,14 +259,14 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function loadPage(url) {
-            if (url === '/AdminUser') {
+            if (url === '/Admin') {
                 window.location.href = url;
             } else {
                 var iframe = document.createElement('iframe');
                 iframe.src = url;
                 iframe.style.position = 'absolute';
                 iframe.style.left = '0';
-                iframe.style.width = '100%'; 
+                iframe.style.width = '100%';
                 iframe.style.height = '1000px';
                 iframe.style.border = 'none';
 
@@ -275,25 +275,20 @@
                 dynamicContent.appendChild(iframe);
             }
         }
-
-        $(document).ready(function() {
-            loadPage('/Local');
-        });
-
-            setTimeout(function () {
-        var message = document.getElementById('message');
-        if (message) {
-            message.style.display = 'none';
-        }
-    }, 3000);
+        setTimeout(function () {
+            var message = document.getElementById('message');
+            if (message) {
+                message.style.display = 'none';
+            }
+        }, 3000);
 
 
-    setTimeout(function () {
-        var error = document.getElementById('error');
-        if (error) {
-            error.style.display = 'none';
-        }
-    }, 3000);
+        setTimeout(function () {
+            var error = document.getElementById('error');
+            if (error) {
+                error.style.display = 'none';
+            }
+        }, 3000);
     </script>
 </body>
 </html>

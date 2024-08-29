@@ -31,7 +31,7 @@ namespace EstoqueWEB.Pages
 
         [BindProperty]
         public Estoque Estoque { get; set; }
-       
+
         [BindProperty(SupportsGet = true)]
         public string StatusFiltro { get; set; }
 

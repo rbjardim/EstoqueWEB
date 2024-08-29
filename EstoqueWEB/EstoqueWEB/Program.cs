@@ -52,6 +52,7 @@ public class Startup
             options.Password.RequireUppercase = true;
             options.Password.RequireLowercase = true;
         })
+        .AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<Context>()
         .AddDefaultTokenProviders();
 
@@ -96,5 +97,6 @@ public class Startup
             endpoints.MapRazorPages();
         });
     }
+
 }
 

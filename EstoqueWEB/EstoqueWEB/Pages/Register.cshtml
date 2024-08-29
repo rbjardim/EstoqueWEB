@@ -3,11 +3,36 @@
 @{
 }
 <style>
-    .text {
-        text-align: center;
-        color: #0096c7;
-        margin-bottom: 20px;
+    .register-container {
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        padding: 50px;
+        max-width: 600px;
+        width: 90%;
+        margin: 100px auto;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
+        .register-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .register-container h1 {
+            color: #0096c7;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .register-container p {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+
     .form-control {
         background-color: #f0f0f0;
     }
@@ -27,73 +52,102 @@
         color: red;
         display: none;
     }
+
+    .btn-custom {
+        display: inline-block;
+        background-color: #0096c7;
+        color: #ffffff;
+        padding: 14px 28px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 1.1rem;
+        margin-top: 10px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border: none;
+        box-shadow: none;
+    }
+
+        .btn-custom:hover {
+            background-color: #0077b6;
+            color: #ffffff;
+            transform: translateY(-3px);
+        }
+
+        .btn-custom:active {
+            transform: translateY(1px);
+        }
+
+        .btn-custom:focus {
+            outline: none;
+        }
+
+        .btn-custom:focus, .btn-custom:hover {
+            box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
+        }
 </style>
-<div class="container mt-5">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-sm-12 col-md-12 col-lg-4">
-            <h1 class="text">Registro</h1>
 
-            @if (TempData["SuccessMessage"] != null)
-            {
-                <div class="success-message">
-                    @TempData["SuccessMessage"]
-                </div>
+<div class="register-container">
+    <h1 class="text-center">Registro</h1>
 
-                <script>
-                    setTimeout(function () {
-                        window.location.href = '/Login';
-                    }, 3000);
-                </script>
-            }
-            else
-            {
-                <form method="post">
-                    <div asp-validation-summary="All" class="text-danger"></div>
-
-                    <div class="mb-3">
-                        <label class="form-label" asp-for="Model.Nome">Nome Completo</label>
-                        <input type="text" asp-for="Model.Nome" class="form-control" />
-                        <span asp-validation-for="Model.Nome" class="text-danger"></span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label" asp-for="Model.Email">Email</label>
-                        <input type="email" asp-for="Model.Email" class="form-control" />
-                        <span asp-validation-for="Model.Email" class="text-danger"></span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label" asp-for="Model.Password">Senha</label>
-                        <input type="password" asp-for="Model.Password" class="form-control" id="password-input" />
-                        <input type="checkbox" id="show-password" onclick="togglePasswordVisibility()"> Mostrar Senha
-                        <span asp-validation-for="Model.Password" class="text-danger"></span>
-                        <div class="password-requirements">
-                            • Mínimo de 12 caracteres<br />
-                            • Alfanumérica<br />
-                            • Caractere Especial
-                        </div>
-                        <p id="caps-lock-warning" class="caps-lock-warning">Caps Lock está ativado!</p>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label" asp-for="Model.ConfirmPassword">Confirme sua Senha</label>
-                        <input type="password" asp-for="Model.ConfirmPassword" class="form-control" id="confirm-password-input" />
-                        <input type="checkbox" id="show-confirm-password" onclick="toggleConfirmPasswordVisibility()"> Mostrar Senha
-                        <span asp-validation-for="Model.ConfirmPassword" class="text-danger"></span>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label" asp-for="Model.Telefone">Telefone</label>
-                        <input type="text" asp-for="Model.Telefone" class="form-control" />
-                    </div>
-
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Registrar</button>
-                    </div>
-                </form>
-            }
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="success-message">
+            @TempData["SuccessMessage"]
         </div>
-    </div>
+
+        <script>
+            setTimeout(function () {
+                window.location.href = '/Index';
+            }, 3000);
+        </script>
+    }
+    else
+    {
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Model.Nome">Nome Completo</label>
+                <input type="text" asp-for="Model.Nome" class="form-control" />
+                <span asp-validation-for="Model.Nome" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Model.Email">Email</label>
+                <input type="email" asp-for="Model.Email" class="form-control" />
+                <span asp-validation-for="Model.Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Model.Password">Senha</label>
+                <input type="password" asp-for="Model.Password" class="form-control" id="password-input" />
+                <input type="checkbox" id="show-password" onclick="togglePasswordVisibility()"> Mostrar Senha
+                <span asp-validation-for="Model.Password" class="text-danger"></span>
+                <div class="password-requirements">
+                    • Mínimo de 12 caracteres<br />
+                    • Alfanumérica<br />
+                    • Caractere Especial
+                </div>
+                <p id="caps-lock-warning" class="caps-lock-warning">Caps Lock está ativado!</p>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Model.ConfirmPassword">Confirme sua Senha</label>
+                <input type="password" asp-for="Model.ConfirmPassword" class="form-control" id="confirm-password-input" />
+                <input type="checkbox" id="show-confirm-password" onclick="toggleConfirmPasswordVisibility()"> Mostrar Senha
+                <span asp-validation-for="Model.ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Model.Telefone">Telefone</label>
+                <input type="text" asp-for="Model.Telefone" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn-custom">Registrar</button>
+            </div>
+        </form>
+    }
 </div>
 
 <script>
@@ -126,3 +180,4 @@
         }
     });
 </script>
+<a href="/" class="btn-custom">Voltar para a Página Principal</a>

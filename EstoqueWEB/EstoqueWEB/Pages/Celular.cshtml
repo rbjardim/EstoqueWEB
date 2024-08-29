@@ -4,475 +4,501 @@
     ViewData["Title"] = "Gerenciar Celulares";
 }
 <div class="main-content">
-<style>
-    .titulo {
-        text-align: center;
-        color: #0096c7;
-        margin-bottom: 20px;
-    }
-
-    .text {
-        color: #0096c7;
-        margin-bottom: 20px;
-    }
-
-    .btn-salvar,
-    .btn-salvar2 {
-        background-color: #0096c7;
-        border-color: none;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-left: 10px;
-    }
-
-        .btn-salvar:hover,
-        .btn-salvar2:hover {
-            background-color: #0096c7;
-        }
-
-    .btn-danger {
-        background-color: #dc3545;
-        border-color: #dc3545;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-left: 10px;
-    }
-
-        .btn-danger:hover {
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
-
-    .btn-primary {
-        background-color: #6c757d;
-        border-color: none;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-left: 10px;
-    }
-
-        .btn-primary:hover {
-            background-color: #0096c7;
-            border-color: #0096c7;
-        }
-
-    .form-control {
-        background-color: #f0f0f0;
-    }
-
-    .filter-btn {
-        background-color: #0096c7;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.3s;
-        margin-left: 10px;
-    }
-
-        .filter-btn:hover {
-            background-color: #0096c7;
-        }
-
-    .filter-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .filter-section {
-        display: none;
-        margin-left: 10px;
-        transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-    }
-
-        .filter-section.show {
-            display: block;
-            max-height: 100px;
-            opacity: 1;
-        }
-
-    .action-buttons {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-    }
-
-    .button-group {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-    }
-
-        .button-group .btn {
-            margin-left: 5px;
-        }
-
-    .linha-branca {
-        background-color: white;
-    }
-
-    .linha-cinza {
-        background-color: #212529;
-    }
-
-    .toggle-btn {
-        background-color: #6c757d;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-left: 10px;
-        transition: background-color 0.3s ease;
-    }
-
-        .toggle-btn:hover {
-            background-color: #5a6268;
-        }
-
-
-    .alert-danger {
-        color: #dc3545;
-        background-color: #f8d7da;
-        border-color: #f5c6cb;
-    }
-
-    .table th,
-    .table td {
-        padding: 12px;
-        text-align: left;
-        border-top: 1px solid #e9ecef;
-        border-bottom: 1px solid black;
-        /* white-space: nowrap; */
-    }
-
-    .table th {
-        background-color: #0096c7;
-        color: white;
-    }
-
-    .table-striped tbody tr:nth-of-type(odd) {
-        background-color: #f2f2f2;
-    }
-
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgb(0, 0, 0);
-        background-color: rgba(0, 0, 0, 0.4);
-        padding-top: 60px;
-    }
-
-    .modal-content {
-        background-color: #fefefe;
-        margin: 5% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-    }
-
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-        .close:hover,
-        .close:focus {
+    <style>
+        .titulo {
+            text-align: center;
             color: black;
+            margin-bottom: 20px;
+        }
+
+        .text {
+            color: black;
+            margin-bottom: 20px;
+        }
+
+        .btn-salvar,
+        .btn-salvar2 {
+            display: inline-block;
+            background-color: #0096c7;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
             text-decoration: none;
-            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
         }
 
-    .logout-button {
-        background-color: #dc3545;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-left: 10px;
+            .btn-salvar:hover,
+            .btn-salvar2:hover {
+                background-color: #0077b6;
+                color: #ffffff;
+                transform: translateY(-3px);
+            }
+
+        .btn-buscar {
+            display: inline-block;
+            background-color: #6c757d;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
+        }
+
+            .btn-buscar:hover {
+                background-color: #6c757d;
+                color: #ffffff;
+                transform: translateY(-3px);
+            }
+
+        .btn-danger {
+            display: inline-block;
+            background-color: #dc3545;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
+        }
+
+            .btn-danger:hover {
+                background-color: #dc3545;
+                color: #ffffff;
+                transform: translateY(-3px);
+            }
+
+        .exibir-btn {
+            display: inline-block;
+            background-color: #6c757d;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
+        }
+
+            .exibir-btn:hover {
+                background-color: #6c757d;
+                color: #ffffff;
+                transform: translateY(-3px);
+            }
+
+        .btn-exportar {
+            display: inline-block;
+            background-color: #6c757d;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
+        }
+
+            .btn-exportar:hover {
+                background-color: #6c757d;
+                color: #ffffff;
+                transform: translateY(-3px);
+            }
+
+        .form-control {
+            background-color: #f0f0f0;
+        }
+
+        .filter-btn {
+            display: inline-block;
+            background-color: #0096c7;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
+        }
+
+            .filter-btn:hover {
+                background-color: #0077b6;
+                color: #ffffff;
+                transform: translateY(-3px);
+            }
+
+        .filter-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-section {
+            display: none;
+            margin-left: 10px;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+            .filter-section.show {
+                display: block;
+                max-height: 100px;
+                opacity: 1;
+            }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+            .button-group .btn {
+                margin-left: 5px;
+            }
+
+        .linha-branca {
+            background-color: white;
+        }
+
+        .linha-cinza {
+            background-color: #212529;
+        }
+
+
+        .alert-danger {
+            color: #dc3545;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .table th,
+        .table td {
+            padding: 12px;
+            text-align: left;
+            border-top: 1px solid #e9ecef;
+            border-bottom: 1px solid black;
+            /* white-space: nowrap; */
+        }
+
+        .table th {
+            background-color: #0096c7;
+            color: white;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f2f2f2;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .logout-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-left: 10px;
+        }
+
+            .logout-button:hover {
+                background-color: #bb2d3b;
+                ;
+            }
+
+    </style>
+
+    <h2 class="titulo">Gerenciar Celulares</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div id="message" class="alert alert-success">
+            @TempData["Message"]
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div id="error" class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+    @if (TempData["Messages"] != null)
+    {
+        <div id="message" class="@TempData["MessageClass"]">
+            @TempData["Messages"]
+        </div>
     }
 
-        .logout-button:hover {
-            background-color: #bb2d3b;
-            ;
+    <script>
+        setTimeout(function () {
+            var message = document.getElementById("message");
+            if (message) {
+                message.style.display = "none";
+            }
+            var error = document.getElementById("error");
+            if (error) {
+                error.style.display = "none";
+            }
+        }, 5000);
+
+        function toggleFilter() {
+            var filterSection = document.getElementById("filterSection");
+            if (filterSection.classList.contains('show')) {
+                filterSection.classList.remove('show');
+            } else {
+                filterSection.classList.add('show');
+            }
         }
 
-</style>
-
-<h2 class="titulo">Gerenciar Celulares</h2>
-
-@if (TempData["Message"] != null)
-{
-    <div id="message" class="alert alert-success">
-        @TempData["Message"]
-    </div>
-}
-@if (TempData["Error"] != null)
-{
-    <div id="error" class="alert alert-danger">
-        @TempData["Error"]
-    </div>
-}
-@if (TempData["Messages"] != null)
-{
-    <div id="message" class="@TempData["MessageClass"]">
-        @TempData["Messages"]
-    </div>
-}
-
-<script>
-    setTimeout(function () {
-        var message = document.getElementById("message");
-        if (message) {
-            message.style.display = "none";
+        function toggleTable() {
+            var table = document.getElementById("inventoryTable");
+            var toggleButton = document.getElementById("toggleButton");
+            if (table.style.display === "none") {
+                table.style.display = "table";
+                toggleButton.innerText = "Ocultar Lista";
+                localStorage.setItem("tableVisibility", "visible");
+            } else {
+                table.style.display = "none";
+                toggleButton.innerText = "Exibir Lista";
+                localStorage.setItem("tableVisibility", "hidden");
+            }
         }
-        var error = document.getElementById("error");
-        if (error) {
-            error.style.display = "none";
-        }
-    }, 5000);
 
-    function toggleFilter() {
-        var filterSection = document.getElementById("filterSection");
-        if (filterSection.classList.contains('show')) {
-            filterSection.classList.remove('show');
-        } else {
-            filterSection.classList.add('show');
-        }
-    }
-
-    function toggleTable() {
-        var table = document.getElementById("inventoryTable");
-        var toggleButton = document.getElementById("toggleButton");
-        if (table.style.display === "none") {
-            table.style.display = "table";
-            toggleButton.innerText = "Ocultar Lista";
-            localStorage.setItem("tableVisibility", "visible");
-        } else {
-            table.style.display = "none";
-            toggleButton.innerText = "Exibir Lista";
-            localStorage.setItem("tableVisibility", "hidden");
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        var statusSelects = document.querySelectorAll("select[name='status']");
-        statusSelects.forEach(function (select) {
-            select.addEventListener("change", function () {
-                this.parentNode.submit();
+        document.addEventListener("DOMContentLoaded", function () {
+            var statusSelects = document.querySelectorAll("select[name='status']");
+            statusSelects.forEach(function (select) {
+                select.addEventListener("change", function () {
+                    this.parentNode.submit();
+                });
             });
+
+            var tableVisibility = localStorage.getItem("tableVisibility");
+            var table = document.getElementById("inventoryTable");
+            var toggleButton = document.getElementById("toggleButton");
+            if (tableVisibility === "hidden") {
+                table.style.display = "none";
+                toggleButton.innerText = "Exibir Lista";
+            } else {
+                table.style.display = "table";
+                toggleButton.innerText = "Ocultar Lista";
+            }
         });
 
-        var tableVisibility = localStorage.getItem("tableVisibility");
-        var table = document.getElementById("inventoryTable");
-        var toggleButton = document.getElementById("toggleButton");
-        if (tableVisibility === "hidden") {
-            table.style.display = "none";
-            toggleButton.innerText = "Exibir Lista";
-        } else {
-            table.style.display = "table";
-            toggleButton.innerText = "Ocultar Lista";
+        function openEditModal(id, chamado, nome, patrimonio, imei, modelo, data) {
+            document.getElementById("editId").value = id;
+            document.getElementById("editChamado").value = chamado;
+            document.getElementById("editNome").value = nome;
+            document.getElementById("editPatrimonio").value = patrimonio;
+            document.getElementById("editIMEI").value = imei;
+            document.getElementById("editModelo").value = modelo;
+            document.getElementById("editData").value = data;
+            document.getElementById("editModal").style.display = "block";
         }
-    });
 
-    function openEditModal(id, chamado, nome, patrimonio, imei, modelo, data) {
-        document.getElementById("editId").value = id;
-        document.getElementById("editChamado").value = chamado;
-        document.getElementById("editNome").value = nome;
-        document.getElementById("editPatrimonio").value = patrimonio;
-        document.getElementById("editIMEI").value = imei;
-        document.getElementById("editModelo").value = modelo;
-        document.getElementById("editData").value = data;
-        document.getElementById("editModal").style.display = "block";
-    }
-
-    function closeEditModal() {
-        document.getElementById("editModal").style.display = "none";
-    }
-
-    function buscarItens() {
-        var chamado = document.getElementById("Chamado").value;
-        var patrimonio = document.getElementById("Patrimonio").value;
-
-        if (chamado) {
-            window.location.href = `./Celular?handler=Search&Chamado=${chamado}`;
-        } else if (patrimonio) {
-            window.location.href = `./Celular?handler=SearchByPatrimonio&Patrimonio=${patrimonio}`;
-        } else {
-            alert("Por favor, informe um número de Chamado ou Patrimônio.");
+        function closeEditModal() {
+            document.getElementById("editModal").style.display = "none";
         }
-    }
-    function filterByUnit() {
-        var unidade = document.getElementById("Unidade").value;
-        if (unidade) {
-            window.location.href = `./Celular?handler=FilterByUnit&Unidade=${unidade}`;
-        } else {
-            window.location.href = `./Celular`;
+
+        function buscarItens() {
+            var chamado = document.getElementById("Chamado").value;
+            var patrimonio = document.getElementById("Patrimonio").value;
+
+            if (chamado) {
+                window.location.href = `./Celular?handler=Search&Chamado=${chamado}`;
+            } else if (patrimonio) {
+                window.location.href = `./Celular?handler=SearchByPatrimonio&Patrimonio=${patrimonio}`;
+            } else {
+                alert("Por favor, informe um número de Chamado ou Patrimônio.");
+            }
         }
-    }
-    function exportarTabela() {
-        window.location.href = '@Url.Page("Celular", new { handler = "Export" })';
-    }
+        function filterByUnit() {
+            var unidade = document.getElementById("Unidade").value;
+            if (unidade) {
+                window.location.href = `./Celular?handler=FilterByUnit&Unidade=${unidade}`;
+            } else {
+                window.location.href = `./Celular`;
+            }
+        }
+        function exportarTabela() {
+            window.location.href = '@Url.Page("Celular", new { handler = "Export" })';
+        }
 
-</script>
+    </script>
 
-<div class="row">
-    <div class="col-md-6">
-        <h4 class="text">Adicionar novo Celular</h4>
-        <form method="post" asp-page-handler="Post" class="form">
-            <div class="form-group">
-                <label asp-for="celular.Chamado"></label>
-                <input asp-for="celular.Chamado" class="form-control" id="Chamado" />
-            </div>
-            <div class="form-group">
-                <label asp-for="celular.Nome"></label>
-                <input asp-for="celular.Nome" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="celular.Patrimonio"></label>
-                <input asp-for="celular.Patrimonio" class="form-control" id="Patrimonio" />
-            </div>
-            <div class="form-group">
-                <label asp-for="celular.IMEI"></label>
-                <input asp-for="celular.IMEI" class="form-control" id="IMEI" />
-            </div>
-            <div class="form-group">
-                <label asp-for="celular.Modelo"></label>
-                <input asp-for="celular.Modelo" class="form-control" id="Modelo" />
-            </div>
-            <div class="form-group">
-                <label asp-for="celular.Data"></label>
-                <input asp-for="celular.Data" class="form-control" id="Data" type="date" asp-format="{0:dd/MM/yyyy}" />
-            </div>
-            <p></p>
-            <button type="submit" class="btn btn-salvar">Salvar</button>
-            <button type="button" class="btn btn-primary" onclick="buscarItens()">Buscar</button>
-        </form>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="text">Adicionar novo Celular</h4>
+            <form method="post" asp-page-handler="Post" class="form">
+                <div class="form-group">
+                    <label asp-for="celular.Chamado"></label>
+                    <input asp-for="celular.Chamado" class="form-control" id="Chamado" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="celular.Nome"></label>
+                    <input asp-for="celular.Nome" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="celular.Patrimonio"></label>
+                    <input asp-for="celular.Patrimonio" class="form-control" id="Patrimonio" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="celular.IMEI"></label>
+                    <input asp-for="celular.IMEI" class="form-control" id="IMEI" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="celular.Modelo"></label>
+                    <input asp-for="celular.Modelo" class="form-control" id="Modelo" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="celular.Data"></label>
+                    <input asp-for="celular.Data" class="form-control" id="Data" type="date" asp-format="{0:dd/MM/yyyy}" />
+                </div>
+                <p></p>
+                <button type="submit" class="btn btn-salvar">Salvar</button>
+                <button type="button" class="btn btn-buscar" onclick="buscarItens()">Buscar</button>
+            </form>
+        </div>
     </div>
-</div>
 
-<hr />
+    <hr />
 
-<div>
-    <div class="filter-container">
-        <h4 class="text">Celulares Existentes</h4>
-        <div>
-            <button type="button" class="btn btn-primary" onclick="exportarTabela()">Exportar</button>
-            <button type="button" class="filter-btn" onclick="toggleFilter()">Filtrar</button>
-            <button type="button" class="toggle-btn" id="toggleButton" onclick="toggleTable()">Exibir</button>
-            <p></p>
-            <div id="filterSection" class="filter-section">
-                <form method="get" asp-page-handler="Filter" class="form-inline">
-                    <div class="form-group">
-                        <select id="filterStatus" name="StatusFiltro" class="form-control" onchange="this.form.submit()">
-                            <option value="">Todos</option>
-                            <option value="Retirar no RH" selected="@((Model.StatusFiltro == "Retirar no RH") ? "selected" : null)">Retirar no RH</option>
-                            <option value="Devolvido" selected="@((Model.StatusFiltro == "Devolvido") ? "selected" : null)">Devolvido</option>
-                            <option value="Armazenado" selected="@((Model.StatusFiltro == "Armazenado") ? "selected" : null)">Armazenado</option>
-                        </select>
-                    </div>
+    <div>
+        <div class="filter-container">
+            <h4 class="text">Celulares Existentes</h4>
+            <div>
+                <button type="button" class="btn-exportar" onclick="exportarTabela()">Exportar</button>
+                <button type="button" class="filter-btn" onclick="toggleFilter()">Filtrar</button>
+                <button type="button" class="exibir-btn" id="toggleButton" onclick="toggleTable()">Exibir</button>
+                <p></p>
+                <div id="filterSection" class="filter-section">
+                    <form method="get" asp-page-handler="Filter" class="form-inline">
+                        <div class="form-group">
+                            <select id="filterStatus" name="StatusFiltro" class="form-control" onchange="this.form.submit()">
+                                <option value="">Todos</option>
+                                <option value="Retirar no RH" selected="@((Model.StatusFiltro == "Retirar no RH") ? "selected" : null)">Retirar no RH</option>
+                                <option value="Devolvido" selected="@((Model.StatusFiltro == "Devolvido") ? "selected" : null)">Devolvido</option>
+                                <option value="Armazenado" selected="@((Model.StatusFiltro == "Armazenado") ? "selected" : null)">Armazenado</option>
+                            </select>
+                        </div>
 
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="form-group">
-    <label for="Unidade">Selecione a Unidade</label>
-    <select id="Unidade" name="Unidade" class="form-control" asp-for="Unidade" onchange="filterByUnit()">
-        <option value="">Selecione...</option>
-        <option value="CPV">Campina Grande - CPV</option>
-        <option value="ES1">Espirito Santo - ES1</option>
-        <option value="ES3">Espirito Santo - ES3</option>
-        <option value="EST">Estação - EST</option>
-        <option value="GOV">Governador Valadares - GOV</option>
-        <option value="JPA">João Pessoa 2 - JPA</option>
-        <option value="JP3">João Pessoa 3 - JP3</option>
-        <option value="JNE">Juazeiro do Norte 1 - JNE</option>
-        <option value="JN2">Juazeiro do Norte 2 - JN2</option>
-        <option value="MOC">Montes Claros - MOC</option>
-        <option value="ORI">Orion - ORI</option>
-        <option value="MRO">Mossoro - MRO</option>
-        <option value="RJO">Cidade Nova - RJO</option>
-        <option value="SP0">Vila Mariana - SP0</option>
-        <option value="SP2">Tatuapé - SP2</option>
-        <option value="SP3">RochaVera - SP3</option>
-        <option value="SP5">Paramount - SP5</option>
-        <option value="SP6">Campinas - SP6</option>
-        <option value="SP7">Bonfiglioli - SP7</option>
-        <option value="TUP">Tupis - TUP</option>
-    </select>
-</div>
-<p></p>
-<table id="inventoryTable" class="table table-striped">
-    <thead>
-        <tr>
-            <th>Chamado</th>
-            <th>Nome</th>
-            <th>Patrimônio</th>
-            <th>IMEI</th>
-            <th>Marca/Modelo</th>
-            <th>Data</th>
-            <th style="min-width: 150px;">Status</th>
-            <th>Adicionado Por</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (var i = 0; i < Model.ItensDeCelular.Count; i++)
-        {
-            var celular = Model.ItensDeCelular[i];
-            var classeLinha = i % 1 == 0 ? "linha-branca" : "linha-cinza";
-            <tr class="@classeLinha">
-                <td>@celular.Chamado</td>
-                <td>@celular.Nome</td>
-                <td>@celular.Patrimonio</td>
-                <td>@celular.IMEI</td>
-                <td>@celular.Modelo</td>
-                <td>@celular.Data</td>
-                <td>
-                    <form method="post" asp-page-handler="UpdateStatus">
-                        <input type="hidden" name="id" value="@celular.Id" />
-                        <select name="status" class="form-control">
-                            <option value="Retirar no RH" selected="@(celular.Status == "Retirar no RH" ? "selected" : null)">Retirar no RH</option>
-                            <option value="Devolvido" selected="@(celular.Status == "Devolvido" ? "selected" : null)">Devolvido</option>
-                            <option value="Armazenado" selected="@(celular.Status == "Armazenado" ? "selected" : null)">Armazenado</option>
-                        </select>
-                    </form>
-                </td>
-                <td>@celular.Responsavel</td>
-                <td>
-                    <div class="button-group">
-                        <button type="button" class="btn btn-salvar2" onclick="openEditModal('@celular.Id', '@celular.Chamado', '@celular.Nome', '@celular.Patrimonio', '@celular.IMEI', '@celular.Modelo', '@celular.Data')">Editar</button>
-                        <form method="post" asp-page-handler="Delete" style="display:inline;">
-                            <input type="hidden" name="id" value="@celular.Id" />
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este item?')">Excluir</button>
-                        </form>
-                    </div>
-                </td>
+    <div class="form-group">
+        <label for="Unidade">Selecione a Unidade</label>
+        <select id="Unidade" name="Unidade" class="form-control" asp-for="Unidade" onchange="filterByUnit()">
+            <option value="">Selecione a sua Unidade...</option>
+        </select>
+    </div>
+    <p></p>
+    <table id="inventoryTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Chamado</th>
+                <th>Nome</th>
+                <th>Patrimônio</th>
+                <th>IMEI</th>
+                <th>Marca/Modelo</th>
+                <th>Data</th>
+                <th style="min-width: 150px;">Status</th>
+                <th>Adicionado Por</th>
+                <th>Ações</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.ItensDeCelular.Count; i++)
+            {
+                var celular = Model.ItensDeCelular[i];
+                var classeLinha = i % 1 == 0 ? "linha-branca" : "linha-cinza";
+                <tr class="@classeLinha">
+                    <td>@celular.Chamado</td>
+                    <td>@celular.Nome</td>
+                    <td>@celular.Patrimonio</td>
+                    <td>@celular.IMEI</td>
+                    <td>@celular.Modelo</td>
+                    <td>@celular.Data</td>
+                    <td>
+                        <form method="post" asp-page-handler="UpdateStatus">
+                            <input type="hidden" name="id" value="@celular.Id" />
+                            <select name="status" class="form-control">
+                                <option value="Retirar no RH" selected="@(celular.Status == "Retirar no RH" ? "selected" : null)">Retirar no RH</option>
+                                <option value="Devolvido" selected="@(celular.Status == "Devolvido" ? "selected" : null)">Devolvido</option>
+                                <option value="Armazenado" selected="@(celular.Status == "Armazenado" ? "selected" : null)">Armazenado</option>
+                            </select>
+                        </form>
+                    </td>
+                    <td>@celular.Responsavel</td>
+                    <td>
+                        <div class="button-group">
+                            <button type="button" class="btn btn-salvar2" onclick="openEditModal('@celular.Id', '@celular.Chamado', '@celular.Nome', '@celular.Patrimonio', '@celular.IMEI', '@celular.Modelo', '@celular.Data')">Editar</button>
+                            <form method="post" asp-page-handler="Delete" style="display:inline;">
+                                <input type="hidden" name="id" value="@celular.Id" />
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este item?')">Excluir</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
 <div id="editModal" class="modal">

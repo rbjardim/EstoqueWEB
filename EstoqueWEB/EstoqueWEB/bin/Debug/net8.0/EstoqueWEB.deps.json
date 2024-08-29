@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "EstoqueWEB/1.4.6.2408": {
+      "EstoqueWEB/1.6.7.2408": {
         "dependencies": {
           "ClosedXML": "0.102.3",
           "EntityFramework": "6.5.1",
@@ -1534,7 +1534,7 @@
     }
   },
   "libraries": {
-    "EstoqueWEB/1.4.6.2408": {
+    "EstoqueWEB/1.6.7.2408": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -4,505 +4,520 @@
     ViewData["Title"] = "Gerenciar Devoluções";
 }
 <div class="main-content">
-<style>
-    .titulo {
-        text-align: center;
-        color: #0096c7;
-        margin-bottom: 20px;
-    }
-
-    .text {
-        color: #0096c7;
-        margin-bottom: 20px;
-    }
-
-    .btn-salvar,
-    .btn-salvar2 {
-        background-color: #0096c7;
-        border-color: none;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-left: 10px;
-    }
-
-        .btn-salvar:hover,
-        .btn-salvar2:hover {
-            background-color: #0096c7;
-        }
-
-    .btn-danger {
-        background-color: #dc3545;
-        border-color: #dc3545;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-left: 10px;
-    }
-
-        .btn-danger:hover {
-            background-color: #dc3545;
-            border-color: #dc3545;
-        }
-
-    .btn-primary {
-        background-color: #6c757d;
-        border-color: none;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-left: 10px;
-    }
-
-        .btn-primary:hover {
-            background-color: #0096c7;
-            border-color: #0096c7;
-        }
-
-    .form-control {
-        background-color: #f0f0f0;
-    }
-
-    .filter-btn {
-        background-color: #0096c7;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.3s;
-        margin-left: 10px;
-    }
-
-        .filter-btn:hover {
-            background-color: #0096c7;
-        }
-
-    .filter-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .filter-section {
-        display: none;
-        margin-left: 10px;
-        transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-    }
-
-        .filter-section.show {
-            display: block;
-            max-height: 100px;
-            opacity: 1;
-        }
-
-    .action-buttons {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-    }
-
-    .button-group {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-    }
-
-        .button-group .btn {
-            margin-left: 5px;
-        }
-
-    .linha-branca {
-        background-color: white;
-    }
-
-    .linha-cinza {
-        background-color: #212529;
-    }
-
-    .toggle-btn {
-        background-color: #6c757d;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-left: 10px;
-        transition: background-color 0.3s ease;
-    }
-
-        .toggle-btn:hover {
-            background-color: #5a6268;
-        }
-
-
-    .alert-danger {
-        color: #dc3545;
-        background-color: #f8d7da;
-        border-color: #f5c6cb;
-    }
-
-    .table th,
-    .table td {
-        padding: 12px;
-        text-align: left;
-        border-top: 1px solid #e9ecef;
-        border-bottom: 1px solid black;
-        /* white-space: nowrap; */
-    }
-
-    .table th {
-        background-color: #0096c7;
-        color: white;
-    }
-
-    .table-striped tbody tr:nth-of-type(odd) {
-        background-color: #f2f2f2;
-    }
-
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgb(0, 0, 0);
-        background-color: rgba(0, 0, 0, 0.4);
-        padding-top: 60px;
-    }
-
-    .modal-content {
-        background-color: #fefefe;
-        margin: 5% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-    }
-
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-        .close:hover,
-        .close:focus {
+    <style>
+        .titulo {
+            text-align: center;
             color: black;
+            margin-bottom: 20px;
+        }
+
+        .text {
+            color: black;
+            margin-bottom: 20px;
+        }
+
+        .btn-salvar,
+        .btn-salvar2 {
+            display: inline-block;
+            background-color: #0096c7;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
             text-decoration: none;
-            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
         }
 
-    .logout-button {
-        background-color: #dc3545;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-left: 10px;
+            .btn-salvar:hover,
+            .btn-salvar2:hover {
+                background-color: #0077b6;
+                color: #ffffff;
+                transform: translateY(-3px);
+            }
+
+        .btn-buscar {
+            display: inline-block;
+            background-color: #6c757d;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
+        }
+
+            .btn-buscar:hover {
+                background-color: #6c757d;
+                color: #ffffff;
+                transform: translateY(-3px);
+            }
+
+        .btn-danger {
+            display: inline-block;
+            background-color: #dc3545;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
+        }
+
+            .btn-danger:hover {
+                background-color: #dc3545;
+                color: #ffffff;
+                transform: translateY(-3px);
+            }
+
+        .exibir-btn {
+            display: inline-block;
+            background-color: #6c757d;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
+        }
+
+            .exibir-btn:hover {
+                background-color: #6c757d;
+                color: #ffffff;
+                transform: translateY(-3px);
+            }
+
+        .btn-exportar {
+            display: inline-block;
+            background-color: #6c757d;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
+        }
+
+            .btn-exportar:hover {
+                background-color: #6c757d;
+                color: #ffffff;
+                transform: translateY(-3px);
+            }
+
+        .form-control {
+            background-color: #f0f0f0;
+        }
+
+        .filter-btn {
+            display: inline-block;
+            background-color: #0096c7;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
+        }
+
+            .filter-btn:hover {
+                background-color: #0077b6;
+                color: #ffffff;
+                transform: translateY(-3px);
+            }
+
+        .filter-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-section {
+            display: none;
+            margin-left: 10px;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+            .filter-section.show {
+                display: block;
+                max-height: 100px;
+                opacity: 1;
+            }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+            .button-group .btn {
+                margin-left: 5px;
+            }
+
+        .linha-branca {
+            background-color: white;
+        }
+
+        .linha-cinza {
+            background-color: #212529;
+        }
+
+        .alert-danger {
+            color: #dc3545;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+
+        .table th,
+        .table td {
+            padding: 12px;
+            text-align: left;
+            border-top: 1px solid #e9ecef;
+            border-bottom: 1px solid black;
+            /* white-space: nowrap; */
+        }
+
+        .table th {
+            background-color: #0096c7;
+            color: white;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f2f2f2;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .logout-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-left: 10px;
+        }
+
+            .logout-button:hover {
+                background-color: #bb2d3b;
+                ;
+            }
+
+    </style>
+
+    <h2 class="titulo">Gerenciar Devoluções</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div id="message" class="alert alert-success">
+            @TempData["Message"]
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div id="error" class="alert alert-danger">
+            @TempData["Error"]
+        </div>
+    }
+    @if (TempData["Messages"] != null)
+    {
+        <div id="message" class="@TempData["MessageClass"]">
+            @TempData["Messages"]
+        </div>
     }
 
-        .logout-button:hover {
-            background-color: #bb2d3b;
-            ;
+    <script>
+        setTimeout(function () {
+            var message = document.getElementById("message");
+            if (message) {
+                message.style.display = "none";
+            }
+            var error = document.getElementById("error");
+            if (error) {
+                error.style.display = "none";
+            }
+        }, 5000);
+
+        function toggleFilter() {
+            var filterSection = document.getElementById("filterSection");
+            if (filterSection.classList.contains('show')) {
+                filterSection.classList.remove('show');
+            } else {
+                filterSection.classList.add('show');
+            }
         }
 
-</style>
-
-<h2 class="titulo">Gerenciar Devoluções</h2>
-
-@if (TempData["Message"] != null)
-{
-    <div id="message" class="alert alert-success">
-        @TempData["Message"]
-    </div>
-}
-@if (TempData["Error"] != null)
-{
-    <div id="error" class="alert alert-danger">
-        @TempData["Error"]
-    </div>
-}
-@if (TempData["Messages"] != null)
-{
-    <div id="message" class="@TempData["MessageClass"]">
-        @TempData["Messages"]
-    </div>
-}
-
-<script>
-    setTimeout(function () {
-        var message = document.getElementById("message");
-        if (message) {
-            message.style.display = "none";
+        function toggleTable() {
+            var table = document.getElementById("inventoryTable");
+            var toggleButton = document.getElementById("toggleButton");
+            if (table.style.display === "none") {
+                table.style.display = "table";
+                toggleButton.innerText = "Ocultar Lista";
+                localStorage.setItem("tableVisibility", "visible");
+            } else {
+                table.style.display = "none";
+                toggleButton.innerText = "Exibir Lista";
+                localStorage.setItem("tableVisibility", "hidden");
+            }
         }
-        var error = document.getElementById("error");
-        if (error) {
-            error.style.display = "none";
-        }
-    }, 5000);
 
-    function toggleFilter() {
-        var filterSection = document.getElementById("filterSection");
-        if (filterSection.classList.contains('show')) {
-            filterSection.classList.remove('show');
-        } else {
-            filterSection.classList.add('show');
-        }
-    }
-
-    function toggleTable() {
-        var table = document.getElementById("inventoryTable");
-        var toggleButton = document.getElementById("toggleButton");
-        if (table.style.display === "none") {
-            table.style.display = "table";
-            toggleButton.innerText = "Ocultar Lista";
-            localStorage.setItem("tableVisibility", "visible");
-        } else {
-            table.style.display = "none";
-            toggleButton.innerText = "Exibir Lista";
-            localStorage.setItem("tableVisibility", "hidden");
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        var statusSelects = document.querySelectorAll("select[name='status']");
-        statusSelects.forEach(function (select) {
-            select.addEventListener("change", function () {
-                this.parentNode.submit();
+        document.addEventListener("DOMContentLoaded", function () {
+            var statusSelects = document.querySelectorAll("select[name='status']");
+            statusSelects.forEach(function (select) {
+                select.addEventListener("change", function () {
+                    this.parentNode.submit();
+                });
             });
+
+            var tableVisibility = localStorage.getItem("tableVisibility");
+            var table = document.getElementById("inventoryTable");
+            var toggleButton = document.getElementById("toggleButton");
+            if (tableVisibility === "hidden") {
+                table.style.display = "none";
+                toggleButton.innerText = "Exibir Lista";
+            } else {
+                table.style.display = "table";
+                toggleButton.innerText = "Ocultar Lista";
+            }
         });
 
-        var tableVisibility = localStorage.getItem("tableVisibility");
-        var table = document.getElementById("inventoryTable");
-        var toggleButton = document.getElementById("toggleButton");
-        if (tableVisibility === "hidden") {
-            table.style.display = "none";
-            toggleButton.innerText = "Exibir Lista";
-        } else {
-            table.style.display = "table";
-            toggleButton.innerText = "Ocultar Lista";
+        function openEditModal(id, chamado, nome, patrimonio, data, fluig, modelo, chamadoarmazenagem, observacao) {
+            document.getElementById("editId").value = id;
+            document.getElementById("editChamado").value = chamado;
+            document.getElementById("editNome").value = nome;
+            document.getElementById("editPatrimonio").value = patrimonio;
+            document.getElementById("editData").value = data;
+            document.getElementById("editFluig").value = fluig;
+            document.getElementById("editModelo").value = modelo;
+            document.getElementById("editChamadoArmazenagem").value = chamadoarmazenagem;
+            document.getElementById("editObservacao").value = observacao;
+            document.getElementById("editModal").style.display = "block";
         }
-    });
 
-    function openEditModal(id, chamado, nome, patrimonio, data, fluig, modelo, chamadoarmazenagem, observacao) {
-        document.getElementById("editId").value = id;
-        document.getElementById("editChamado").value = chamado;
-        document.getElementById("editNome").value = nome;
-        document.getElementById("editPatrimonio").value = patrimonio;
-        document.getElementById("editData").value = data;
-        document.getElementById("editFluig").value = fluig;
-        document.getElementById("editModelo").value = modelo;
-        document.getElementById("editChamadoArmazenagem").value = chamadoarmazenagem;
-        document.getElementById("editObservacao").value = observacao;
-        document.getElementById("editModal").style.display = "block";
-    }
-
-    function closeEditModal() {
+        function closeEditModal() {
             document.getElementById("editModal").style.display = "none";
         }
 
-    function buscarItens() {
-        var chamado = document.getElementById("Chamado").value;
-        var patrimonio = document.getElementById("Patrimonio").value;
+        function buscarItens() {
+            var chamado = document.getElementById("Chamado").value;
+            var patrimonio = document.getElementById("Patrimonio").value;
 
-        if (chamado) {
-            window.location.href = `./Devolucao?handler=Search&Chamado=${chamado}`;
-        } else if (patrimonio) {
-            window.location.href = `./Devolucao?handler=SearchByPatrimonio&Patrimonio=${patrimonio}`;
-        } else {
-            alert("Por favor, informe um número de Chamado ou Patrimônio.");
+            if (chamado) {
+                window.location.href = `./Devolucao?handler=Search&Chamado=${chamado}`;
+            } else if (patrimonio) {
+                window.location.href = `./Devolucao?handler=SearchByPatrimonio&Patrimonio=${patrimonio}`;
+            } else {
+                alert("Por favor, informe um número de Chamado ou Patrimônio.");
+            }
         }
-    }
-    function filterByUnit() {
-        var unidade = document.getElementById("Unidade").value;
-        if (unidade) {
-            window.location.href = `./Devolucao?handler=FilterByUnit&Unidade=${unidade}`;
-        } else {
-            window.location.href = `./Devolucao`;
+        function filterByUnit() {
+            var unidade = document.getElementById("Unidade").value;
+            if (unidade) {
+                window.location.href = `./Devolucao?handler=FilterByUnit&Unidade=${unidade}`;
+            } else {
+                window.location.href = `./Devolucao`;
+            }
         }
-    }
 
-    function exportarTabela() {
-        window.location.href = '@Url.Page("Devolucao", new { handler = "Export" })';
-    }
+        function exportarTabela() {
+            window.location.href = '@Url.Page("Devolucao", new { handler = "Export" })';
+        }
 
-</script>
-<div class="row">
-    <div class="col-md-6">
-        <h4 class="text">Adicionar nova Devolução</h4>
-        <form method="post" asp-page-handler="Post" class="form">
-            <div class="form-group">
-                <label asp-for="Devolucao.Chamado"></label>
-                <input asp-for="Devolucao.Chamado" class="form-control" id="Chamado" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Devolucao.Nome"></label>
-                <input asp-for="Devolucao.Nome" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Devolucao.Patrimonio"></label>
-                <input asp-for="Devolucao.Patrimonio" class="form-control" id="Patrimonio" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Devolucao.Data"></label>
-                <input asp-for="Devolucao.Data" class="form-control" id="Data" type="date" asp-format="{0:dd/MM/yyyy}" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Devolucao.Fluig"></label>
-                <input asp-for="Devolucao.Fluig" class="form-control" id="Fluig" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Devolucao.Modelo"></label>
-                <select asp-for="Devolucao.Modelo" class="form-control">
-                    <option value="">Selecione um modelo</option>
-                    <option value="Dell Latitude 3400">Dell Latitude 3400</option>
-                    <option value="Dell Latitude 3410">Dell Latitude 3410</option>
-                    <option value="Dell Latitude 3420">Dell Latitude 3420</option>
-                    <option value="Dell Latitude 3440">Dell Latitude 3440</option>
-                    <option value="Dell Latitude 3490">Dell Latitude 3490</option>
-                    <option value="Dell Vostro 3401">Dell Vostro 3401</option>
-                    <option value="HP 240 G7">HP 240 G7</option>
-                    <option value="HP 250 G8">HP 250 G8</option>
-                    <option value="HP 250 G8">Lenovo B330</option>
-                    <option value="HP Probook 440 G5">HP Probook 440 G5</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Devolucao.ChamadoArmazenagem"></label>
-                <input asp-for="Devolucao.ChamadoArmazenagem" class="form-control" id="ChamadoArmazenagem" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Devolucao.Observacao"></label>
-                <input asp-for="Devolucao.Observacao" class="form-control" id="Observacao" />
-            </div>
+    </script>
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="text">Adicionar nova Devolução</h4>
+            <form method="post" asp-page-handler="Post" class="form">
+                <div class="form-group">
+                    <label asp-for="Devolucao.Chamado"></label>
+                    <input asp-for="Devolucao.Chamado" class="form-control" id="Chamado" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Devolucao.Nome"></label>
+                    <input asp-for="Devolucao.Nome" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Devolucao.Patrimonio"></label>
+                    <input asp-for="Devolucao.Patrimonio" class="form-control" id="Patrimonio" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Devolucao.Data"></label>
+                    <input asp-for="Devolucao.Data" class="form-control" id="Data" type="date" asp-format="{0:dd/MM/yyyy}" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Devolucao.Fluig"></label>
+                    <input asp-for="Devolucao.Fluig" class="form-control" id="Fluig" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Devolucao.Modelo"></label>
+                    <select asp-for="Devolucao.Modelo" class="form-control">
+                        <option value="Adicione Seu Modelo">Adicione Seu Modelo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Devolucao.ChamadoArmazenagem"></label>
+                    <input asp-for="Devolucao.ChamadoArmazenagem" class="form-control" id="ChamadoArmazenagem" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Devolucao.Observacao"></label>
+                    <input asp-for="Devolucao.Observacao" class="form-control" id="Observacao" />
+                </div>
                 <p></p>
-            <button type="submit" class="btn btn-salvar">Salvar</button>
-            <button type="button" class="btn btn-primary" onclick="buscarItens()">Buscar</button>
-        </form>
+                <button type="submit" class="btn btn-salvar">Salvar</button>
+                <button type="button" class="btn btn-buscar" onclick="buscarItens()">Buscar</button>
+            </form>
+        </div>
     </div>
-</div>
 
-<hr />
+    <hr />
 
-<div>
-    <div class="filter-container">
-        <h4 class="text">Devolução Existentes</h4>
-        <div>
-            <button type="button" class="btn btn-primary" onclick="exportarTabela()">Exportar</button>
-            <button type="button" class="filter-btn" onclick="toggleFilter()">Filtrar</button>
-            <button type="button" class="toggle-btn" id="toggleButton" onclick="toggleTable()">Exibir</button>
-            <p></p>
-            <div id="filterSection" class="filter-section">
-                <form method="get" asp-page-handler="Filter" class="form-inline">
-                    <div class="form-group">
-                        <select id="filterStatus" name="StatusFiltro" class="form-control" onchange="this.form.submit()">
-                            <option value="">Todos</option>
-                            <option value="Retirar no RH" selected="@((Model.StatusFiltro == "Retirar no RH") ? "selected" : null)">Retirar no RH</option>
-                            <option value="Devolvido" selected="@((Model.StatusFiltro == "Devolvido") ? "selected" : null)">Devolvido</option>
-                            <option value="Reutilizado" selected="@((Model.StatusFiltro == "Reutilizado") ? "selected" : null)">Reutilizado</option>
-                            <option value="Descarte" selected="@((Model.StatusFiltro == "Descarte") ? "selected" : null)">Descarte</option>
-                            <option value="Armazenado" selected="@((Model.StatusFiltro == "Armazenado") ? "selected" : null)">Armazenado</option>
-                        </select>
-                    </div>
+    <div>
+        <div class="filter-container">
+            <h4 class="text">Devolução Existentes</h4>
+            <div>
+                <button type="button" class="btn-exportar" onclick="exportarTabela()">Exportar</button>
+                <button type="button" class="filter-btn" onclick="toggleFilter()">Filtrar</button>
+                <button type="button" class="exibir-btn" id="toggleButton" onclick="toggleTable()">Exibir</button>
+                <p></p>
+                <div id="filterSection" class="filter-section">
+                    <form method="get" asp-page-handler="Filter" class="form-inline">
+                        <div class="form-group">
+                            <select id="filterStatus" name="StatusFiltro" class="form-control" onchange="this.form.submit()">
+                                <option value="">Todos</option>
+                                <option value="Retirar no RH" selected="@((Model.StatusFiltro == "Retirar no RH") ? "selected" : null)">Retirar no RH</option>
+                                <option value="Devolvido" selected="@((Model.StatusFiltro == "Devolvido") ? "selected" : null)">Devolvido</option>
+                                <option value="Reutilizado" selected="@((Model.StatusFiltro == "Reutilizado") ? "selected" : null)">Reutilizado</option>
+                                <option value="Descarte" selected="@((Model.StatusFiltro == "Descarte") ? "selected" : null)">Descarte</option>
+                                <option value="Armazenado" selected="@((Model.StatusFiltro == "Armazenado") ? "selected" : null)">Armazenado</option>
+                            </select>
+                        </div>
 
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="form-group">
-    <label for="Unidade">Selecione a Unidade</label>
-    <select id="Unidade" name="Unidade" class="form-control" asp-for="Unidade" onchange="filterByUnit()">
-        <option value="">Selecione...</option>
-        <option value="CPV">Campina Grande - CPV</option>
-        <option value="ES1">Espirito Santo - ES1</option>
-        <option value="ES3">Espirito Santo - ES3</option>
-        <option value="EST">Estação - EST</option>
-        <option value="GOV">Governador Valadares - GOV</option>
-        <option value="JPA">João Pessoa 2 - JPA</option>
-        <option value="JP3">João Pessoa 3 - JP3</option>
-        <option value="JNE">Juazeiro do Norte 1 - JNE</option>
-        <option value="JN2">Juazeiro do Norte 2 - JN2</option>
-        <option value="MOC">Montes Claros - MOC</option>
-        <option value="ORI">Orion - ORI</option>
-        <option value="MRO">Mossoro - MRO</option>
-        <option value="RJO">Cidade Nova - RJO</option>
-        <option value="SP0">Vila Mariana - SP0</option>
-        <option value="SP2">Tatuapé - SP2</option>
-        <option value="SP3">RochaVera - SP3</option>
-        <option value="SP5">Paramount - SP5</option>
-        <option value="SP6">Campinas - SP6</option>
-        <option value="SP7">Bonfiglioli - SP7</option>
-        <option value="TUP">Tupis - TUP</option>
-    </select>
-</div>
-<p></p>
-<table id="inventoryTable" class="table table-striped">
-    <thead>
-        <tr>
-            <th>Chamado</th>
-            <th>Nome</th>
-            <th>Patrimônio</th>
-            <th>Data</th>
-            <th>Fluig</th>
-            <th>Modelo</th>
-            <th>Armazenagem</th>
-            <th>Observação</th>
-            <th style ="min-width: 150px;">Status</th>
-            <th>Adicionado Por</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (var i = 0; i < Model.ItensDeDevolucao.Count; i++)
-        {
-            var devolucao = Model.ItensDeDevolucao[i];
-            var classeLinha = i % 1 == 0 ? "linha-branca" : "linha-cinza";
-            <tr class="@classeLinha">
-                <td>@devolucao.Chamado</td>
-                <td>@devolucao.Nome</td>
-                <td>@devolucao.Patrimonio</td>
-                <td>@devolucao.Data</td>
-                <td>@devolucao.Fluig</td>
-                <td>@devolucao.Modelo</td>              
-                <td>@devolucao.ChamadoArmazenagem</td>
-                <td>@devolucao.Observacao</td>
-                <td>
-                    <form method="post" asp-page-handler="UpdateStatus">
-                        <input type="hidden" name="id" value="@devolucao.Id" />
-                        <select name="status" class="form-control">
-                            <option value="Retirar no RH" selected="@(devolucao.Status == "Retirar no RH" ? "selected" : null)">Retirar no RH</option>
-                            <option value="Devolvido" selected="@(devolucao.Status == "Devolvido" ? "selected" : null)">Devolvido</option>
-                            <option value="Reutilizado" selected="@((devolucao.Status == "Reutilizado") ? "selected" : null)">Reutilizado</option>
-                            <option value="Descarte" selected="@((devolucao.Status == "Descarte") ? "selected" : null)">Descarte</option>
-                            <option value="Armazenado" selected="@(devolucao.Status == "Armazenado" ? "selected" : null)">Armazenado</option>
-                        </select>
-                    </form>
-                </td>
-                <td>@devolucao.Responsavel</td>
-                <td>
-                    <div class="button-group">
-                        <button type="button" class="btn btn-salvar2" onclick="openEditModal('@devolucao.Id', '@devolucao.Chamado', '@devolucao.Nome', '@devolucao.Patrimonio', '@devolucao.Data', '@devolucao.Fluig', '@devolucao.Modelo', '@devolucao.ChamadoArmazenagem', '@devolucao.Observacao')">Editar</button>
-                        <form method="post" asp-page-handler="Delete" style="display:inline;">
-                            <input type="hidden" name="id" value="@devolucao.Id" />
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este item?')">Excluir</button>
-                        </form>
-                    </div>
-                </td>
+    <div class="form-group">
+        <label for="Unidade">Selecione a Unidade</label>
+        <select id="Unidade" name="Unidade" class="form-control" asp-for="Unidade" onchange="filterByUnit()">
+            <option value="">Selecione a sua Unidade...</option>
+        </select>
+    </div>
+    <p></p>
+    <table id="inventoryTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Chamado</th>
+                <th>Nome</th>
+                <th>Patrimônio</th>
+                <th>Data</th>
+                <th>Fluig</th>
+                <th>Modelo</th>
+                <th>Armazenagem</th>
+                <th>Observação</th>
+                <th style="min-width: 150px;">Status</th>
+                <th>Adicionado Por</th>
+                <th>Ações</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.ItensDeDevolucao.Count; i++)
+            {
+                var devolucao = Model.ItensDeDevolucao[i];
+                var classeLinha = i % 1 == 0 ? "linha-branca" : "linha-cinza";
+                <tr class="@classeLinha">
+                    <td>@devolucao.Chamado</td>
+                    <td>@devolucao.Nome</td>
+                    <td>@devolucao.Patrimonio</td>
+                    <td>@devolucao.Data</td>
+                    <td>@devolucao.Fluig</td>
+                    <td>@devolucao.Modelo</td>
+                    <td>@devolucao.ChamadoArmazenagem</td>
+                    <td>@devolucao.Observacao</td>
+                    <td>
+                        <form method="post" asp-page-handler="UpdateStatus">
+                            <input type="hidden" name="id" value="@devolucao.Id" />
+                            <select name="status" class="form-control">
+                                <option value="Retirar no RH" selected="@(devolucao.Status == "Retirar no RH" ? "selected" : null)">Retirar no RH</option>
+                                <option value="Devolvido" selected="@(devolucao.Status == "Devolvido" ? "selected" : null)">Devolvido</option>
+                                <option value="Reutilizado" selected="@((devolucao.Status == "Reutilizado") ? "selected" : null)">Reutilizado</option>
+                                <option value="Descarte" selected="@((devolucao.Status == "Descarte") ? "selected" : null)">Descarte</option>
+                                <option value="Armazenado" selected="@(devolucao.Status == "Armazenado" ? "selected" : null)">Armazenado</option>
+                            </select>
+                        </form>
+                    </td>
+                    <td>@devolucao.Responsavel</td>
+                    <td>
+                        <div class="button-group">
+                            <button type="button" class="btn btn-salvar2" onclick="openEditModal('@devolucao.Id', '@devolucao.Chamado', '@devolucao.Nome', '@devolucao.Patrimonio', '@devolucao.Data', '@devolucao.Fluig', '@devolucao.Modelo', '@devolucao.ChamadoArmazenagem', '@devolucao.Observacao')">Editar</button>
+                            <form method="post" asp-page-handler="Delete" style="display:inline;">
+                                <input type="hidden" name="id" value="@devolucao.Id" />
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este item?')">Excluir</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
 <div id="editModal" class="modal">
@@ -534,16 +549,7 @@
             <div class="form-group">
                 <label for="editModelo">Modelo</label>
                 <select id="editModelo" name="modelo" class="form-control">
-                    <option value="Dell Latitude 3400">Dell Latitude 3400</option>
-                    <option value="Dell Latitude 3410">Dell Latitude 3410</option>
-                    <option value="Dell Latitude 3420">Dell Latitude 3420</option>
-                    <option value="Dell Latitude 3440">Dell Latitude 3440</option>
-                    <option value="Dell Latitude 3490">Dell Latitude 3490</option>
-                    <option value="Dell Vostro 3401">Dell Vostro 3401</option>
-                    <option value="HP 240 G7">HP 240 G7</option>
-                    <option value="HP 250 G8">HP 250 G8</option>
-                    <option value="HP 250 G8">Lenovo B330</option>
-                    <option value="HP Probook 440 G5">HP Probook 440 G5</option>
+                    <option value="Adicione Seu Modelo">Adicione Seu Modelo</option>
                 </select>
             </div>
             <div class="form-group">

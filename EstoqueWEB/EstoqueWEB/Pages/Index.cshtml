@@ -35,6 +35,45 @@
             font-size: 1.2rem;
         }
 
+    .login-container {
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        padding: 50px;
+        max-width: 600px;
+        width: 90%;
+        margin: 100px auto;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .login-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .login-container h1 {
+            color: #0096c7;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .login-container p {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+
+    .form-control {
+        background-color: #f0f0f0;
+    }
+
+    .caps-lock-warning {
+        color: red;
+        display: none;
+    }
+
     .btn-custom {
         display: inline-block;
         background-color: #0096c7;
@@ -43,12 +82,15 @@
         border-radius: 8px;
         text-decoration: none;
         font-size: 1.1rem;
-        margin: 5px;
+        margin-top: 10px;
         transition: background-color 0.3s ease, transform 0.3s ease;
+        border: none;
+        box-shadow: none;
     }
 
         .btn-custom:hover {
-            background-color: #0096c7;
+            background-color: #0077b6;
+            color: #ffffff;
             transform: translateY(-3px);
         }
 
@@ -64,7 +106,63 @@
             box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
         }
 
+    .btn-custom2 {
+        display: inline-block;
+        background-color: #778899;
+        color: #ffffff;
+        padding: 14px 28px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 1.1rem;
+        margin-top: 10px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border: none;
+        box-shadow: none;
+    }
+
+        .btn-custom2:hover {
+            background-color: #778899;
+            color: #ffffff;
+            transform: translateY(-3px);
+        }
+
+        .btn-custom2:active {
+            transform: translateY(1px);
+        }
+
+        .btn-custom2:focus {
+            outline: none;
+        }
+
+        .btn-custom2:focus, .btn-custom2:hover {
+            box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
+        }
+
 </style>
+
+<div class="login-container">
+    <h1 class="text-center">Login</h1>
+
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label" for="email">Email</label>
+            <input type="email" id="email" name="Model.Email" class="form-control" />
+            <span class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="password">Senha</label>
+            <input type="password" id="password" name="Model.Password" class="form-control" />
+            <input type="checkbox" id="show-password" onclick="togglePasswordVisibility()"> Mostrar Senha
+            <p id="caps-lock-warning" class="caps-lock-warning">Caps Lock está ativado!</p>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn-custom">Login</button>
+            <a href="/Register" class="btn-custom2">Registrar</a>
+        </div>
+    </form>
+</div>
 
 <div class="welcome-container">
     <h1>Bem-vindo ao EstoqueWEB</h1>
@@ -72,3 +170,25 @@
     <a href="/about" class="btn-custom">Saiba Mais</a>
     <a href="/contact" class="btn-custom">Contato</a>
 </div>
+
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("password");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+        } else {
+            passwordInput.type = "password";
+        }
+    }
+
+    var passwordInput = document.getElementById("password");
+    var capsLockWarning = document.getElementById("caps-lock-warning");
+
+    passwordInput.addEventListener("keyup", function (event) {
+        if (event.getModifierState("CapsLock")) {
+            capsLockWarning.style.display = "block";
+        } else {
+            capsLockWarning.style.display = "none";
+        }
+    });
+</script>

@@ -73,20 +73,36 @@
             color: #666;
         }
 
-    .btn-back {
+    .btn-custom {
         display: inline-block;
         background-color: #0096c7;
-        color: #fff;
+        color: #ffffff;
         padding: 10px 20px;
         border-radius: 5px;
         text-decoration: none;
         font-size: 16px;
         margin-top: 20px;
-        text-align: center;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border: none;
+        box-shadow: none;
     }
 
-        .btn-back:hover {
-            background-color: #007bb5;
+        .btn-custom:hover {
+            background-color: #0077b6;
+            color: #ffffff;
+            transform: translateY(-3px);
+        }
+
+        .btn-custom:active {
+            transform: translateY(1px);
+        }
+
+        .btn-custom:focus {
+            outline: none;
+        }
+
+        .btn-custom:focus, .btn-custom:hover {
+            box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.4);
         }
 
 </style>
@@ -110,5 +126,5 @@
         </div>
     </div>
 </div>
-<a href="/" class="btn-back">Voltar para a Página Principal</a>
+<a href="/" class="btn-custom">Voltar para a Página Principal</a>
 

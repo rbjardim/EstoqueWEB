@@ -79,7 +79,6 @@
 
             .logout-button:hover {
                 background-color: #bb2d3b;
-                ;
             }
 
         .italic-text {
@@ -128,69 +127,38 @@
             visibility: visible;
         }
 
-
     </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-custom border-bottom box-shadow mb-3">
-            <div class="container">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    var user = await UserManager.GetUserAsync(User);
-                    if (user != null && await UserManager.IsInRoleAsync(user, "Admin"))
-                    {
-                        <a class="navbar-brand" asp-area="" asp-page="/Admin">
-                            <img src="~/images/logo.png" alt="Logo" style="height: 30px;" />
-                        </a>
-                    }
-                    else
-                    {
-                        <a class="navbar-brand" asp-area="" asp-page="/Index">
-                            <img src="~/images/logo.png" alt="Logo" style="height: 30px;" />
-                        </a>
-                    }
-                }
-                else
-                {
-                    <a class="navbar-brand" asp-area="" asp-page="/Index">
-                        <img src="~/images/logo.png" alt="Logo" style="height: 30px;" />
-                    </a>
-                }
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item services-dropdown">
-                                <a class="nav-link text-white services-dropdown-btn" href="#">Serviços</a>
-                                <div class="services-dropdown-content">
-                                    <a class="nav-link text-black" asp-area="" asp-page="/Local">Estoque</a>
-                                    <a class="nav-link text-black" asp-area="" asp-page="/Devolucao">Devoluções</a>
-                                    <a class="nav-link text-black" asp-area="" asp-page="/Celular">Celulares</a>
-                                </div>
-                            </li>
-                        }
-                    </ul>
-                    <div class="btn-group-custom">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <form method="post" asp-area="" asp-page="/Logout">
-                                <button type="submit" class="btn logout-button">Logout</button>
-                            </form>
-                        }
-                        else
-                        {
-                            <a asp-page="/Login" class="btn btn-primary">Login</a>
-                            <a asp-page="/Register" class="btn btn-secondary">Registrar</a>
-                        }
+        @if (User.Identity.IsAuthenticated)
+        {
+            var user = await UserManager.GetUserAsync(User);
+            if (user != null && !(await UserManager.IsInRoleAsync(user, "Admin")))
+            {
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-custom border-bottom box-shadow mb-3">
+                    <div class="container">
+                        <a class="nav-link text-white" asp-area="" asp-page="/Local">Inicio</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                            <ul class="navbar-nav flex-grow-1">
+                                <a class="nav-link text-white" asp-area="" asp-page="/Local">Estoque</a>
+                                <a class="nav-link text-white" asp-area="" asp-page="/Devolucao">Devoluções</a>
+                                <a class="nav-link text-white" asp-area="" asp-page="/Celular">Celulares</a>
+                            </ul>
+                            <div class="btn-group-custom">
+                                <form method="post" asp-area="" asp-page="/Logout">
+                                    <button type="submit" class="btn logout-button">Logout</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </nav>
+                </nav>
+            }
+        }
     </header>
     <div class="container">
         <main role="main" class="pb-3">
