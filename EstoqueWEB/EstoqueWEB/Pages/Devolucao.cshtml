@@ -7,78 +7,139 @@
 <style>
     .titulo {
         text-align: center;
-        color: #0096c7;
+        color: black;
         margin-bottom: 20px;
     }
 
     .text {
-        color: #0096c7;
+        color: black;
         margin-bottom: 20px;
     }
 
     .btn-salvar,
     .btn-salvar2 {
-        background-color: #0096c7;
-        border-color: none;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-left: 10px;
+            display: inline-block;
+            background-color: #0096c7;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
     }
 
         .btn-salvar:hover,
         .btn-salvar2:hover {
-            background-color: #0096c7;
+                background-color: #0077b6;
+                color: #ffffff;
+                transform: translateY(-3px);
         }
 
-    .btn-danger {
-        background-color: #dc3545;
-        border-color: #dc3545;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-left: 10px;
-    }
+    .btn-buscar {
+            display: inline-block;
+            background-color: #6c757d;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
+        }
 
-        .btn-danger:hover {
+            .btn-buscar:hover {
+                background-color: #6c757d;
+                color: #ffffff;
+                transform: translateY(-3px);
+            }
+
+        .btn-danger {
+            display: inline-block;
             background-color: #dc3545;
-            border-color: #dc3545;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
         }
 
-    .btn-primary {
-        background-color: #6c757d;
-        border-color: none;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-left: 10px;
-    }
+            .btn-danger:hover {
+                background-color: #dc3545;
+                color: #ffffff;
+                transform: translateY(-3px);
+            }
 
-        .btn-primary:hover {
-            background-color: #0096c7;
-            border-color: #0096c7;
+   .exibir-btn {
+            display: inline-block;
+            background-color: #6c757d;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
         }
+
+            .exibir-btn:hover {
+                background-color: #6c757d;
+                color: #ffffff;
+                transform: translateY(-3px);
+            }
+
+        .btn-exportar {
+            display: inline-block;
+            background-color: #6c757d;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
+        }
+
+            .btn-exportar:hover {
+                background-color: #6c757d;
+                color: #ffffff;
+                transform: translateY(-3px);
+            }
 
     .form-control {
         background-color: #f0f0f0;
     }
 
     .filter-btn {
-        background-color: #0096c7;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.3s;
-        margin-left: 10px;
+            display: inline-block;
+            background-color: #0096c7;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none;
+            box-shadow: none;
     }
 
         .filter-btn:hover {
-            background-color: #0096c7;
+                background-color: #0077b6;
+                color: #ffffff;
+                transform: translateY(-3px);
         }
 
     .filter-container {
@@ -125,22 +186,6 @@
     .linha-cinza {
         background-color: #212529;
     }
-
-    .toggle-btn {
-        background-color: #6c757d;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-left: 10px;
-        transition: background-color 0.3s ease;
-    }
-
-        .toggle-btn:hover {
-            background-color: #5a6268;
-        }
-
 
     .alert-danger {
         color: #dc3545;
@@ -218,7 +263,7 @@
 
 </style>
 
-<h2 class="titulo">Gerenciar Devoluções</h2>
+<h2 class="titulo">Gerenciar Devoluções de Notebooks</h2>
 
 @if (TempData["Message"] != null)
 {
@@ -335,6 +380,9 @@
     function exportarTabela() {
         window.location.href = '@Url.Page("Devolucao", new { handler = "Export" })';
     }
+        if (window.self !== window.top) {
+            document.write('<style> footer { display: none; } </style>');
+        }
 
 </script>
 <div class="row">
@@ -370,9 +418,12 @@
                     <option value="Dell Latitude 3420">Dell Latitude 3420</option>
                     <option value="Dell Latitude 3440">Dell Latitude 3440</option>
                     <option value="Dell Latitude 3490">Dell Latitude 3490</option>
+                        <option value="Dell Vostro 3400">Dell Vostro 3400</option>
                     <option value="Dell Vostro 3401">Dell Vostro 3401</option>
+                    <option value="Dell Vostro 3510">Dell Vostro 3510</option>
                     <option value="HP 240 G7">HP 240 G7</option>
                     <option value="HP 250 G8">HP 250 G8</option>
+                    <option value="HP 250 G9">HP 250 G9</option>
                     <option value="HP 250 G8">Lenovo B330</option>
                     <option value="HP Probook 440 G5">HP Probook 440 G5</option>
                 </select>
@@ -387,7 +438,7 @@
             </div>
                 <p></p>
             <button type="submit" class="btn btn-salvar">Salvar</button>
-            <button type="button" class="btn btn-primary" onclick="buscarItens()">Buscar</button>
+                <button type="button" class="btn btn-buscar" onclick="buscarItens()">Buscar</button>
         </form>
     </div>
 </div>
@@ -398,9 +449,9 @@
     <div class="filter-container">
         <h4 class="text">Devolução Existentes</h4>
         <div>
-            <button type="button" class="btn btn-primary" onclick="exportarTabela()">Exportar</button>
+            <button type="button" class="btn-exportar" onclick="exportarTabela()">Exportar</button>
             <button type="button" class="filter-btn" onclick="toggleFilter()">Filtrar</button>
-            <button type="button" class="toggle-btn" id="toggleButton" onclick="toggleTable()">Exibir</button>
+            <button type="button" class="exibir-btn" id="toggleButton" onclick="toggleTable()">Exibir</button>
             <p></p>
             <div id="filterSection" class="filter-section">
                 <form method="get" asp-page-handler="Filter" class="form-inline">
@@ -539,9 +590,12 @@
                     <option value="Dell Latitude 3420">Dell Latitude 3420</option>
                     <option value="Dell Latitude 3440">Dell Latitude 3440</option>
                     <option value="Dell Latitude 3490">Dell Latitude 3490</option>
+                    <option value="Dell Vostro 3400">Dell Vostro 3400</option>
                     <option value="Dell Vostro 3401">Dell Vostro 3401</option>
+                    <option value="Dell Vostro 3510">Dell Vostro 3510</option>
                     <option value="HP 240 G7">HP 240 G7</option>
                     <option value="HP 250 G8">HP 250 G8</option>
+                    <option value="HP 250 G9">HP 250 G9</option>
                     <option value="HP 250 G8">Lenovo B330</option>
                     <option value="HP Probook 440 G5">HP Probook 440 G5</option>
                 </select>

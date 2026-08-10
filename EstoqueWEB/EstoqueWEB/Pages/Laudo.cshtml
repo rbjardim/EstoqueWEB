@@ -1,0 +1,364 @@
+﻿@page
+@model EstoqueWEB.Pages.LaudoModel
+@{
+    ViewData["Title"] = "Laudo";
+}
+
+<style>
+    .laudo-container {
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        padding: 50px;
+        max-width: 3000px; 
+        width: 90%;
+        margin: 50px auto;
+        height:1100px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .laudo-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .laudo-container h1, .laudo-container h2 {
+            color: #0096c7;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .laudo-container h1 {
+            font-size: 2.5rem;
+        }
+
+        .laudo-container p {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 1.2rem;
+        }
+
+    .form-control {
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        width: 100%;
+        margin-bottom: 20px;
+        font-size: 1rem;
+    }
+
+    .btn-custom {
+        display: inline-block;
+        background-color: #0096c7;
+        color: #ffffff;
+        padding: 14px 28px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border: none;
+        cursor: pointer;
+    }
+
+        .btn-custom:hover {
+            background-color: #0077b6;
+            transform: translateY(-3px);
+        }
+
+        .btn-custom:focus {
+            outline: none;
+        }
+
+        .btn-custom:active {
+            transform: translateY(1px);
+        }
+
+
+    .tox-editor-container {
+        min-height: 100%;
+        max-height: none;
+    }
+
+    .tox .tox-edit-area__iframe {
+        height: 100%;
+    }
+
+</style>
+<script>
+    if (window.self !== window.top) {
+        document.write('<style> footer { display: none; } </style>');
+    }
+    </script>
+
+<div class="laudo-container">
+
+    <h2 class="text-center">Laudo Técnico</h2>
+    <p class="text-center">Para exportar o Laudo, clique em "FILE>PRINT", e obrigatoriamente altere para o formato "Salvar como PDF"</p>
+
+
+    <textarea id="word-editor">
+    <a class="navbar-brand" asp-area="" asp-page="/Laudo">
+    <img src="~/images/logo.png" alt="Logo" style="height: 30px;" />
+                        </a>
+    <h1 style="text-align: center; color: #0096c7;">Avaliação de Equipamentos</h1>
+
+    <h2 style="text-align: left; color: #0096c7;">Especificações de Hardware</h2>
+    <table border="1" style="border-collapse: collapse; width: 100%;">
+    <tr>
+    <td><strong>Patrimônio:</strong></td>
+    <td><strong>Equipamento/Modelo:</strong></td>
+    <td><strong>Processador:</strong></td>
+    <tr>
+    <td><strong>Memória RAM:</strong></td>
+    <td><strong>HD:</strong></td>
+    <td><strong>Número de Série:</strong></td>
+
+        </table>
+
+    <h2 style="text-align: left; color: #0096c7;">Checklist Equipamentos</h2>
+    <table border="1" style="border-collapse: collapse; width: 100%;">
+    <tr>
+    <td><strong>Data da Avaliação:</strong></td>
+    <td><strong>Manutenção Externa:</strong>
+    <label><input type="checkbox"> Sim</label>
+    <label><input type="checkbox"> Nao</label>
+</td>
+    <td><strong>Ordem de Serviço:</strong></td>
+            </tr>
+</table>
+
+
+    <h2 style="text-align: left; color: #0096c7;">Dados</h2>
+    <table border="1" style="border-collapse: collapse; width: 100%;">
+    <tr>
+    <td><strong>Chamado do Gestão X:</strong></td>
+    <td><strong>Responsável Técnico:</strong></td>
+    </tr>
+    <tr>
+    <td><strong>Usuário:</strong></td>
+    <td><strong>Matrícula:</strong></td>
+    </tr>
+    </table>
+
+
+    <h2 style="text-align: left; color: #0096c7;">Garantia</h2>
+    <table border="1" style="border-collapse: collapse; width: 100%;">
+    <tr>
+     <td><strong>Controle de Garantia:</strong>
+    <label><input type="checkbox"> Sim</label>
+    <label><input type="checkbox"> Nao</label></td>
+    <tr>
+    <td><strong>Caminho do Diretorio:</strong>
+    <label><input type="checkbox"> Sim</label>
+    <label><input type="checkbox"> Nao</label></td>
+            </tr>
+</table>
+
+    <h2 style="text-align: left; color: #0096c7;">Periférico/Peças</h2>
+    <table border="1" style="border-collapse: collapse; width: 100%;">
+    <tr>
+    <td><strong>Periférico/Peças</strong></td>
+    <td><strong>Status</strong></td>
+    <td><strong>Observações</strong></td>
+            </tr>
+    <tr>
+    <td>Bateria</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <tr>
+    <td>Fonte</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <tr>
+    <td>Conector de Rede</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <tr>
+    <td>HD</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <tr>
+    <td>Processador</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <tr>
+    <td>Memoria RAM</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <tr>
+    <td>Teclado</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <tr>
+    <td>Mouse/Touch</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <tr>
+    <td>Tela/Display</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <tr>
+    <td>Porta USB</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <tr>
+    <td>HDMI</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <tr>
+    <td>Áudio</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <td>Wireless</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <td>Carcaça</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <td>Parafusos</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <td>Temperatura</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <td>Cooler</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+    <td>Outros</td>
+    <td>
+    <label><input type="checkbox"> Ok</label>
+    <label><input type="checkbox"> Problema</label>
+                </td>
+    <td></td>
+            </tr>
+
+        </table>
+
+
+    <h2 style="text-align: left; color: #0096c7;">Desempenho da Maquina</h2>
+    <table border="1" style="border-collapse: collapse; width: 100%;">
+   <td><strong>Satisfatório?</strong> 
+    <label><input type="checkbox"> Sim</label>
+    <label><input type="checkbox"> Nao</label></td></tr>
+    <td><strong>Necessária Manutenção Externa?</strong> 
+    <label><input type="checkbox"> Sim</label>
+    <label><input type="checkbox"> Nao</label></td></tr>
+    <td><strong>Necessária Aquisição de Peças?</strong> 
+    <label><input type="checkbox"> Sim</label>
+    <label><input type="checkbox"> Nao</label></td></tr>
+</table>
+    </textarea>
+
+
+@*     <button id="export-pdf" class="btn-custom" style="margin-top: 20px;">Exportar para PDF</button> *@
+    
+</div>
+
+<script src="https://cdn.tiny.cloud/1/fq4z68py3pnnfe2tmaf9pbxdj2apsoaham5usoerv0z9xhc3/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#word-editor',
+        plugins: 'wordcount',
+        toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent | wordcount',
+        api_key: 'fq4z68py3pnnfe2tmaf9pbxdj2apsoaham5usoerv0z9xhc3',
+        height: 900,
+        setup: function (editor) {
+            fetch('/Laudo/GetDocumentContent')
+                .then(response => response.text())
+                .then(data => {
+                    editor.setContent(data);
+                });
+        }
+    });
+
+    document.getElementById('export-pdf').addEventListener('click', function () {
+        var content = tinymce.get('word-editor').getContent();
+        fetch('/Laudo/ExportToPdf', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ content: content })
+        })
+            .then(response => response.blob())
+            .then(blob => {
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = "LaudoPreenchido.pdf";
+                link.click();
+            });
+    });
+
+</script>

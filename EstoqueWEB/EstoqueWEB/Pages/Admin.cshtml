@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #e7ecef;
             font-family: Arial, sans-serif;
             margin: 0;
         }
@@ -79,6 +79,7 @@
         .dashboard-cards {
             display: flex;
             justify-content: space-between;
+            margin-top: 80px;
             margin-bottom: 20px;
         }
 
@@ -223,6 +224,7 @@
         <a href="#" onclick="loadPage('/Local'); return false;">Estoque</a>
         <a href="#" onclick="loadPage('/Devolucao'); return false;">Devolução</a>
         <a href="#" onclick="loadPage('/Celular'); return false;">Celulares</a>
+        <a href="#" onclick="loadPage('/Laudo'); return false;">Laudo Técnico</a>
     </div>
 
     <div class="header">
@@ -259,7 +261,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function loadPage(url) {
-            if (url === '/AdminUser') {
+            if (url === '/Admin') {
                 window.location.href = url;
             } else {
                 var iframe = document.createElement('iframe');
@@ -275,12 +277,7 @@
                 dynamicContent.appendChild(iframe);
             }
         }
-
-        $(document).ready(function() {
-            loadPage('/Local');
-        });
-
-            setTimeout(function () {
+        setTimeout(function () {
         var message = document.getElementById('message');
         if (message) {
             message.style.display = 'none';
@@ -294,6 +291,12 @@
             error.style.display = 'none';
         }
     }, 3000);
+
     </script>
+    <footer class="border-end footer text-muted">
+        <div class="container">
+            &copy; 2024 Ruan - EstoqueWEB - v1.6.7.2408
+        </div>
+    </footer>
 </body>
 </html>

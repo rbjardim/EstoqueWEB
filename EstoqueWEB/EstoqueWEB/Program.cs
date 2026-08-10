@@ -52,8 +52,10 @@ public class Startup
             options.Password.RequireUppercase = true;
             options.Password.RequireLowercase = true;
         })
+        .AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<Context>()
         .AddDefaultTokenProviders();
+
 
         services.AddScoped<IRoleInitializer, RoleInitializer>();
         services.AddScoped<IEstoqueService, EstoqueService>();
@@ -96,5 +98,6 @@ public class Startup
             endpoints.MapRazorPages();
         });
     }
+
 }
 
